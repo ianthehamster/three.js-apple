@@ -122,3 +122,14 @@ canvas {
     @apply opacity-0 translate-y-[100px];
   }
 }
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px; /* Adjust the gap between cards as needed */
+}
+
+/* Adjust the width of each card to occupy half of the container's width */
+.card {
+  width: calc(50% - 10px); /* Subtracting margin (gap) from 50% */
+}
