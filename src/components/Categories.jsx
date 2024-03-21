@@ -36,7 +36,7 @@ const Categories = () => {
         Featured Products
       </h1>
       {/* </div> */}
-      <Typography
+      {/* <Typography
         style={{
           display: 'flex',
           justifyContent: 'center',
@@ -49,7 +49,7 @@ const Categories = () => {
       >
         "Discover the Latest in Tech Essentials: Phones, Laptops, Accessories,
         and Tablets"
-      </Typography>
+      </Typography> */}
       <div
         className="card-container"
         // style={{

@@ -17,6 +17,8 @@
     "@mui/material": "^5.15.13",
     "@react-three/drei": "^9.102.6",
     "@react-three/fiber": "^8.15.19",
+    "axios": "^1.6.8",
+    "cors": "^2.8.5",
     "gsap": "^3.12.5",
     "ldrs": "^1.0.1",
     "react": "^18.2.0",
