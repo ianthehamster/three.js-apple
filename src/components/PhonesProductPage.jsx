@@ -1,5 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+import ProductCard from './ProductCard';
 
 const PhonesProductPage = () => {
   const [phones, setPhones] = useState([]);
@@ -8,7 +10,7 @@ const PhonesProductPage = () => {
   useEffect(() => {
     axios.get(`http://localhost:3000/products`).then((response) => {
       console.log(response);
-      setLaptops(response.data);
+      setPhones(response.data);
       console.log(phones);
     });
   }, []);
@@ -22,7 +24,6 @@ const PhonesProductPage = () => {
             <li key={product.id}>
               {console.log(product)}
               <ProductCard product={product} />
-              {/* <ProductCard laptop={laptop} /> */}
             </li>
           ))}
         </ul>

@@ -8,6 +8,7 @@ import LaptopsProductPage from './components/LaptopsProductPage.jsx';
 import PhonesProductPage from './components/PhonesProductPage.jsx';
 import AccessoriesProductPage from './components/AccessoriesProductPage.jsx';
 import TabletsProductPage from './components/TabletsProductPage.jsx';
+import AboutUs from './components/AboutUs.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/phonesPage" element={<PhonesProductPage />} />
         <Route path="/accessoriesPage" element={<AccessoriesProductPage />} />
         <Route path="/tabletsPage" element={<TabletsProductPage />} />
+        <Route path="/aboutUs" element={<AboutUs />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

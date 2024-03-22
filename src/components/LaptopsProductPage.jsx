@@ -23,7 +23,6 @@ const LaptopsProductPage = () => {
         <ul>
           {laptops.map((product) => (
             <li key={product.id}>
-              {console.log(product)}
               <ProductCard product={product} />
             </li>
           ))}

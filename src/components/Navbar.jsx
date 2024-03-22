@@ -32,7 +32,7 @@ const Navbar = () => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
             onClick={() => {
-              navigate('/categories');
+              navigate('/aboutUs');
             }}
           >
             Contact
