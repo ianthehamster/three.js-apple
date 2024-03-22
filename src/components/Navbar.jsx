@@ -19,35 +19,41 @@ const Navbar = () => {
         <DevicesIcon />
 
         <div className="flex flex-1 justify-center max-sm:hidden">
-          <Button
-            id="basic-button"
-            aria-controls={open ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Home
-          </Button>
-          <BasicMenu />
-          <Button
-            id="basic-button"
-            aria-controls={open ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={() => {
-              navigate("/aboutUs");
-            }}
-          >
-            Contact
-          </Button>
-        </div>
-        <div>
-          <div className="flex items-baseline gap-7 max-sm:justify-end max-sm:flex-1">
-            <img src={searchImg} alt="search" width={18} height={18} />
-            <img src={bagImg} alt="bag" width={18} height={18} />
+          <div>
+            <Button
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Home
+            </Button>
           </div>
+          <div>
+            <BasicMenu />
+          </div>
+          <div>
+            <Button
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={() => {
+                navigate("/aboutUs");
+              }}
+            >
+              About us
+            </Button>
+          </div>
+        </div>
+
+        <div className="flex items-baseline gap-7 max-sm:justify-end max-sm:flex-1">
+          <img src={searchImg} alt="search" width={18} height={18} />
+          <img src={bagImg} alt="bag" width={18} height={18} />
+          <div>Hello {isAuthenticated ? `${user.first_name}` : `Guest`}</div>
           <div>{isAuthenticated ? <LogoutButton /> : <LoginButton />}</div>
         </div>
       </nav>
