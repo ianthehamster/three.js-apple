@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.2.4",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "@gsap/react": "^2.1.0",
@@ -19,6 +20,7 @@
     "@react-three/fiber": "^8.15.19",
     "axios": "^1.6.8",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "gsap": "^3.12.5",
     "ldrs": "^1.0.1",
     "react": "^18.2.0",
