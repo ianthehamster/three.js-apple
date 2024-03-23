@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "../ProductCard";
 import { Grid } from "@mui/material";
+import { BACKEND_URL } from "../../constants";
 const PhonesProductPage = () => {
   const [phones, setPhones] = useState([]);
   // user is redirected to this page after clicking on a category
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/products`).then((response) => {
+    axios.get(`${BACKEND_URL}/products`).then((response) => {
       console.log(response);
       setPhones(response.data);
       console.log(phones);
@@ -19,8 +20,6 @@ const PhonesProductPage = () => {
     <div>
       <div>
         <h2>Phones</h2>
-        {/* <ul> */}
-
         <Grid container spacing={5}>
           {phones.map((product) => (
             <Grid
@@ -40,7 +39,6 @@ const PhonesProductPage = () => {
             </Grid>
           ))}
         </Grid>
-        {/* </ul> */}
       </div>
     </div>
   );

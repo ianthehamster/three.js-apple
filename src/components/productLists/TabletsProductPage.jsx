@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../ProductCard";
 import axios from "axios";
 import { Grid } from "@mui/material";
+import { BACKEND_URL } from "../../constants";
 
 const TabletsProductPage = () => {
   const [tablets, setTablets] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/products`).then((response) => {
+    axios.get(`${BACKEND_URL}/products`).then((response) => {
       console.log(response);
       setTablets(response.data);
       console.log(tablets);
@@ -18,7 +19,6 @@ const TabletsProductPage = () => {
     <div>
       <div>
         <h2>Tablets</h2>
-        {/* <ul> */}
         <Grid container spacing={5}>
           {tablets.map((product) => (
             <Grid
@@ -38,7 +38,6 @@ const TabletsProductPage = () => {
             </Grid>
           ))}
         </Grid>
-        {/* </ul> */}
       </div>
     </div>
   );
