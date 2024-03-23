@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import ProductCard from './ProductCard';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import ProductCard from "../ProductCard";
+import axios from "axios";
+import { Grid } from "@mui/material";
 
 const LaptopsProductPage = () => {
   const [laptops, setLaptops] = useState([]);
@@ -20,13 +21,26 @@ const LaptopsProductPage = () => {
     <div>
       <div>
         <h2>Laptops</h2>
-        <ul>
+
+        <Grid container spacing={5}>
           {laptops.map((product) => (
-            <li key={product.id}>
-              <ProductCard product={product} />
-            </li>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={4}
+              key={product.id}
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <div key={product.id}>
+                {console.log(product)}
+                <ProductCard product={product} />
+              </div>
+            </Grid>
           ))}
-        </ul>
+        </Grid>
       </div>
     </div>
   );
