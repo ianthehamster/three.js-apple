@@ -5,9 +5,11 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { formatCurrency } from "../utils/formatCurrency";
 
 const ProductCard = ({ product }) => {
   console.log(product);
+  const price = formatCurrency(product.price);
   return (
     <div>
       <Card sx={{ width: 350, height: 400 }}>
@@ -23,7 +25,7 @@ const ProductCard = ({ product }) => {
           </Typography>
 
           <Typography variant="body2" color="text.secondary">
-            {product.price}
+            {price}
           </Typography>
           {/* <Typography variant="body2" color="text.secondary">
             {product.shipping_details}
