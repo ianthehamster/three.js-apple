@@ -10,23 +10,24 @@ const ProductCard = ({ product }) => {
   console.log(product);
   return (
     <div>
-      <Card sx={{ maxWidth: 350, height: 300 }}>
-        <CardMedia
-          sx={{ height: 140 }}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="product img"
-        />
+      <Card sx={{ width: 350, height: 400 }}>
         <CardContent>
+          <CardMedia
+            component="img"
+            sx={{ height: 250 }}
+            image={product.img}
+            alt="product"
+          />
           <Typography gutterBottom variant="h5" component="div">
             {product.title}
           </Typography>
+
           <Typography variant="body2" color="text.secondary">
             {product.price}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          {/* <Typography variant="body2" color="text.secondary">
             {product.shipping_details}
-          </Typography>
-          <img src={product.img} />
+          </Typography> */}
         </CardContent>
         <CardActions>
           <Button size="small">Share</Button>
