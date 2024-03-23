@@ -7,11 +7,12 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { formatCurrency } from "../utils/formatCurrency";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddToCartButton from "./buttons/AddToCartButton";
 
 const ProductCard = ({ product }) => {
   console.log(product);
   const price = formatCurrency(product.price);
-  const quantityInCart = 0; // for testing purposes the quantity in cart is hard coded
+  const quantityInCart = 1; // for testing purposes the quantity in cart is hard coded
   return (
     <div>
       <Card sx={{ width: 380, height: 400 }}>
@@ -29,9 +30,6 @@ const ProductCard = ({ product }) => {
           <Typography variant="body2" color="text.secondary">
             {price}
           </Typography>
-          {/* <Typography variant="body2" color="text.secondary">
-            {product.shipping_details}
-          </Typography> */}
         </CardContent>
         <CardActions sx={{ display: "flex", justifyContent: "space-evenly" }}>
           <div>
@@ -40,30 +38,7 @@ const ProductCard = ({ product }) => {
           <div>
             <Button size="small">Learn More</Button>
           </div>
-          {quantityInCart === 0 ? (
-            <Button size="small">Add to cart</Button>
-          ) : (
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <Button
-                variant="outlined"
-                size="small"
-                style={{ padding: "4px", minWidth: "24px" }}
-              >
-                +
-              </Button>
-
-              <span style={{ margin: "0 10px" }}>{quantityInCart} in cart</span>
-
-              <Button
-                variant="outlined"
-                size="small"
-                style={{ padding: "4px", minWidth: "24px" }}
-              >
-                -
-              </Button>
-              <DeleteIcon style={{ margin: "auto 15px" }} />
-            </div>
-          )}
+          <AddToCartButton quantityInCart={quantityInCart} />
         </CardActions>
       </Card>
     </div>
