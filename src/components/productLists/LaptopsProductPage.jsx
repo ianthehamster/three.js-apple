@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../ProductCard";
 import axios from "axios";
 import { Grid } from "@mui/material";
-import { BACKEND_URL } from "../../constants";
 
+import { BACKEND_URL } from "../../constantVariables";
 const LaptopsProductPage = () => {
   const [laptops, setLaptops] = useState([]);
 

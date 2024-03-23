@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "../ProductCard";
 import { Grid } from "@mui/material";
-import { BACKEND_URL } from "../../constants";
+
+import { BACKEND_URL } from "../../constantVariables";
 const PhonesProductPage = () => {
   const [phones, setPhones] = useState([]);
   // user is redirected to this page after clicking on a category
