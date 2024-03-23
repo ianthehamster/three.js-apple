@@ -6,13 +6,15 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { formatCurrency } from "../utils/formatCurrency";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const ProductCard = ({ product }) => {
   console.log(product);
   const price = formatCurrency(product.price);
+  const quantityInCart = 0; // for testing purposes the quantity in cart is hard coded
   return (
     <div>
-      <Card sx={{ width: 350, height: 400 }}>
+      <Card sx={{ width: 380, height: 400 }}>
         <CardContent>
           <CardMedia
             component="img"
@@ -31,9 +33,37 @@ const ProductCard = ({ product }) => {
             {product.shipping_details}
           </Typography> */}
         </CardContent>
-        <CardActions>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
+        <CardActions sx={{ display: "flex", justifyContent: "space-evenly" }}>
+          <div>
+            <Button size="small">Share</Button>
+          </div>
+          <div>
+            <Button size="small">Learn More</Button>
+          </div>
+          {quantityInCart === 0 ? (
+            <Button size="small">Add to cart</Button>
+          ) : (
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Button
+                variant="outlined"
+                size="small"
+                style={{ padding: "4px", minWidth: "24px" }}
+              >
+                +
+              </Button>
+
+              <span style={{ margin: "0 10px" }}>{quantityInCart} in cart</span>
+
+              <Button
+                variant="outlined"
+                size="small"
+                style={{ padding: "4px", minWidth: "24px" }}
+              >
+                -
+              </Button>
+              <DeleteIcon style={{ margin: "auto 15px" }} />
+            </div>
+          )}
         </CardActions>
       </Card>
     </div>
