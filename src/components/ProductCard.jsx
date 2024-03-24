@@ -8,11 +8,16 @@ import Typography from "@mui/material/Typography";
 import { formatCurrency } from "../utils/formatCurrency";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddToCartButton from "./buttons/AddToCartButton";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   console.log(product);
   const price = formatCurrency(product.price);
-  const quantityInCart = 1; // for testing purposes the quantity in cart is hard coded
+  const quantityInCart = 0; // for testing purposes the quantity in cart is hard coded
+  const navigate = useNavigate();
+  const handleLearnClick = () => {
+    navigate(`/products/${product.id}`);
+  };
   return (
     <div>
       <Card sx={{ width: 380, height: 400 }}>
@@ -36,7 +41,9 @@ const ProductCard = ({ product }) => {
             <Button size="small">Share</Button>
           </div>
           <div>
-            <Button size="small">Learn More</Button>
+            <Button size="small" onClick={handleLearnClick}>
+              Learn More
+            </Button>
           </div>
           <AddToCartButton quantityInCart={quantityInCart} />
         </CardActions>

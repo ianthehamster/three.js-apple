@@ -1,0 +1,28 @@
+.header {
+  font-size: 200%;
+  padding-left: 6px;
+}
+.price {
+  font-size: 120%;
+  opacity: 80%;
+  padding-left: 6px;
+}
+
+.text {
+  font-size: 110%;
+  padding: 15px 6px;
+}
+
+.in-stock {
+  padding-left: 6px;
+  opacity: 80%;
+  padding-bottom: 30px;
+}
+
+.image {
+  width: 500px;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
