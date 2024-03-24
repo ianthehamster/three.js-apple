@@ -9,7 +9,7 @@ import { View } from '@react-three/drei';
 import { models, sizes } from '../constants';
 import { animateWithGsapTimeline } from '../utils/animations';
 
-const Model = () => {
+const Model = ({ modelState }) => {
   const [size, setSize] = useState('small');
   const [model, setModel] = useState({
     title: 'iPhone 15 Pro in Natural Titanium',
@@ -71,16 +71,21 @@ const Model = () => {
               setRotationState={setSmallRotation}
               item={model}
               size={size}
+              modelState={modelState}
             />
-            <ModelView
-              index={2}
-              groupRef={large}
-              gsapType="view2"
-              controlRef={cameraControlLarge}
-              setRotationState={setLargeRotation}
-              item={model}
-              size={size}
-            />
+
+            {modelState === 'laptop' ? null : (
+              <ModelView
+                index={2}
+                groupRef={large}
+                gsapType="view2"
+                controlRef={cameraControlLarge}
+                setRotationState={setLargeRotation}
+                item={model}
+                size={size}
+                modelState={modelState}
+              />
+            )}
             <Canvas
               className="w-full h-full"
               style={{

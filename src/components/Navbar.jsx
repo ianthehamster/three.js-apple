@@ -1,5 +1,5 @@
 import { appleImg, bagImg, searchImg } from "../utils";
-import { navLists } from "../constants";
+// import { navLists } from "../constants";
 import { Link } from "react-router-dom";
 import DevicesIcon from "@mui/icons-material/Devices";
 import BasicMenu from "./minorComponents/DropDownMenu";

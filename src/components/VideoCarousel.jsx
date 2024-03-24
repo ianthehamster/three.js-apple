@@ -97,21 +97,21 @@ const VideoCarousel = () => {
         anim.restart();
       }
 
-      // update the progress bar
-      const animUpdate = () => {
-        anim.progress(
-          videoRef.current[videoId].currentTime /
-            hightlightsSlides[videoId].videoDuration,
-        );
-      };
+      // // update the progress bar
+      // const animUpdate = () => {
+      //   anim.progress(
+      //     videoRef.current[videoId].currentTime /
+      //       hightlightsSlides[videoId].videoDuration,
+      //   );
+      // };
 
-      if (isPlaying) {
-        // ticker to update the progress bar
-        gsap.ticker.add(animUpdate);
-      } else {
-        // remove the ticker when the video is paused (progress bar is stopped)
-        gsap.ticker.remove(animUpdate);
-      }
+      // if (isPlaying) {
+      //   // ticker to update the progress bar
+      //   gsap.ticker.add(animUpdate);
+      // } else {
+      //   // remove the ticker when the video is paused (progress bar is stopped)
+      //   gsap.ticker.remove(animUpdate);
+      // }
     }
   }, [videoId, startPlay]);
 

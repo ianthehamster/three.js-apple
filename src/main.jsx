@@ -5,11 +5,12 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import App from './App.jsx';
 import './index.css';
 import Categories from './components/Categories.jsx';
-import LaptopsProductPage from './components/LaptopsProductPage.jsx';
-import PhonesProductPage from './components/PhonesProductPage.jsx';
-import AccessoriesProductPage from './components/AccessoriesProductPage.jsx';
-import TabletsProductPage from './components/TabletsProductPage.jsx';
+import LaptopsProductPage from './components/productLists/LaptopsProductPage.jsx';
+import PhonesProductPage from './components/productLists/PhonesProductPage.jsx';
+import AccessoriesProductPage from './components/productLists/AccessoriesProductPage.jsx';
+import TabletsProductPage from './components/productLists/TabletsProductPage.jsx';
 import AboutUs from './components/AboutUs.jsx';
+import SingleProductPage from './components/SingleProductPage.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -31,7 +32,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/phonesPage" element={<PhonesProductPage />} />
           <Route path="/accessoriesPage" element={<AccessoriesProductPage />} />
           <Route path="/tabletsPage" element={<TabletsProductPage />} />
+          <Route path="/products/:productId" element={<SingleProductPage />} />
           <Route path="/aboutUs" element={<AboutUs />} />
+          <Route path="*" element={'Nothing here!'} />
         </Routes>
       </BrowserRouter>
     </Auth0Provider>
