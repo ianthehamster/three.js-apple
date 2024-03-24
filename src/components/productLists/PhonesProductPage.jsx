@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "../ProductCard";
 import { Grid } from "@mui/material";
+import Navbar from "../Navbar";
 
 import { BACKEND_URL } from "../../constantVariables";
 const PhonesProductPage = () => {
@@ -20,7 +21,7 @@ const PhonesProductPage = () => {
   return (
     <div>
       <div>
-        <h2>Phones</h2>
+        <Navbar />
         <Grid container spacing={5}>
           {phones.map((product) => (
             <Grid

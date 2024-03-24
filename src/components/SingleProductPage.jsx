@@ -47,7 +47,7 @@ const SingleProductPage = () => {
   const productDetails = (
     <div>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6} lg={6}>
+        <Grid item xs={12} md={6} lg={6} display="flex" justifyContent="center">
           <div className="image">
             <img src={product.img} alt="product_img" />
           </div>
@@ -58,7 +58,7 @@ const SingleProductPage = () => {
           md={6}
           lg={6}
           display="flex"
-          justifyContent="flex-start"
+          // justifyContent="center"
           alignItems="center"
         >
           <Stack spacing={2}>

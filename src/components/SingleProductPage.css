@@ -1,28 +1,65 @@
 .header {
   font-size: 200%;
-  padding-left: 6px;
+  padding-left: 8px;
 }
 .price {
   font-size: 120%;
   opacity: 80%;
-  padding-left: 6px;
+  padding-left: 8px;
 }
 
 .text {
   font-size: 110%;
-  padding: 15px 6px;
+  padding: 15px 8px;
 }
 
 .in-stock {
-  padding-left: 6px;
+  padding-left: 8px;
   opacity: 80%;
   padding-bottom: 30px;
 }
 
 .image {
-  width: 500px;
-  height: 600px;
+  object-fit: cover;
   display: flex;
-  justify-content: center;
   align-items: center;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 500px) {
+  .image {
+    width: 350px;
+    height: 500px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .image {
+    width: 450px;
+    height: 600px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .image {
+    width: 450px;
+    height: 600px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 1024px) {
+  .image {
+    width: 500px;
+    height: 700px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .image {
+    width: 500px;
+    height: 700px;
+  }
 }
