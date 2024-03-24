@@ -15,6 +15,7 @@ import { hourglass } from 'ldrs';
 import CyberpunkTablet from './CyberpunkTablet';
 import AppleVisionPro from './AppleVisionPro';
 import { Apple } from '@mui/icons-material';
+import IPhone13 from './IPhone13';
 
 hourglass.register();
 
@@ -45,6 +46,8 @@ const ModelView = ({
         <PerspectiveCamera makeDefault position={[-300, 50, 230]} />
       ) : modelState === 'accessories' ? (
         <PerspectiveCamera makeDefault position={[0.2, 0.2, 0.3]} />
+      ) : modelState === 'phones' ? (
+        <PerspectiveCamera makeDefault position={[0.7, 0.4, -1.4]} />
       ) : (
         <PerspectiveCamera makeDefault position={[0, 0, 4]} />
       )}
@@ -72,6 +75,8 @@ const ModelView = ({
             <CyberpunkTablet />
           ) : modelState === 'accessories' ? (
             <AppleVisionPro />
+          ) : modelState === 'phones' ? (
+            <IPhone13 />
           ) : (
             <IPhone
               scale={index === 1 ? [15, 15, 15] : [17, 17, 17]}

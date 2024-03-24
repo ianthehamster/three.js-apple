@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Grid } from '@mui/material';
 import Navbar from '../Navbar';
 import { BACKEND_URL } from '../../constantVariables';
-import ModelFlagshipLaptop from '../ModelFlagshipLaptop';
+import ModelFlagshipLaptop from '../ModelFlagshipProduct';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 

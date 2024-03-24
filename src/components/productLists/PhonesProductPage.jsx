@@ -6,15 +6,15 @@ import { Grid } from '@mui/material';
 import Navbar from '../Navbar';
 
 import { BACKEND_URL } from '../../constantVariables';
+import ModelFlagshipLaptop from '../ModelFlagshipProduct';
 const PhonesProductPage = () => {
   const [phones, setPhones] = useState([]);
-  // user is redirected to this page after clicking on a category
+  const [modelState, setModelState] = useState('');
 
   useEffect(() => {
     axios.get(`${BACKEND_URL}/products`).then((response) => {
-      console.log(response);
       setPhones(response.data);
-      console.log(phones);
+      setModelState('phones');
     });
   }, []);
 
@@ -22,6 +22,7 @@ const PhonesProductPage = () => {
     <div>
       <div>
         <Navbar />
+        <ModelFlagshipLaptop modelState={modelState} />
         <Grid container spacing={5}>
           {phones.map((product) => (
             <Grid

@@ -5,7 +5,7 @@ import { Grid } from '@mui/material';
 
 import { BACKEND_URL } from '../../constantVariables';
 import Navbar from '../Navbar';
-import ModelFlagshipLaptop from '../ModelFlagshipLaptop';
+import ModelFlagshipLaptop from '../ModelFlagshipProduct';
 
 const AccessoriesProductPage = () => {
   const [accessories, setAccessories] = useState([]);

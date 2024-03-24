@@ -90,6 +90,11 @@ const ModelFlagshipLaptop = ({ modelState }) => {
             Our Flagship Product: Pear Vision Pro
           </h1>
         ) : null}
+        {modelState === 'phones' ? (
+          <h1 id="heading" className="section-heading" style={{ opacity: '0' }}>
+            Our Flagship Product: Pear IPhone X
+          </h1>
+        ) : null}
 
         <div className="flex flex-col items-center mt-5">
           <div className="w-full h-[75vh] md:h-[90vh] overflow-hidden relative">
