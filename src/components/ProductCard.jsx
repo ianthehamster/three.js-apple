@@ -1,16 +1,20 @@
-import React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { formatCurrency } from '../utils/formatCurrency';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddToCartButton from './buttons/AddToCartButton';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { formatCurrency } from "../utils/formatCurrency";
+import AddToCartButton from "./buttons/AddToCartButton";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 const ProductCard = ({ product }) => {
+  const { addToCart, cartItems } = useContext(CartContext);
+  console.log(product);
+  console.log(cartItems);
   const price = formatCurrency(product.price);
   const quantityInCart = 0; // for testing purposes the quantity in cart is hard coded
   const navigate = useNavigate();
@@ -23,7 +27,7 @@ const ProductCard = ({ product }) => {
         <CardContent>
           <CardMedia
             component="img"
-            sx={{ height: 250, objectFit: 'cover' }} //
+            sx={{ height: 250, objectFit: "cover" }} //
             image={product.img}
             alt="product"
           />
@@ -35,7 +39,7 @@ const ProductCard = ({ product }) => {
             {price}
           </Typography>
         </CardContent>
-        <CardActions sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
+        <CardActions sx={{ display: "flex", justifyContent: "space-evenly" }}>
           <div>
             <Button size="small">Share</Button>
           </div>
@@ -44,7 +48,8 @@ const ProductCard = ({ product }) => {
               Learn More
             </Button>
           </div>
-          <AddToCartButton quantityInCart={quantityInCart} />
+          <AddToCartButton quantityInCart={quantityInCart} product={product} />
+          {/* <Button onClick={() => addToCart(product.id)}>Add to cart</Button> */}
         </CardActions>
       </Card>
     </div>

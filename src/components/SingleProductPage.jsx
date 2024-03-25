@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
-import { BACKEND_URL } from '../constantVariables';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { Grid, Stack, Container, Typography } from '@mui/material';
-import './SingleProductPage.css';
-import { formatCurrency } from '../utils/formatCurrency';
-import AddToCartButton from './buttons/AddToCartButton';
+import React, { useState, useEffect } from "react";
+import Navbar from "./Navbar";
+import { BACKEND_URL } from "../constantVariables";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { Grid, Stack, Container, Typography } from "@mui/material";
+import "./SingleProductPage.css";
+import { formatCurrency } from "../utils/formatCurrency";
+import AddToCartButton from "./buttons/AddToCartButton";
 
 // Animations
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const SingleProductPage = () => {
   const [product, setProduct] = useState({});
@@ -28,7 +28,7 @@ const SingleProductPage = () => {
 
   // Animations
   useGSAP(() => {
-    gsap.to('#test-title', {
+    gsap.to("#test-title", {
       opacity: 1,
       y: -20,
       delay: 2,
@@ -75,9 +75,7 @@ const SingleProductPage = () => {
           alignItems="center"
         >
           <Stack spacing={2}>
-            <div className="header" id="test-title" style={{ opacity: 0 }}>
-              {product.title && product.title}
-            </div>
+            <div className="header">{product.title && product.title}</div>
             <div className="price">{product.price && price}</div>
             <div className="text">
               {product.description && product.description}
@@ -86,7 +84,7 @@ const SingleProductPage = () => {
             <div className="in-stock">
               In stock: {product.stock_left && product.stock_left}
             </div>
-            <AddToCartButton quantityInCart={quantityInCart} />
+            <AddToCartButton product={product} />
           </Stack>
         </Grid>
       </Grid>
