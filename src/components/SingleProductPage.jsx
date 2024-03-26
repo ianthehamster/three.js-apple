@@ -66,6 +66,10 @@ const SingleProductPage = () => {
     } catch (err) {
       console.error(`Error creating checkout session: ${err}`);
     }
+
+    // Send a POST request to backend to create an order
+    try {
+    } catch (err) {}
   };
 
   const quantityInCart = 0;

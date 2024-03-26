@@ -1,17 +1,19 @@
-import { appleImg, bagImg, searchImg } from "../utils";
+import { appleImg, bagImg, searchImg } from '../utils';
 // import { navLists } from "../constants";
-import { Link } from "react-router-dom";
-import DevicesIcon from "@mui/icons-material/Devices";
-import BasicMenu from "./minorComponents/DropDownMenu";
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from "./buttons/LoginButton";
-import LogoutButton from "./buttons/LogoutButton";
+import { Link } from 'react-router-dom';
+import DevicesIcon from '@mui/icons-material/Devices';
+import BasicMenu from './minorComponents/DropDownMenu';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import LoginButton from './buttons/LoginButton';
+import LogoutButton from './buttons/LogoutButton';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
+
+  console.log(user, isAuthenticated);
 
   return (
     <header className="w-full py-5 sm:px-10 px-5 flex justify-between items-center">
@@ -22,11 +24,11 @@ const Navbar = () => {
           <div>
             <Button
               id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
+              aria-controls={open ? 'basic-menu' : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
+              aria-expanded={open ? 'true' : undefined}
               onClick={() => {
-                navigate("/");
+                navigate('/');
               }}
             >
               Home
@@ -38,11 +40,11 @@ const Navbar = () => {
           <div>
             <Button
               id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
+              aria-controls={open ? 'basic-menu' : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
+              aria-expanded={open ? 'true' : undefined}
               onClick={() => {
-                navigate("/aboutUs");
+                navigate('/aboutUs');
               }}
             >
               About us
