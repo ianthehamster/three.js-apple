@@ -1,26 +1,28 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar";
-import { BACKEND_URL } from "../constantVariables";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import { Grid, Stack, Container, Typography } from "@mui/material";
-import "./SingleProductPage.css";
-import { formatCurrency } from "../utils/formatCurrency";
-import AddToCartButton from "./buttons/AddToCartButton";
+import React, { useState, useEffect } from 'react';
+import Navbar from './Navbar';
+import { BACKEND_URL } from '../constantVariables';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { Grid, Stack, Container, Typography } from '@mui/material';
+import './SingleProductPage.css';
+import { formatCurrency } from '../utils/formatCurrency';
+import AddToCartButton from './buttons/AddToCartButton';
 
 // Animations
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 const SingleProductPage = () => {
   const [product, setProduct] = useState({});
   const [productId, setProductId] = useState();
+  const [priceId, setPriceId] = useState('');
 
   const getProductInfo = async () => {
     if (productId) {
       axios.get(`${BACKEND_URL}/products/${productId}`).then((response) => {
         setProduct(response.data);
-        console.log(response.data);
+        setPriceId(response.data.stripe_id);
+        console.log(response, priceId);
         console.log(product);
       });
     }
@@ -28,7 +30,7 @@ const SingleProductPage = () => {
 
   // Animations
   useGSAP(() => {
-    gsap.to("#test-title", {
+    gsap.to('#test-title', {
       opacity: 1,
       y: -20,
       delay: 2,
@@ -38,6 +40,9 @@ const SingleProductPage = () => {
   useEffect(() => {
     getProductInfo();
   }, [productId]);
+  useEffect(() => {
+    getProductInfo();
+  }, []);
 
   // Update product ID in state if needed to trigger data retrieval
   const params = useParams();
@@ -47,13 +52,21 @@ const SingleProductPage = () => {
 
   const price = formatCurrency(product.price);
 
-  // Store a new JSX element for each property in product details
-  // const productDetails = [];
-  // if (product) {
-  //   for (const key in product) {
-  //     productDetails.push(<p key={key}>{`${key}: ${product[key]}`}</p>);
-  //   }
-  // }
+  const handleCheckout = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/products/create-checkout-session`,
+        {
+          priceId: priceId,
+        },
+      );
+      window.location.href = response.data.url;
+    } catch (err) {
+      console.error(`Error creating checkout session: ${err}`);
+    }
+  };
 
   const quantityInCart = 0;
 
@@ -93,8 +106,14 @@ const SingleProductPage = () => {
 
   return (
     <div>
-      <Navbar />
-      {product && productDetails}
+      <section>
+        <Navbar />
+        {product && productDetails}
+        <form onSubmit={handleCheckout}>
+          <input type="hidden" name="priceId" value={priceId} />
+          <button type="submit">Checkout</button>
+        </form>
+      </section>
     </div>
   );
 };
