@@ -1,6 +1,9 @@
 import React from "react";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
+import { formatCurrency } from "../../utils/formatCurrency";
+import "./Cart.css";
+import IncrementDecrementBtn from "../buttons/IncrementDecrementBtn";
 
 const CartItem = () => {
   const {
@@ -11,25 +14,19 @@ const CartItem = () => {
     decreaseQuantity,
   } = useContext(CartContext);
 
-  console.log(cartItems);
-
   const cartItemsList =
     cartItems.length > 0 &&
     cartItems.map((item) => (
-      <div key={item.id}>
-        <p>
-          {item.title} : {item.quantity} pcs.
-        </p>
+      <div key={item.id} className="item-container">
+        <div>{item.title}</div>
+        {/* <div>{item.quantity} pcs</div> */}
+        <div>{formatCurrency(item.price)}</div>
+        <div>{formatCurrency(item.price * item.quantity)}</div>
+        <IncrementDecrementBtn product={item} />
       </div>
     ));
 
-  console.log(cartItemsList);
-  return (
-    <div>
-      <h1>Your cart</h1>
-      {cartItems.length > 0 && cartItemsList}
-    </div>
-  );
+  return <div> {cartItems.length > 0 && cartItemsList}</div>;
 };
 
 export default CartItem;
