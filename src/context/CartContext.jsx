@@ -58,6 +58,18 @@ export const CartContextProvider = (props) => {
     setCartItems(updatedCartItems);
   };
 
+  const getTotalCartPrice = () => {
+    let cartTotal = 0;
+    let itemTotal = 0;
+    for (let i = 0; i < cartItems.length; i++) {
+      const item = cartItems[i];
+      itemTotal = item.price * item.quantity;
+      cartTotal = cartTotal + itemTotal;
+    }
+
+    return cartTotal;
+  };
+
   const checkout = () => {
     setCartItems([]);
   };
@@ -68,7 +80,7 @@ export const CartContextProvider = (props) => {
     addToCart,
     decreaseQuantity,
     removeFromCart,
-    // getTotalCartAmount,
+    getTotalCartPrice,
     checkout,
   };
 

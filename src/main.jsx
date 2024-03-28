@@ -14,6 +14,7 @@ import SingleProductPage from "./components/SingleProductPage.jsx";
 import { CartContextProvider } from "./context/CartContext.jsx";
 import PaymentSuccessPage from "./components/PaymentSuccessPage.jsx";
 import CartPage from "./components/cart/CartPage.jsx";
+import CheckoutPage from "./components/checkout/CheckoutPage.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -44,6 +45,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               element={<SingleProductPage />}
             />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />}></Route>
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/order/success" element={<PaymentSuccessPage />} />
             <Route path="*" element={"Nothing here!"} />

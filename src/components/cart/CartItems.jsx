@@ -4,8 +4,9 @@ import { CartContext } from "../../context/CartContext";
 import { formatCurrency } from "../../utils/formatCurrency";
 import "./Cart.css";
 import IncrementDecrementBtn from "../buttons/IncrementDecrementBtn";
+import { Grid, Divider } from "@mui/material";
 
-const CartItem = () => {
+const CartItems = () => {
   const {
     addToCart,
     cartItems,
@@ -18,15 +19,25 @@ const CartItem = () => {
     cartItems.length > 0 &&
     cartItems.map((item) => (
       <div key={item.id} className="item-container">
-        <div>{item.title}</div>
-        {/* <div>{item.quantity} pcs</div> */}
-        <div>{formatCurrency(item.price)}</div>
-        <div>{formatCurrency(item.price * item.quantity)}</div>
-        <IncrementDecrementBtn product={item} />
+        <Grid container spacing={6} className="grid">
+          <Grid item xs={4}>
+            <div>{item.title}</div>
+          </Grid>
+
+          <Grid item xs={4}>
+            <IncrementDecrementBtn product={item} />
+          </Grid>
+          <Grid item xs={2}>
+            {formatCurrency(item.price)}
+          </Grid>
+          <Grid item xs={2}>
+            {formatCurrency(item.price * item.quantity)}
+          </Grid>
+        </Grid>
       </div>
     ));
 
   return <div> {cartItems.length > 0 && cartItemsList}</div>;
 };
 
-export default CartItem;
+export default CartItems;

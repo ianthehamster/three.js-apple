@@ -8,5 +8,24 @@
 .item-container {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+  min-height: 10vh;
+}
+
+.cart-header {
+  font-size: 200%;
+}
+
+.cart-content {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  align-items: center;
+  width: 100%;
+}
+
+.continue-btn {
+  display: flex;
+  justify-content: flex-end;
 }
