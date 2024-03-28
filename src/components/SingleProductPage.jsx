@@ -1,21 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
-import { BACKEND_URL } from '../constantVariables';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { Grid, Stack, Container, Typography } from '@mui/material';
-import './SingleProductPage.css';
-import { formatCurrency } from '../utils/formatCurrency';
-import AddToCartButton from './buttons/AddToCartButton';
-
+import React, { useState, useEffect, useContext } from "react";
+import { CartContext } from "../context/CartContext";
+import Navbar from "./Navbar";
+import { BACKEND_URL } from "../constantVariables";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { Grid, Stack, Container, Typography } from "@mui/material";
+import "./SingleProductPage.css";
+import { formatCurrency } from "../utils/formatCurrency";
+import AddToCartButton from "./buttons/AddToCartButton";
+import IncrementDecrementBtn from "./buttons/IncrementDecrementBtn";
+import DeleteIcon from "@mui/icons-material/Delete";
 // Animations
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const SingleProductPage = () => {
   const [product, setProduct] = useState({});
   const [productId, setProductId] = useState();
-  const [priceId, setPriceId] = useState('');
+  const [priceId, setPriceId] = useState("");
+  const {
+    addToCart,
+    cartItems,
+    getCartItemQuantity,
+    removeFromCart,
+    decreaseQuantity,
+  } = useContext(CartContext);
+
+  console.log(cartItems);
 
   const getProductInfo = async () => {
     if (productId) {
@@ -30,7 +41,7 @@ const SingleProductPage = () => {
 
   // Animations
   useGSAP(() => {
-    gsap.to('#test-title', {
+    gsap.to("#test-title", {
       opacity: 1,
       y: -20,
       delay: 2,
@@ -49,7 +60,7 @@ const SingleProductPage = () => {
   if (productId !== params.productId) {
     setProductId(params.productId);
   }
-
+  const quantityInCart = getCartItemQuantity(product.id);
   const price = formatCurrency(product.price);
 
   const handleCheckout = async (e) => {
@@ -60,7 +71,7 @@ const SingleProductPage = () => {
         `${BACKEND_URL}/products/create-checkout-session`,
         {
           priceId: priceId,
-        },
+        }
       );
       window.location.href = response.data.url;
     } catch (err) {
@@ -71,8 +82,6 @@ const SingleProductPage = () => {
     try {
     } catch (err) {}
   };
-
-  const quantityInCart = 0;
 
   const productDetails = (
     <div>
@@ -101,7 +110,19 @@ const SingleProductPage = () => {
             <div className="in-stock">
               In stock: {product.stock_left && product.stock_left}
             </div>
-            <AddToCartButton product={product} />
+            {quantityInCart === 0 ? (
+              <AddToCartButton product={product} />
+            ) : (
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <IncrementDecrementBtn product={product} />
+                <div>
+                  <DeleteIcon
+                    style={{ margin: "auto 15px" }}
+                    onClick={() => removeFromCart(product.id)}
+                  />
+                </div>
+              </div>
+            )}
           </Stack>
         </Grid>
       </Grid>

@@ -1,13 +1,13 @@
-import { appleImg, bagImg, searchImg } from '../utils';
+import { appleImg, bagImg, searchImg } from "../utils";
 // import { navLists } from "../constants";
-import { Link } from 'react-router-dom';
-import DevicesIcon from '@mui/icons-material/Devices';
-import BasicMenu from './minorComponents/DropDownMenu';
-import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
-import LoginButton from './buttons/LoginButton';
-import LogoutButton from './buttons/LogoutButton';
+import { Link } from "react-router-dom";
+import DevicesIcon from "@mui/icons-material/Devices";
+import BasicMenu from "./minorComponents/DropDownMenu";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "./buttons/LoginButton";
+import LogoutButton from "./buttons/LogoutButton";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -24,11 +24,11 @@ const Navbar = () => {
           <div>
             <Button
               id="basic-button"
-              aria-controls={open ? 'basic-menu' : undefined}
+              aria-controls={open ? "basic-menu" : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
+              aria-expanded={open ? "true" : undefined}
               onClick={() => {
-                navigate('/');
+                navigate("/");
               }}
             >
               Home
@@ -40,11 +40,11 @@ const Navbar = () => {
           <div>
             <Button
               id="basic-button"
-              aria-controls={open ? 'basic-menu' : undefined}
+              aria-controls={open ? "basic-menu" : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
+              aria-expanded={open ? "true" : undefined}
               onClick={() => {
-                navigate('/aboutUs');
+                navigate("/aboutUs");
               }}
             >
               About us
@@ -54,7 +54,15 @@ const Navbar = () => {
 
         <div className="flex items-baseline gap-7 max-sm:justify-end max-sm:flex-1">
           <img src={searchImg} alt="search" width={18} height={18} />
-          <img src={bagImg} alt="bag" width={18} height={18} />
+          <img
+            src={bagImg}
+            alt="bag"
+            width={18}
+            height={18}
+            onClick={() => {
+              navigate("/cart");
+            }}
+          />
           <div>Hello {isAuthenticated ? `${user.first_name}` : `Guest`}</div>
           <div>{isAuthenticated ? <LogoutButton /> : <LoginButton />}</div>
         </div>

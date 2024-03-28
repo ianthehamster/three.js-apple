@@ -12,11 +12,11 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 const ProductCard = ({ product }) => {
-  const { addToCart, cartItems } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
   console.log(product);
   console.log(cartItems);
   const price = formatCurrency(product.price);
-  const quantityInCart = 0; // for testing purposes the quantity in cart is hard coded
+
   const navigate = useNavigate();
   const handleLearnClick = () => {
     navigate(`/products/${product.id}`);
@@ -48,8 +48,7 @@ const ProductCard = ({ product }) => {
               Learn More
             </Button>
           </div>
-          <AddToCartButton quantityInCart={quantityInCart} product={product} />
-          {/* <Button onClick={() => addToCart(product.id)}>Add to cart</Button> */}
+          {/* <AddToCartButton product={product} /> */}
         </CardActions>
       </Card>
     </div>
