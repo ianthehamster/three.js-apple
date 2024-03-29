@@ -15,7 +15,8 @@ const Categories = () => {
   const [categoryTest, setCategoryTest] = useState('Phones');
 
   return (
-    <main className="bg-black">
+    <main>
+      {/* <main className="bg-black"> */}
       <Navbar />
       {/* <section
         id="highlights"

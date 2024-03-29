@@ -1,13 +1,13 @@
-import { appleImg, bagImg, searchImg } from "../utils";
+import { appleImg, bagImg, searchImg } from '../utils';
 // import { navLists } from "../constants";
-import { Link } from "react-router-dom";
-import DevicesIcon from "@mui/icons-material/Devices";
-import BasicMenu from "./minorComponents/DropDownMenu";
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from "./buttons/LoginButton";
-import LogoutButton from "./buttons/LogoutButton";
+import { Link } from 'react-router-dom';
+import DevicesIcon from '@mui/icons-material/Devices';
+import BasicMenu from './minorComponents/DropDownMenu';
+import { Button, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import LoginButton from './buttons/LoginButton';
+import LogoutButton from './buttons/LogoutButton';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -16,20 +16,29 @@ const Navbar = () => {
   console.log(user, isAuthenticated);
 
   return (
-    <header className="w-full py-5 sm:px-10 px-5 flex justify-between items-center">
+    <header
+      className="w-full py-5 sm:px-10 px-5 flex justify-between items-center bg-black"
+      style={{ width: '100%' }}
+    >
       <nav className="flex w-full screen-max-width">
-        <DevicesIcon />
+        <DevicesIcon style={{ color: 'white', marginRight: '15px' }} />
 
+        <Typography variant="p" style={{ color: 'white' }}>
+          Techie E-Store
+        </Typography>
+
+        {/* <div className="flex flex-1 justify-center max-sm:hidden"> */}
         <div className="flex flex-1 justify-center max-sm:hidden">
           <div>
             <Button
               id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
+              aria-controls={open ? 'basic-menu' : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
+              aria-expanded={open ? 'true' : undefined}
               onClick={() => {
-                navigate("/");
+                navigate('/');
               }}
+              style={{ color: 'white' }}
             >
               Home
             </Button>
@@ -40,12 +49,13 @@ const Navbar = () => {
           <div>
             <Button
               id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
+              aria-controls={open ? 'basic-menu' : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
+              aria-expanded={open ? 'true' : undefined}
               onClick={() => {
-                navigate("/aboutUs");
+                navigate('/aboutUs');
               }}
+              style={{ color: 'white' }}
             >
               About us
             </Button>
@@ -60,11 +70,15 @@ const Navbar = () => {
             width={18}
             height={18}
             onClick={() => {
-              navigate("/cart");
+              navigate('/cart');
             }}
           />
-          <div>Hello {isAuthenticated ? `${user.first_name}` : `Guest`}</div>
-          <div>{isAuthenticated ? <LogoutButton /> : <LoginButton />}</div>
+          <div style={{ color: 'white' }}>
+            Hello {isAuthenticated ? `${user.first_name}` : `Guest`}
+          </div>
+          <div style={{ color: 'white' }}>
+            {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+          </div>
         </div>
       </nav>
     </header>

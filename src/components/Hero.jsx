@@ -39,12 +39,14 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="w-full nav-height bg-black relaive">
+    <section className="w-full nav-height relative">
+      {/* <section className="w-full nav-height bg-black relative"> */}
       <div className="h-5/6 w-full flex-center flex-col">
-        <p id="hero" className="hero-title" style={{ size: '30px' }}>
+        {/* <div className="h-3/6 w-full"> */}
+        {/* <p id="hero" className="hero-title" style={{ size: '30px' }}>
           Techie E-Store 📱
-        </p>
-        <div className="md:w-10/12 w-9/12">
+        </p> */}
+        <div className="md:w-10/12 w-9/12" style={{ width: '100%' }}>
           <video
             className="pointer-events-none"
             autoPlay

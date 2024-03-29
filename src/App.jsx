@@ -5,7 +5,8 @@ import Model from './components/Model';
 
 const App = () => {
   return (
-    <main className="bg-black">
+    <main>
+      {/* <main className="bg-black"> */}
       <Navbar />
       <Hero />
       <Highlights />

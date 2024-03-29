@@ -3,17 +3,20 @@
 @tailwind utilities;
 
 * {
-  margin: 0 5px;
+  /* margin: 0 5px; */
   padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  color: white;
+  /* color: white; */
+  color: #000;
   width: 100dvw;
   overflow-x: hidden;
   height: 100%;
-  background: #000;
+  /* background: #000; */
+  background: white;
+
   border-color: #3b3b3b;
   user-select: none;
 }
