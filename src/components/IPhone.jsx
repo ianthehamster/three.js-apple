@@ -5,7 +5,9 @@ import * as THREE from 'three';
 function Model(props) {
   const { nodes, materials } = useGLTF('/models/scene.glb');
 
-  const texture = useTexture(props.item.img);
+  if (props.item.img) {
+    var texture = useTexture(props.item.img);
+  }
 
   useEffect(() => {
     Object.entries(materials).map((material) => {
@@ -130,15 +132,17 @@ function Model(props) {
         material={materials.sxNzrmuTqVeaXdg}
         scale={0.01}
       />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.xXDHkMplTIDAXLN.geometry}
-        material={materials.pIJKfZsazmcpEiU}
-        scale={0.01}
-      >
-        <meshStandardMaterial roughness={1} map={texture} />
-      </mesh>
+      {texture ? (
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.xXDHkMplTIDAXLN.geometry}
+          material={materials.pIJKfZsazmcpEiU}
+          scale={0.01}
+        >
+          <meshStandardMaterial roughness={1} map={texture} />
+        </mesh>
+      ) : null}
       <mesh
         castShadow
         receiveShadow

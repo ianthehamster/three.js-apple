@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import Navbar from '../Navbar';
 import {
   Box,
@@ -7,7 +7,10 @@ import {
   Typography,
   MenuItem,
   Button,
+  Checkbox,
 } from '@mui/material';
+// import { CartContext } from '../context/CartContext';
+import { CartContext } from '../../context/CartContext';
 import Select from 'react-select';
 import countryList from 'react-select-country-list';
 import { momentum } from 'ldrs';
@@ -26,6 +29,10 @@ const CheckoutPage = () => {
     postcode: '',
     phoneNumber: '',
   });
+
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+  const { cartItems } = useContext(CartContext);
 
   const [shippingInfoState, setShippingInfoState] = useState(true);
   const [loaderSpinner, setLoaderSpinner] = useState(false);
@@ -64,11 +71,14 @@ const CheckoutPage = () => {
     e.preventDefault();
   };
 
-  console.log(formData.firstName);
+  console.log(cartItems);
 
   return (
     <div>
       <Navbar />
+      <Typography variant="h5" sx={{ margin: '20px', marginTop: '50px' }}>
+        Secure Checkout
+      </Typography>
       <form onSubmit={handleSubmit}>
         {shippingInfoState ? (
           <Box
@@ -243,7 +253,46 @@ const CheckoutPage = () => {
               borderRadius: 1,
             }}
           >
-            Shipping Information
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Box>Shipping Method</Box>
+              <Box>
+                <Button
+                  variant="contained"
+                  size="small"
+                  sx={{
+                    color: 'white',
+                    backgroundColor: 'grey',
+                  }}
+                  onClick={() => {
+                    setShippingInfoState(true);
+                    setLoaderSpinner(false);
+                  }}
+                >
+                  Edit
+                </Button>
+              </Box>
+            </Box>
+            <Box sx={{ display: 'flex', marginTop: '30px' }}>
+              <Typography sx={{ marginRight: '5px' }}>
+                {formData.firstName}
+              </Typography>
+              <Typography>{formData.lastName}</Typography>
+            </Box>
+            <Box>
+              <Typography>{formData.addressLine1}</Typography>
+            </Box>
+            <Box sx={{ display: 'flex' }}>
+              <Typography sx={{ marginRight: '5px' }}>
+                {formData.country}
+              </Typography>
+              <Typography>{formData.postcode}</Typography>
+            </Box>
+            <Box sx={{ marginTop: '30px' }}>
+              <Typography>{formData.email}</Typography>
+            </Box>
+            <Box>
+              <Typography>{formData.phoneNumber}</Typography>
+            </Box>
           </Box>
         )}
         <Box
@@ -255,7 +304,44 @@ const CheckoutPage = () => {
             borderRadius: 1,
           }}
         >
-          Shipping Method
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Box>Shipping Method</Box>
+          </Box>
+          {!shippingInfoState ? (
+            <>
+              <Box
+                sx={{
+                  marginTop: '20px',
+                  width: '80%',
+                  padding: 3,
+                  border: '1px solid grey',
+                  borderRadius: 1,
+                }}
+              >
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Checkbox {...label} disabled checked />
+                  <Typography sx={{ marginTop: '10px', marginLeft: '5px' }}>
+                    Couriers & Singapore Post
+                  </Typography>
+                  <Typography sx={{ marginTop: '10px', marginLeft: '5px' }}>
+                    SGD$0.00
+                  </Typography>
+                </Box>
+              </Box>
+              <Box sx={{ marginTop: '20px' }}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    color: 'white',
+                    backgroundColor: 'grey',
+                  }}
+                  onClick={handleYourDetails}
+                >
+                  Next
+                </Button>
+              </Box>
+            </>
+          ) : null}
         </Box>
       </form>
     </div>
