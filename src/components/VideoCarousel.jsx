@@ -157,7 +157,7 @@ const VideoCarousel = () => {
 
   return (
     <>
-      <div className="flex items-center">
+      <div className="flex items-center" style={{ color: 'white' }}>
         {hightlightsSlides.map((list, i) => (
           <div key={list.id} id="slider" className="sm:pr-20 pr-10">
             <div className="video-carousel_container">
