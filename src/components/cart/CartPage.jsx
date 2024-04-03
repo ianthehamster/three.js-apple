@@ -22,7 +22,9 @@ const CartPage = () => {
           <div>
             <CartItems />
           </div>
-          <div>Subtotal: {total}</div>
+          <div className="subtotal">
+            <span className="subtotal-text">Subtotal:</span> {total}
+          </div>
           <div className="continue-btn">
             <Button
               onClick={() => {
