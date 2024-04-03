@@ -2,7 +2,7 @@ import React from "react";
 import CartItems from "./CartItems";
 import Navbar from "../Navbar";
 import "./Cart.css";
-import { Stack, Button } from "@mui/material";
+import { Stack, Button, Box } from "@mui/material";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { formatCurrency } from "../../utils/formatCurrency";

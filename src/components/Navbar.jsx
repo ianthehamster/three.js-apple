@@ -1,29 +1,30 @@
-import { appleImg, bagImg, searchImg } from '../utils';
+import { appleImg, bagImg, searchImg } from "../utils";
 // import { navLists } from "../constants";
-import { Link } from 'react-router-dom';
-import DevicesIcon from '@mui/icons-material/Devices';
-import BasicMenu from './minorComponents/DropDownMenu';
-import { Button, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
-import LoginButton from './buttons/LoginButton';
-import LogoutButton from './buttons/LogoutButton';
+import { Link } from "react-router-dom";
+import DevicesIcon from "@mui/icons-material/Devices";
+import BasicMenu from "./minorComponents/DropDownMenu";
+import { Button, Typography, Badge } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "./buttons/LoginButton";
+import LogoutButton from "./buttons/LogoutButton";
+import { CartContext } from "../context/CartContext";
+import { useContext } from "react";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
-
-  console.log(user, isAuthenticated);
-
+  const { getTotalCartItemsQty } = useContext(CartContext);
+  const cartQuantity = getTotalCartItemsQty();
   return (
     <header
       className="w-full py-5 sm:px-10 px-5 flex justify-between items-center bg-black"
-      style={{ width: '100%' }}
+      style={{ width: "100%" }}
     >
       <nav className="flex w-full screen-max-width">
-        <DevicesIcon style={{ color: 'white', marginRight: '15px' }} />
+        <DevicesIcon style={{ color: "white", marginRight: "15px" }} />
 
-        <Typography variant="p" style={{ color: 'white' }}>
+        <Typography variant="p" style={{ color: "white" }}>
           Techie E-Store
         </Typography>
 
@@ -32,13 +33,13 @@ const Navbar = () => {
           <div>
             <Button
               id="basic-button"
-              aria-controls={open ? 'basic-menu' : undefined}
+              aria-controls={open ? "basic-menu" : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
+              aria-expanded={open ? "true" : undefined}
               onClick={() => {
-                navigate('/');
+                navigate("/");
               }}
-              style={{ color: 'white' }}
+              style={{ color: "white" }}
             >
               Home
             </Button>
@@ -49,13 +50,13 @@ const Navbar = () => {
           <div>
             <Button
               id="basic-button"
-              aria-controls={open ? 'basic-menu' : undefined}
+              aria-controls={open ? "basic-menu" : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
+              aria-expanded={open ? "true" : undefined}
               onClick={() => {
-                navigate('/aboutUs');
+                navigate("/aboutUs");
               }}
-              style={{ color: 'white' }}
+              style={{ color: "white" }}
             >
               About us
             </Button>
@@ -64,19 +65,21 @@ const Navbar = () => {
 
         <div className="flex items-baseline gap-7 max-sm:justify-end max-sm:flex-1">
           <img src={searchImg} alt="search" width={18} height={18} />
-          <img
-            src={bagImg}
-            alt="bag"
-            width={18}
-            height={18}
-            onClick={() => {
-              navigate('/cart');
-            }}
-          />
-          <div style={{ color: 'white' }}>
+          <Badge badgeContent={cartQuantity} color="primary">
+            <img
+              src={bagImg}
+              alt="bag"
+              width={18}
+              height={18}
+              onClick={() => {
+                navigate("/cart");
+              }}
+            />
+          </Badge>
+          <div style={{ color: "white" }}>
             Hello {isAuthenticated ? `${user.first_name}` : `Guest`}
           </div>
-          <div style={{ color: 'white' }}>
+          <div style={{ color: "white" }}>
             {isAuthenticated ? <LogoutButton /> : <LoginButton />}
           </div>
         </div>
