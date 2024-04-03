@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import { BACKEND_URL } from "../constantVariables";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Grid, Stack, Container, Typography } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import "./SingleProductPage.css";
 import { formatCurrency } from "../utils/formatCurrency";
 import AddToCartButton from "./buttons/AddToCartButton";
@@ -18,13 +18,8 @@ const SingleProductPage = () => {
   const [product, setProduct] = useState({});
   const [productId, setProductId] = useState();
   const [priceId, setPriceId] = useState("");
-  const {
-    addToCart,
-    cartItems,
-    getCartItemQuantity,
-    removeFromCart,
-    decreaseQuantity,
-  } = useContext(CartContext);
+  const { cartItems, getCartItemQuantity, removeFromCart } =
+    useContext(CartContext);
 
   console.log(cartItems);
 

@@ -8,7 +8,7 @@ const IncrementDecrementBtn = (props) => {
 
   const quantityInCart = getCartItemQuantity(props.product.id);
   return (
-    <div>
+    <div style={{ display: "flex", alignItems: "center" }}>
       <Button
         variant="outlined"
         size="small"
@@ -17,7 +17,7 @@ const IncrementDecrementBtn = (props) => {
       >
         +
       </Button>
-      <span style={{ margin: "0 10px" }}>{quantityInCart} in cart</span>
+      <span style={{ margin: "0 10px" }}>{quantityInCart} </span>
       <Button
         variant="outlined"
         size="small"
