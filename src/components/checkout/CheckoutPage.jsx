@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useContext } from 'react';
+import React, { useState, useMemo, useContext, useCallback } from 'react';
 import Navbar from '../Navbar';
 import {
   Box,
@@ -16,6 +16,14 @@ import countryList from 'react-select-country-list';
 import { momentum } from 'ldrs';
 import axios from 'axios';
 import { BACKEND_URL } from '../../constantVariables';
+import { loadStripe } from '@stripe/stripe-js';
+import {
+  EmbeddedCheckoutProvider,
+  EmbeddedCheckout,
+} from '@stripe/react-stripe-js';
+import { useAuth0 } from '@auth0/auth0-react';
+
+const stripePromise = loadStripe('pk_test_123');
 
 momentum.register();
 
@@ -40,8 +48,46 @@ const CheckoutPage = () => {
   const [loaderSpinner, setLoaderSpinner] = useState(false);
   const [shippingMethodState, setShippingMethodState] = useState(true);
   const [loaderSpinnerMethod, setLoaderSpinnerMethod] = useState(false);
+  const { user, isAuthenticated } = useAuth0();
 
   const options = useMemo(() => countryList().getData(), []);
+
+  // Stripe Embedded Form
+  // const fetchClientSecret = useCallback(() => {
+  //   // Create a Checkout Session
+  //   return fetch('http://localhost:3000/products/create-checkout-session', {
+  //     method: 'POST',
+  //   })
+  //     .then((res) => {
+  //       console.log(res);
+  //       res.json();
+  //     })
+  //     .then((data) => {
+  //       console.log(data);
+  //       data.clientSecret;
+  //     });
+  // }, []);
+
+  const fetchClientSecret = useCallback(async () => {
+    try {
+      // Create a Checkout Session
+
+      const response = await axios.post(
+        'http://localhost:3000/products/create-checkout-session',
+      );
+
+      console.log(response);
+      console.log(response.data); // Log the response data
+
+      return response.data.clientSecret;
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error here if needed
+      throw error; // Rethrow error to handle it outside of this function
+    }
+  }, []);
+
+  const options1 = { fetchClientSecret };
 
   const changeHandler = (e) => {
     console.log(e.label);
@@ -50,6 +96,8 @@ const CheckoutPage = () => {
   };
 
   const handleYourDetails = (e) => {
+    const itemNames = cartItems.map((cartItem) => cartItem.title);
+    console.log(`User purchased these items: `, itemNames);
     setLoaderSpinner(true);
     setTimeout(() => {
       setShippingInfoState(false);
@@ -85,12 +133,25 @@ const CheckoutPage = () => {
   const handleCheckout = async (e) => {
     e.preventDefault();
 
+    const priceIdsOfItems = cartItems.map((cartItem) => ({
+      priceId: cartItem.stripe_id,
+      quantity: cartItem.quantity,
+    }));
+
+    const itemNames = cartItems.map((cartItem) => cartItem.title);
+    console.log(`User purchased these items: `, itemNames);
+
+    // Sending customer to Stripe-hosted checkout page
     try {
       const response = await axios.post(
-        `${BACKEND_URL}/products/create-checkout-session`,
+        `${BACKEND_URL}/products/create-checkout-session-external`,
         {
-          // Test priceId
-          priceId: 'price_1OyRM8Ce2bVtqVUUKsqiHOpR',
+          // priceIds is array of priceIds
+          priceIds: priceIdsOfItems,
+          userFirstName: user.first_name,
+          userLastName: user.last_name,
+          userEmail: user.name,
+          itemNames: itemNames,
         },
       );
       window.location.href = response.data.url;
@@ -111,9 +172,11 @@ const CheckoutPage = () => {
   );
 
   console.log(cartItems);
+  console.log(user);
 
   return (
     <div>
+      {/* <EmbeddedCheckoutProvider stripe={stripePromise} options={options1}> */}
       <Navbar />
       <Typography variant="h5" sx={{ margin: '20px', marginTop: '50px' }}>
         Secure Checkout
@@ -433,84 +496,102 @@ const CheckoutPage = () => {
           </Box>
         </Box>
       </Box>
-      <Box
-        sx={{
-          margin: '20px',
-          width: '60.5%',
-          padding: 3,
-          border: '1px solid grey',
-          borderRadius: 1,
-        }}
-      >
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Box>Shipping Method</Box>
-        </Box>
-        {!shippingInfoState && shippingMethodState ? (
-          <>
-            <Box
-              sx={{
-                marginTop: '20px',
-                width: '80%',
-                padding: 3,
-                border: '1px solid grey',
-                borderRadius: 1,
-              }}
-            >
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Checkbox {...label} disabled checked />
-                <Typography sx={{ marginTop: '10px', marginLeft: '5px' }}>
-                  Couriers & Singapore Post
-                </Typography>
-                <Typography sx={{ marginTop: '10px', marginLeft: '5px' }}>
-                  SGD$0.00
-                </Typography>
-              </Box>
-            </Box>
-            <Box sx={{ marginTop: '20px' }}>
-              <Button
-                variant="contained"
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box
+          sx={{
+            margin: '20px',
+            width: '50%',
+            padding: 3,
+            border: '1px solid grey',
+            borderRadius: 1,
+          }}
+        >
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Box>Shipping Method</Box>
+          </Box>
+          {!shippingInfoState && shippingMethodState ? (
+            <>
+              <Box
                 sx={{
-                  color: 'white',
-                  backgroundColor: 'grey',
+                  marginTop: '20px',
+                  width: '80%',
+                  padding: 3,
+                  border: '1px solid grey',
+                  borderRadius: 1,
                 }}
-                onClick={handleYourShippingMethod}
               >
-                Next
-              </Button>
-            </Box>
-            {loaderSpinnerMethod ? (
-              <Box sx={{ marginLeft: '20px' }}>
-                <l-momentum size="27" speed="1.1" color="grey"></l-momentum>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Checkbox {...label} disabled checked />
+                  <Typography sx={{ marginTop: '10px', marginLeft: '5px' }}>
+                    Couriers & Singapore Post
+                  </Typography>
+                  <Typography sx={{ marginTop: '10px', marginLeft: '5px' }}>
+                    SGD$0.00
+                  </Typography>
+                </Box>
               </Box>
-            ) : null}
-          </>
-        ) : !shippingMethodState ? (
-          <>
-            <Box
-              sx={{
-                marginTop: '20px',
-                width: '80%',
-                padding: 3,
-                border: '1px solid grey',
-                borderRadius: 1,
-              }}
-            >
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                {/* <Checkbox {...label} disabled checked /> */}
-                <Typography sx={{ marginTop: '10px', marginLeft: '5px' }}>
-                  Couriers & Singapore Post
-                </Typography>
-                <Typography sx={{ marginTop: '10px', marginLeft: '5px' }}>
-                  SGD$0.00
-                </Typography>
+              <Box sx={{ marginTop: '20px' }}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    color: 'white',
+                    backgroundColor: 'grey',
+                  }}
+                  onClick={handleYourShippingMethod}
+                >
+                  Next
+                </Button>
               </Box>
-            </Box>
-          </>
-        ) : null}
+              {loaderSpinnerMethod ? (
+                <Box sx={{ marginLeft: '20px' }}>
+                  <l-momentum size="27" speed="1.1" color="grey"></l-momentum>
+                </Box>
+              ) : null}
+            </>
+          ) : !shippingMethodState ? (
+            <>
+              <Box
+                sx={{
+                  marginTop: '20px',
+                  width: '80%',
+                  padding: 3,
+                  border: '1px solid grey',
+                  borderRadius: 1,
+                }}
+              >
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  {/* <Checkbox {...label} disabled checked /> */}
+                  <Typography sx={{ marginTop: '10px', marginLeft: '5px' }}>
+                    Couriers & Singapore Post
+                  </Typography>
+                  <Typography sx={{ marginTop: '10px', marginLeft: '5px' }}>
+                    SGD$0.00
+                  </Typography>
+                </Box>
+              </Box>
+            </>
+          ) : null}
+        </Box>
       </Box>
-      <Box>
-        <Button onClick={handleCheckout}>Checkout</Button>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box
+          sx={{
+            margin: '20px',
+            width: '50%',
+            padding: 3,
+            // border: '1px solid grey',
+            // borderRadius: 1,
+          }}
+        >
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Button variant="outlined" onClick={handleCheckout}>
+              Checkout!
+            </Button>
+          </Box>
+        </Box>
       </Box>
+      {/* <EmbeddedCheckout /> */}
+      {/* </EmbeddedCheckoutProvider> */}
     </div>
   );
 };

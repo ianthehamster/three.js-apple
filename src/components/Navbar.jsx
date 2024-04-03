@@ -13,7 +13,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
 
-  console.log(user, isAuthenticated);
+  // console.log(user, isAuthenticated);
 
   return (
     <header

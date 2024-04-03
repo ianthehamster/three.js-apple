@@ -54,6 +54,8 @@ const Model = ({ modelState }) => {
     });
   }, []);
 
+  console.log(`The current model state is ${modelState}`);
+
   return (
     <section className="common-padding" style={{ backgroundColor: 'beige' }}>
       <div className="screen-max-width">
@@ -74,7 +76,18 @@ const Model = ({ modelState }) => {
               modelState={modelState}
             />
 
-            {modelState === 'laptop' ? null : (
+            <ModelView
+              index={2}
+              groupRef={large}
+              gsapType="view2"
+              controlRef={cameraControlLarge}
+              setRotationState={setLargeRotation}
+              item={model}
+              size={size}
+              modelState={modelState}
+            />
+
+            {/* {modelState === 'laptop' ? null : (
               <ModelView
                 index={2}
                 groupRef={large}
@@ -85,7 +98,7 @@ const Model = ({ modelState }) => {
                 size={size}
                 modelState={modelState}
               />
-            )}
+            )} */}
             <Canvas
               className="w-full h-full"
               style={{

@@ -7,6 +7,23 @@ const PaymentSuccessPage = () => {
 
   console.log(isAuthenticated, user);
 
+  /**
+   * Hi [customer name],
+
+Thanks for your order!
+
+[Order number]
+[Order Date]
+[Estimated time of delivery]
+
+[Table of items purchased]
+
+[Delivery details]
+
+Thanks,
+The [brand name] team
+   */
+
   return (
     <div>
       <Navbar />
