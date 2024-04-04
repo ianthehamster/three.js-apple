@@ -4,36 +4,35 @@ import { CartContext } from "../../context/CartContext";
 import { formatCurrency } from "../../utils/formatCurrency";
 import "./Cart.css";
 import IncrementDecrementBtn from "../buttons/IncrementDecrementBtn";
-import { Grid, Divider } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const CartItems = () => {
-  const {
-    addToCart,
-    cartItems,
-    getCartItemQuantity,
-    removeFromCart,
-    decreaseQuantity,
-  } = useContext(CartContext);
+  const { cartItems, getCartItemQuantity, removeFromCart } =
+    useContext(CartContext);
 
   const cartItemsList =
     cartItems.length > 0 &&
     cartItems.map((item) => (
       <div key={item.id} className="item-container">
-        <Grid container spacing={6} className="grid">
-          <Grid item xs={4}>
-            <div>{item.title}</div>
-          </Grid>
+        <div className="name-price-container">
+          <div className="name-img-container">
+            <div className="cart-item-image">
+              <img src={item.img} alt="product_img" />
+            </div>
 
-          <Grid item xs={4}>
-            <IncrementDecrementBtn product={item} />
-          </Grid>
-          <Grid item xs={2}>
-            {formatCurrency(item.price)}
-          </Grid>
-          <Grid item xs={2}>
+            <div className="item-name">{item.title}</div>
+          </div>
+
+          <div className="item-total-price">
             {formatCurrency(item.price * item.quantity)}
-          </Grid>
-        </Grid>
+          </div>
+        </div>
+        <div className="buttons-container">
+          <div className="cart-buttons">
+            <IncrementDecrementBtn product={item} />
+            <DeleteIcon onClick={() => removeFromCart(item.id)} />
+          </div>
+        </div>
       </div>
     ));
 
