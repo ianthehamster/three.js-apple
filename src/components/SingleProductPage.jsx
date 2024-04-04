@@ -18,19 +18,19 @@ const SingleProductPage = () => {
   const [product, setProduct] = useState({});
   const [productId, setProductId] = useState();
   const [priceId, setPriceId] = useState("");
-  const { cartItems, getCartItemQuantity, removeFromCart } =
-    useContext(CartContext);
-
-  console.log(cartItems);
+  const { getCartItemQuantity, removeFromCart } = useContext(CartContext);
 
   const getProductInfo = async () => {
     if (productId) {
-      axios.get(`${BACKEND_URL}/products/${productId}`).then((response) => {
+      try {
+        const response = await axios.get(
+          `${BACKEND_URL}/products/${productId}`
+        );
         setProduct(response.data);
         setPriceId(response.data.stripe_id);
-        console.log(response, priceId);
-        console.log(product);
-      });
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -43,9 +43,9 @@ const SingleProductPage = () => {
     });
   });
 
-  useEffect(() => {
-    getProductInfo();
-  }, [productId]);
+  // useEffect(() => {
+  //   getProductInfo();
+  // }, [productId]);
   useEffect(() => {
     getProductInfo();
   }, []);

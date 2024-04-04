@@ -33,7 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/categories" element={<Categories />} />
-            <Route path="/laptopPage" element={<LaptopsProductPage />} />
+            <Route path="/laptopsPage" element={<LaptopsProductPage />} />
             <Route path="/phonesPage" element={<PhonesProductPage />} />
             <Route
               path="/accessoriesPage"

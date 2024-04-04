@@ -8,13 +8,12 @@ import Typography from "@mui/material/Typography";
 import { formatCurrency } from "../utils/formatCurrency";
 import AddToCartButton from "./buttons/AddToCartButton";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+// import { useContext } from "react";
+// import { CartContext } from "../context/CartContext";
 
 const ProductCard = ({ product }) => {
-  const { cartItems } = useContext(CartContext);
-  console.log(product);
-  console.log(cartItems);
+  // const { cartItems } = useContext(CartContext);
+
   const price = formatCurrency(product.price);
 
   const navigate = useNavigate();
