@@ -7,14 +7,19 @@ import { BACKEND_URL } from "../../constantVariables";
 import ModelFlagshipLaptop from "../ModelFlagshipProduct";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useLocation } from "react-router-dom";
 
 const LaptopsProductPage = () => {
   const [laptops, setLaptops] = useState([]);
   const [modelState, setModelState] = useState("");
+  const location = useLocation();
+  const currentUrl = location.pathname; // returns /laptopsPage - current path
+  const categoryName = currentUrl.replace(/Page$/, "").substring(1); //returns laptops as category name
+  const params = { categoryName: categoryName };
 
   // Seed Laptops and also alter products table to add columns and categories so that only products of category laptop is fetched here
   useEffect(() => {
-    axios.get(`${BACKEND_URL}/products`).then((response) => {
+    axios.get(`${BACKEND_URL}/products`, { params }).then((response) => {
       setLaptops(response.data);
       setModelState("laptop");
     });

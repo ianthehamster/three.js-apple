@@ -43,15 +43,13 @@ const SingleProductPage = () => {
     });
   });
 
-  // useEffect(() => {
-  //   getProductInfo();
-  // }, [productId]);
   useEffect(() => {
     getProductInfo();
   }, []);
 
   // Update product ID in state if needed to trigger data retrieval
   const params = useParams();
+  console.log(params);
   if (productId !== params.productId) {
     setProductId(params.productId);
   }
