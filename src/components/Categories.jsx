@@ -1,18 +1,36 @@
-import React, { useState } from 'react';
-import Navbar from './Navbar';
-import CardCategory from './CardCategory';
-import { Box, Card, Typography } from '@mui/material';
+import React, { useEffect, useState } from "react";
+import Navbar from "./Navbar";
+import CardCategory from "./CardCategory";
+import { Box, Card, Typography } from "@mui/material";
 // import './index.css';
-import '../index.css';
+import "../index.css";
+import { ConstructionOutlined } from "@mui/icons-material";
+import { BACKEND_URL } from "../constantVariables";
+import axios from "axios";
 
 const Categories = () => {
-  const [categories, setCategories] = useState([
-    'Phones',
-    'Laptops',
-    'Accessories',
-    'Tablets',
-  ]);
-  const [categoryTest, setCategoryTest] = useState('Phones');
+  // const [categories, setCategories] = useState([
+  //   "Phones",
+  //   "Laptops",
+  //   "Accessories",
+  //   "Tablets",
+  // ]);
+  const [categories, setCategories] = useState([]);
+  const [categoryTest, setCategoryTest] = useState("Phones");
+
+  const getCategories = async () => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/categories`);
+      const categoryNames = response.data.map((category) => category.name);
+      setCategories(categoryNames);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   return (
     <main>
@@ -25,13 +43,13 @@ const Categories = () => {
       {/* <div className="mb-12 w-full md:flex items-end justify-between"> */}
       <h1
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          fontSize: '1.875rem',
-          lineHeight: '2.25rem',
-          fontWeight: '500',
+          display: "flex",
+          justifyContent: "center",
+          fontSize: "1.875rem",
+          lineHeight: "2.25rem",
+          fontWeight: "500",
           // color: 'rgb(134, 134, 139, var(--tw-text-opacity))',
-          color: 'rgb(134,134,139)',
+          color: "rgb(134,134,139)",
         }}
       >
         Featured Products
@@ -58,17 +76,17 @@ const Categories = () => {
         //   // flexWrap: 'nowrap',
         //   // justifyContent: 'space-between',
         // }}
-        style={{ display: 'flex' }}
+        style={{ display: "flex" }}
       >
         {categories.map((category) => (
           <Box key={category} className="card">
             <Card
               className="card-category"
-              style={{ width: '50%', margin: '0 auto' }}
+              style={{ width: "50%", margin: "0 auto" }}
             >
               <CardCategory category={category} />
             </Card>
-            <Typography style={{ display: 'flex', justifyContent: 'center' }}>
+            <Typography style={{ display: "flex", justifyContent: "center" }}>
               {category}
             </Typography>
           </Box>

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, CardActions, CardContent, Typography } from '@mui/material';
+import React from "react";
+import { Button, CardActions, CardContent, Typography } from "@mui/material";
 
 const CardCategory = ({ category }) => {
   return (
