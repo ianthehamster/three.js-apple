@@ -30,6 +30,7 @@ const ModelView = ({
   modelState,
 }) => {
   console.log(modelState);
+  console.log(`PROBLEM ERROR: ${item}`);
   return (
     <View
       index={index}
@@ -77,13 +78,13 @@ const ModelView = ({
             <AppleVisionPro />
           ) : modelState === 'phones' ? (
             <IPhone13 />
-          ) : (
+          ) : item ? (
             <IPhone
               scale={index === 1 ? [15, 15, 15] : [17, 17, 17]}
               item={item}
               size={size}
             />
-          )}
+          ) : null}
         </Suspense>
       </group>
     </View>

@@ -9,13 +9,40 @@ import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from './buttons/LoginButton';
 import LogoutButton from './buttons/LogoutButton';
 import { CartContext } from '../context/CartContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
+import axios from 'axios';
+import { BACKEND_URL } from '../constantVariables';
 
-const Navbar = () => {
+const Navbar = ({ isUserInDb }) => {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
   const { getTotalCartItemsQty } = useContext(CartContext);
   const cartQuantity = getTotalCartItemsQty();
+
+  console.log(isUserInDb, user);
+
+  const postNewUser = async () => {
+    if (isUserInDb === false) {
+      console.log(`postNewUser is called`);
+      await axios
+        .post(`${BACKEND_URL}/users`, {
+          first_name: user.first_name,
+          last_name: user.last_name,
+          email: user.name,
+        })
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err));
+    }
+  };
+
+  useEffect(() => {
+    console.log('useEffect is called but postNewUser is not called');
+    if (user && isUserInDb === false) {
+      console.log('useEffect is called correctly');
+      postNewUser();
+    }
+  }, [user, isUserInDb]);
+
   return (
     <header
       className="w-full py-5 sm:px-10 px-5 flex justify-between items-center bg-black"

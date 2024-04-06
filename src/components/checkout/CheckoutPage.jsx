@@ -23,7 +23,7 @@ import {
 } from '@stripe/react-stripe-js';
 import { useAuth0 } from '@auth0/auth0-react';
 
-const stripePromise = loadStripe('pk_test_123');
+// const stripePromise = loadStripe('pk_test_123');
 
 momentum.register();
 
@@ -68,26 +68,26 @@ const CheckoutPage = () => {
   //     });
   // }, []);
 
-  const fetchClientSecret = useCallback(async () => {
-    try {
-      // Create a Checkout Session
+  // const fetchClientSecret = useCallback(async () => {
+  //   try {
+  //     // Create a Checkout Session
 
-      const response = await axios.post(
-        'http://localhost:3000/products/create-checkout-session',
-      );
+  //     const response = await axios.post(
+  //       'http://localhost:3000/products/create-checkout-session',
+  //     );
 
-      console.log(response);
-      console.log(response.data); // Log the response data
+  //     console.log(response);
+  //     console.log(response.data); // Log the response data
 
-      return response.data.clientSecret;
-    } catch (error) {
-      console.error('Error:', error);
-      // Handle error here if needed
-      throw error; // Rethrow error to handle it outside of this function
-    }
-  }, []);
+  //     return response.data.clientSecret;
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     // Handle error here if needed
+  //     throw error; // Rethrow error to handle it outside of this function
+  //   }
+  // }, []);
 
-  const options1 = { fetchClientSecret };
+  // const options1 = { fetchClientSecret };
 
   const changeHandler = (e) => {
     console.log(e.label);
