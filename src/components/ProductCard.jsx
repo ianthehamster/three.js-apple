@@ -12,7 +12,7 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 const ProductCard = ({ product }) => {
-  // const { cartItems } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
 
   const price = formatCurrency(product.price);
 
