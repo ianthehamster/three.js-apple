@@ -1,11 +1,11 @@
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Highlights from './components/Highlights';
-import Model from './components/Model';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { BACKEND_URL } from './constantVariables';
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Highlights from "./components/Highlights";
+import Model from "./components/Model";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { BACKEND_URL } from "./constantVariables";
 
 const App = () => {
   const { user, isAuthenticated } = useAuth0();

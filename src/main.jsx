@@ -1,22 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Auth0Provider } from '@auth0/auth0-react';
-import App from './App.jsx';
-import './index.css';
-import Categories from './components/Categories.jsx';
-import LaptopsProductPage from './components/productLists/LaptopsProductPage.jsx';
-import PhonesProductPage from './components/productLists/PhonesProductPage.jsx';
-import AccessoriesProductPage from './components/productLists/AccessoriesProductPage.jsx';
-import TabletsProductPage from './components/productLists/TabletsProductPage.jsx';
-import AboutUs from './components/AboutUs.jsx';
-import SingleProductPage from './components/SingleProductPage.jsx';
-import { CartContextProvider } from './context/CartContext.jsx';
-import PaymentSuccessPage from './components/PaymentSuccessPage.jsx';
-import CartPage from './components/cart/CartPage.jsx';
-import CheckoutPage from './components/checkout/CheckoutPage.jsx';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
+import App from "./App.jsx";
+import "./index.css";
+import Categories from "./components/Categories.jsx";
+import LaptopsProductPage from "./components/productLists/LaptopsProductPage.jsx";
+import PhonesProductPage from "./components/productLists/PhonesProductPage.jsx";
+import AccessoriesProductPage from "./components/productLists/AccessoriesProductPage.jsx";
+import TabletsProductPage from "./components/productLists/TabletsProductPage.jsx";
+import AboutUs from "./components/AboutUs.jsx";
+import SingleProductPage from "./components/SingleProductPage.jsx";
+import { CartContextProvider } from "./context/CartContext.jsx";
+import PaymentSuccessPage from "./components/PaymentSuccessPage.jsx";
+import CartPage from "./components/cart/CartPage.jsx";
+import CheckoutPage from "./components/checkout/CheckoutPage.jsx";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Auth0Provider
       domain={import.meta.env.VITE_AUTH0_DOMAIN}
@@ -25,7 +25,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         redirect_uri: window.location.origin,
         audience: import.meta.env.VITE_AUTH0_AUDIENCE,
         scope:
-          'read:current_user update:current_user_metadata openid profile email read:user_metadata',
+          "read:current_user update:current_user_metadata openid profile email read:user_metadata",
       }}
     >
       <CartContextProvider>
@@ -48,10 +48,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="/checkout" element={<CheckoutPage />}></Route>
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/order/success" element={<PaymentSuccessPage />} />
-            <Route path="*" element={'Nothing here!'} />
+            <Route path="*" element={"Nothing here!"} />
           </Routes>
         </BrowserRouter>
       </CartContextProvider>
     </Auth0Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
