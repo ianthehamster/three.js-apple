@@ -12,7 +12,7 @@ import TabletsProductPage from "./components/productLists/TabletsProductPage.jsx
 import AboutUs from "./components/AboutUs.jsx";
 import SingleProductPage from "./components/SingleProductPage.jsx";
 import { CartContextProvider } from "./context/CartContext.jsx";
-import PaymentSuccessPage from "./components/PaymentSuccessPage.jsx";
+import PaymentSuccessPage from "./components/checkout/PaymentSuccessPage.jsx";
 import CartPage from "./components/cart/CartPage.jsx";
 import CheckoutPage from "./components/checkout/CheckoutPage.jsx";
 
