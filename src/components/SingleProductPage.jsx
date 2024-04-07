@@ -13,27 +13,54 @@ import DeleteIcon from "@mui/icons-material/Delete";
 // Animations
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const SingleProductPage = () => {
   const [product, setProduct] = useState({});
-  const [productId, setProductId] = useState();
+  const [productId, setProductId] = useState("");
   const [priceId, setPriceId] = useState("");
   const { getCartItemQuantity, removeFromCart } = useContext(CartContext);
+  const { user, isAuthenticated, getAccessTokenSilently, loginWithRedirect } =
+    useAuth0();
+  const [accessToken, setAccessToken] = useState("");
+
+  const getToken = async () => {
+    if (!isAuthenticated) {
+      loginWithRedirect();
+    } else {
+      const token = await getAccessTokenSilently({
+        audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+        scope:
+          "read:current_user update:current_user_metadata openid profile email read:user_metadata",
+      });
+      setAccessToken(token);
+    }
+  };
 
   const getProductInfo = async () => {
     if (productId) {
       try {
         const response = await axios.get(
-          `${BACKEND_URL}/products/${productId}`
+          `${BACKEND_URL}/products/${productId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
         );
         setProduct(response.data);
         setPriceId(response.data.stripe_id);
       } catch (error) {
-        console.error(error);
+        console.error(error.message);
       }
     }
   };
 
+  const showProductInfo = () => {
+    if (accessToken) {
+      getProductInfo();
+    }
+  };
   // Animations
   useGSAP(() => {
     gsap.to("#test-title", {
@@ -44,8 +71,12 @@ const SingleProductPage = () => {
   });
 
   useEffect(() => {
-    getProductInfo();
+    getToken();
   }, []);
+
+  useEffect(() => {
+    showProductInfo();
+  }, [accessToken]);
 
   // Update product ID in state if needed to trigger data retrieval
   const params = useParams();
@@ -56,25 +87,25 @@ const SingleProductPage = () => {
   const quantityInCart = getCartItemQuantity(product.id);
   const price = formatCurrency(product.price);
 
-  const handleCheckout = async (e) => {
-    e.preventDefault();
+  // const handleCheckout = async (e) => {
+  //   e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        `${BACKEND_URL}/products/create-checkout-session`,
-        {
-          priceId: priceId,
-        }
-      );
-      window.location.href = response.data.url;
-    } catch (err) {
-      console.error(`Error creating checkout session: ${err}`);
-    }
+  //   try {
+  //     const response = await axios.post(
+  //       `${BACKEND_URL}/products/create-checkout-session`,
+  //       {
+  //         priceId: priceId,
+  //       }
+  //     );
+  //     window.location.href = response.data.url;
+  //   } catch (err) {
+  //     console.error(`Error creating checkout session: ${err}`);
+  //   }
 
-    // Send a POST request to backend to create an order
-    try {
-    } catch (err) {}
-  };
+  //   // Send a POST request to backend to create an order
+  //   try {
+  //   } catch (err) {}
+  // };
 
   const productDetails = (
     <div>
@@ -127,10 +158,6 @@ const SingleProductPage = () => {
       <section>
         <Navbar />
         {product && productDetails}
-        <form onSubmit={handleCheckout}>
-          <input type="hidden" name="priceId" value={priceId} />
-          <button type="submit">Checkout</button>
-        </form>
       </section>
     </div>
   );
