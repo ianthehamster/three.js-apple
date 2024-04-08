@@ -14,7 +14,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useAuth0 } from "@auth0/auth0-react";
-import CircularProgress from "@mui/material/CircularProgress";
+// import CircularProgress from "@mui/material/CircularProgress";
+import "ldrs/hourglass";
 
 const SingleProductPage = () => {
   const [product, setProduct] = useState({});
@@ -169,7 +170,7 @@ const SingleProductPage = () => {
         <Navbar />
         {loading ? (
           <div className="spinner">
-            <CircularProgress />
+            <l-hourglass size="60" color="coral"></l-hourglass>
           </div>
         ) : (
           productDetails
