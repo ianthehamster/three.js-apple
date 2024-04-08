@@ -14,6 +14,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useAuth0 } from "@auth0/auth0-react";
+// import CircularProgress from "@mui/material/CircularProgress";
+import "ldrs/hourglass";
 
 const SingleProductPage = () => {
   const [product, setProduct] = useState({});
@@ -23,6 +25,7 @@ const SingleProductPage = () => {
   const { user, isAuthenticated, getAccessTokenSilently, loginWithRedirect } =
     useAuth0();
   const [accessToken, setAccessToken] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const getToken = async () => {
     if (!isAuthenticated) {
@@ -50,6 +53,7 @@ const SingleProductPage = () => {
         );
         setProduct(response.data);
         setPriceId(response.data.stripe_id);
+        setLoading(false);
       } catch (error) {
         console.error(error.message);
       }
@@ -61,6 +65,7 @@ const SingleProductPage = () => {
       getProductInfo();
     }
   };
+
   // Animations
   useGSAP(() => {
     gsap.to("#test-title", {
@@ -75,8 +80,9 @@ const SingleProductPage = () => {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     showProductInfo();
-  }, [accessToken]);
+  }, [accessToken, productId]);
 
   // Update product ID in state if needed to trigger data retrieval
   const params = useParams();
@@ -84,6 +90,7 @@ const SingleProductPage = () => {
   if (productId !== params.productId) {
     setProductId(params.productId);
   }
+
   const quantityInCart = getCartItemQuantity(product.id);
   const price = formatCurrency(product.price);
 
@@ -109,10 +116,14 @@ const SingleProductPage = () => {
 
   const productDetails = (
     <div>
-      <Grid container spacing={2}>
+      <Grid container sx={{ p: 2 }}>
         <Grid item xs={12} md={6} lg={6} display="flex" justifyContent="center">
           <div className="image">
-            <img src={product.img} alt="product_img" />
+            <img
+              id="product-image"
+              src={product.img && product.img}
+              alt="product_img"
+            />
           </div>
         </Grid>
         <Grid
@@ -124,10 +135,10 @@ const SingleProductPage = () => {
           // justifyContent="center"
           alignItems="center"
         >
-          <Stack spacing={2}>
+          <Stack spacing={2} sx={{ p: 2 }}>
             <div className="header">{product.title && product.title}</div>
             <div className="price">{product.price && price}</div>
-            <div className="text">
+            <div className="product-info">
               {product.description && product.description}
             </div>
 
@@ -137,7 +148,7 @@ const SingleProductPage = () => {
             {quantityInCart === 0 ? (
               <AddToCartButton product={product} />
             ) : (
-              <div style={{ display: "flex", alignItems: "center" }}>
+              <div className="increment-btn">
                 <IncrementDecrementBtn product={product} />
                 <div>
                   <DeleteIcon
@@ -157,7 +168,13 @@ const SingleProductPage = () => {
     <div>
       <section>
         <Navbar />
-        {product && productDetails}
+        {loading ? (
+          <div className="spinner">
+            <l-hourglass size="60" color="coral"></l-hourglass>
+          </div>
+        ) : (
+          productDetails
+        )}
       </section>
     </div>
   );

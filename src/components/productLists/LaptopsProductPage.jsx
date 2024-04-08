@@ -18,19 +18,19 @@ const LaptopsProductPage = () => {
   const params = { categoryName: categoryName };
 
   // Seed Laptops and also alter products table to add columns and categories so that only products of category laptop is fetched here
-  // useEffect(() => {
-  //   axios.get(`${BACKEND_URL}/products`, { params }).then((response) => {
-  //     setLaptops(response.data);
-  //     setModelState("laptop");
-  //   });
-  // }, []);
-
   useEffect(() => {
-    axios.get(`${BACKEND_URL}/products?${categoryName}`).then((response) => {
+    axios.get(`${BACKEND_URL}/products`, { params }).then((response) => {
       setLaptops(response.data);
       setModelState("laptop");
     });
   }, []);
+
+  // useEffect(() => {
+  //   axios.get(`${BACKEND_URL}/products?${categoryName}`).then((response) => {
+  //     setLaptops(response.data);
+  //     setModelState("laptop");
+  //   });
+  // }, []);
 
   console.log(categoryName, params);
 
