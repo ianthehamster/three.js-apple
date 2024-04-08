@@ -17,19 +17,19 @@ const TabletsProductPage = () => {
   const categoryName = currentUrl.replace(/Page$/, "").substring(1); //returns tablets as category name
   const params = { categoryName: categoryName };
 
-  // useEffect(() => {
-  //   axios.get(`${BACKEND_URL}/products`, { params }).then((response) => {
-  //     setTablets(response.data);
-  //     setModelState("tablet");
-  //   });
-  // }, []);
-
   useEffect(() => {
-    axios.get(`${BACKEND_URL}/products?${categoryName}`).then((response) => {
+    axios.get(`${BACKEND_URL}/products`, { params }).then((response) => {
       setTablets(response.data);
       setModelState("tablet");
     });
   }, []);
+
+  // useEffect(() => {
+  //   axios.get(`${BACKEND_URL}/products?${categoryName}`).then((response) => {
+  //     setTablets(response.data);
+  //     setModelState("tablet");
+  //   });
+  // }, []);
 
   console.log(tablets);
   return (
