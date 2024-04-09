@@ -1,17 +1,17 @@
-import { appleImg, bagImg, searchImg } from "../utils";
+import { appleImg, bagImg, searchImg } from '../utils';
 // import { navLists } from "../constants";
-import { Link } from "react-router-dom";
-import DevicesIcon from "@mui/icons-material/Devices";
-import BasicMenu from "./minorComponents/DropDownMenu";
-import { Button, Typography, Badge } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from "./buttons/LoginButton";
-import LogoutButton from "./buttons/LogoutButton";
-import { CartContext } from "../context/CartContext";
-import { useContext, useEffect } from "react";
-import axios from "axios";
-import { BACKEND_URL } from "../constantVariables";
+import { Link } from 'react-router-dom';
+import DevicesIcon from '@mui/icons-material/Devices';
+import BasicMenu from './minorComponents/DropDownMenu';
+import { Button, Typography, Badge } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import LoginButton from './buttons/LoginButton';
+import LogoutButton from './buttons/LogoutButton';
+import { CartContext } from '../context/CartContext';
+import { useContext, useEffect } from 'react';
+import axios from 'axios';
+import { BACKEND_URL } from '../constantVariables';
 
 const Navbar = ({ isUserInDb }) => {
   const navigate = useNavigate();
@@ -19,11 +19,11 @@ const Navbar = ({ isUserInDb }) => {
   const { getTotalCartItemsQty } = useContext(CartContext);
   const cartQuantity = getTotalCartItemsQty();
 
-  console.log(isUserInDb, user);
+  // console.log(isUserInDb, user);
 
   const postNewUser = async () => {
     if (isUserInDb === false) {
-      console.log(`postNewUser is called`);
+      // console.log(`postNewUser is called`);
       await axios
         .post(`${BACKEND_URL}/users`, {
           first_name: user.first_name,
@@ -36,9 +36,9 @@ const Navbar = ({ isUserInDb }) => {
   };
 
   useEffect(() => {
-    console.log("useEffect is called but postNewUser is not called");
+    console.log('useEffect is called but postNewUser is not called');
     if (user && isUserInDb === false) {
-      console.log("useEffect is called correctly");
+      console.log('useEffect is called correctly');
       postNewUser();
     }
   }, [user, isUserInDb]);
@@ -46,12 +46,12 @@ const Navbar = ({ isUserInDb }) => {
   return (
     <header
       className="w-full py-5 sm:px-10 px-5 flex justify-between items-center bg-black"
-      style={{ width: "100%" }}
+      style={{ width: '100%' }}
     >
       <nav className="flex w-full screen-max-width">
-        <DevicesIcon style={{ color: "white", marginRight: "15px" }} />
+        <DevicesIcon style={{ color: 'white', marginRight: '15px' }} />
 
-        <Typography variant="p" style={{ color: "white" }}>
+        <Typography variant="p" style={{ color: 'white' }}>
           Techie E-Store
         </Typography>
 
@@ -59,13 +59,13 @@ const Navbar = ({ isUserInDb }) => {
           <div>
             <Button
               id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
+              aria-controls={open ? 'basic-menu' : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
+              aria-expanded={open ? 'true' : undefined}
               onClick={() => {
-                navigate("/");
+                navigate('/');
               }}
-              style={{ color: "white" }}
+              style={{ color: 'white' }}
             >
               Home
             </Button>
@@ -76,13 +76,13 @@ const Navbar = ({ isUserInDb }) => {
           <div>
             <Button
               id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
+              aria-controls={open ? 'basic-menu' : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
+              aria-expanded={open ? 'true' : undefined}
               onClick={() => {
-                navigate("/aboutUs");
+                navigate('/aboutUs');
               }}
-              style={{ color: "white" }}
+              style={{ color: 'white' }}
             >
               About us
             </Button>
@@ -98,14 +98,14 @@ const Navbar = ({ isUserInDb }) => {
               width={18}
               height={18}
               onClick={() => {
-                navigate("/cart");
+                navigate('/cart');
               }}
             />
           </Badge>
-          <div style={{ color: "white" }}>
+          <div style={{ color: 'white' }}>
             Hello {isAuthenticated ? `${user.first_name}` : `Guest`}
           </div>
-          <div style={{ color: "white" }}>
+          <div style={{ color: 'white' }}>
             {isAuthenticated ? <LogoutButton /> : <LoginButton />}
           </div>
         </div>

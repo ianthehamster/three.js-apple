@@ -1,49 +1,68 @@
-import React, { useEffect } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
-import Navbar from "../Navbar";
-import { BACKEND_URL } from "../../constantVariables";
-import axios from "axios";
-import "./PaymentSuccessPage.css";
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useContext, useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import Navbar from '../Navbar';
+import { BACKEND_URL } from '../../constantVariables';
+import axios from 'axios';
+import './PaymentSuccessPage.css';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { CartContext } from '../../context/CartContext';
 
 const PaymentSuccessPage = () => {
+  const [userAddress, setUserAddress] = useState(null);
+  const [addressId, setAddressId] = useState(null);
+  const [userId, setUserId] = useState(null);
   const { user, isAuthenticated } = useAuth0();
+  const [productIdArray, setProductIdArray] = useState([]);
+  const { getDeliveryAddress, getTotalCartPrice, cartItems } =
+    useContext(CartContext);
+
   const navigate = useNavigate();
 
-  console.log(isAuthenticated, user);
+  // console.log(isAuthenticated, user);
+  console.log(cartItems);
 
-  // const getUserId = async function(){
-  //   try{
-  //     const user = await axios.get()
-  //   }catch(err){
-  //     console.error(err)
-  //   }
-  // }
+  const getUserIdAndSetUserAddress = async () => {
+    if (user) {
+      await axios
+        .put(`${BACKEND_URL}/users`, {
+          name: user.name,
+        })
+        .then((response) => setUserId(response.data.id));
+    }
+    setUserAddress(getDeliveryAddress());
 
-  // useEffect(async () => {
-  //   try{
-  //     const postOrder = await axios.post()
-  //   }catch(err){
+    if (userAddress) {
+      try {
+        await axios
+          .post(`http://localhost:3000/addresses/get-address-id`, {
+            delivery_address: userAddress,
+          })
+          .then((response) => setAddressId(response.data))
+          .catch((err) => console.log(err));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
 
-  //   }
-
-  //   return () => {
-  //     second;
-  //   };
-  // }, []);
-
-  const getUserId = async () => {
-    await axios
-      .put(`${BACKEND_URL}/users`, {
-        name: user.name,
-      })
-      .then((response) => console.log(response));
+  const setProductIdArrays = () => {
+    if (cartItems) {
+      setProductIdArray(cartItems.map((cartItem) => cartItem.id));
+    }
   };
 
   useEffect(() => {
-    getUserId();
+    getUserIdAndSetUserAddress();
   }, [user]);
+
+  useEffect(() => {
+    setProductIdArrays();
+  }, [cartItems]);
+
+  const subTotalPrice = getTotalCartPrice();
+
+  console.log(userAddress, addressId, userId, subTotalPrice, productIdArray);
 
   return (
     <div>
@@ -61,14 +80,14 @@ const PaymentSuccessPage = () => {
         <Button
           variant="contained"
           sx={{
-            marginTop: "20px",
-            bgcolor: "#42b883",
-            "&:hover": {
-              bgcolor: "#61b390",
+            marginTop: '20px',
+            bgcolor: '#42b883',
+            '&:hover': {
+              bgcolor: '#61b390',
             },
           }}
           onClick={() => {
-            navigate("/");
+            navigate('/');
           }}
         >
           Continue shopping

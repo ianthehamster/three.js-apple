@@ -16,19 +16,19 @@ const PhonesProductPage = () => {
   const categoryName = currentUrl.replace(/Page$/, '').substring(1); //returns phones as category name
   const params = { categoryName: categoryName };
 
-  // useEffect(() => {
-  //   axios.get(`${BACKEND_URL}/products`, { params }).then((response) => {
-  //     setPhones(response.data);
-  //     setModelState("phones");
-  //   });
-  // }, []);
-
   useEffect(() => {
-    axios.get(`${BACKEND_URL}/products?${categoryName}`).then((response) => {
+    axios.get(`${BACKEND_URL}/products`, { params }).then((response) => {
       setPhones(response.data);
       setModelState('phones');
     });
   }, []);
+
+  // useEffect(() => {
+  //   axios.get(`${BACKEND_URL}/products?${categoryName}`).then((response) => {
+  //     setPhones(response.data);
+  //     setModelState('phones');
+  //   });
+  // }, []);
 
   return (
     <div>

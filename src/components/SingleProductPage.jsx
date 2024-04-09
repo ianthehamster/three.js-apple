@@ -1,28 +1,28 @@
-import React, { useState, useEffect, useContext } from "react";
-import { CartContext } from "../context/CartContext";
-import Navbar from "./Navbar";
-import { BACKEND_URL } from "../constantVariables";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import { Grid, Stack } from "@mui/material";
-import "./SingleProductPage.css";
-import { formatCurrency } from "../utils/formatCurrency";
-import AddToCartButton from "./buttons/AddToCartButton";
-import IncrementDecrementBtn from "./buttons/IncrementDecrementBtn";
-import DeleteIcon from "@mui/icons-material/Delete";
+import React, { useState, useEffect, useContext } from 'react';
+import { CartContext } from '../context/CartContext';
+import Navbar from './Navbar';
+import { BACKEND_URL } from '../constantVariables';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { Grid, Stack } from '@mui/material';
+import './SingleProductPage.css';
+import { formatCurrency } from '../utils/formatCurrency';
+import AddToCartButton from './buttons/AddToCartButton';
+import IncrementDecrementBtn from './buttons/IncrementDecrementBtn';
+import DeleteIcon from '@mui/icons-material/Delete';
 // Animations
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { useAuth0 } from "@auth0/auth0-react";
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const SingleProductPage = () => {
   const [product, setProduct] = useState({});
-  const [productId, setProductId] = useState("");
-  const [priceId, setPriceId] = useState("");
+  const [productId, setProductId] = useState('');
+  const [priceId, setPriceId] = useState('');
   const { getCartItemQuantity, removeFromCart } = useContext(CartContext);
   const { user, isAuthenticated, getAccessTokenSilently, loginWithRedirect } =
     useAuth0();
-  const [accessToken, setAccessToken] = useState("");
+  const [accessToken, setAccessToken] = useState('');
 
   const getToken = async () => {
     if (!isAuthenticated) {
@@ -31,11 +31,14 @@ const SingleProductPage = () => {
       const token = await getAccessTokenSilently({
         audience: import.meta.env.VITE_AUTH0_AUDIENCE,
         scope:
-          "read:current_user update:current_user_metadata openid profile email read:user_metadata",
+          'read:current_user update:current_user_metadata openid profile email read:user_metadata',
       });
+      console.log('Token from Auth0', token);
       setAccessToken(token);
     }
   };
+
+  console.log(accessToken);
 
   const getProductInfo = async () => {
     if (productId) {
@@ -46,7 +49,7 @@ const SingleProductPage = () => {
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },
-          }
+          },
         );
         setProduct(response.data);
         setPriceId(response.data.stripe_id);
@@ -63,7 +66,7 @@ const SingleProductPage = () => {
   };
   // Animations
   useGSAP(() => {
-    gsap.to("#test-title", {
+    gsap.to('#test-title', {
       opacity: 1,
       y: -20,
       delay: 2,
@@ -137,11 +140,11 @@ const SingleProductPage = () => {
             {quantityInCart === 0 ? (
               <AddToCartButton product={product} />
             ) : (
-              <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <IncrementDecrementBtn product={product} />
                 <div>
                   <DeleteIcon
-                    style={{ margin: "auto 15px" }}
+                    style={{ margin: 'auto 15px' }}
                     onClick={() => removeFromCart(product.id)}
                   />
                 </div>

@@ -42,7 +42,7 @@ const CheckoutPage = () => {
 
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, updateDeliveryAddress } = useContext(CartContext);
 
   const [shippingInfoState, setShippingInfoState] = useState(true);
   const [loaderSpinner, setLoaderSpinner] = useState(false);
@@ -95,9 +95,29 @@ const CheckoutPage = () => {
     setCountryValue(value);
   };
 
-  const handleYourDetails = (e) => {
+  const handleYourDetails = async (e) => {
     const itemNames = cartItems.map((cartItem) => cartItem.title);
-    console.log(`User purchased these items: `, itemNames);
+    console.log(
+      `User purchased these items: `,
+      itemNames,
+      'Delivery address is: ',
+      formData.addressLine1,
+    );
+
+    // POST request to add address to addresses table
+    const newAddress = await axios
+      .post(`${BACKEND_URL}/addresses`, {
+        email: user.name,
+        address: formData.addressLine1,
+      })
+      .then((response) =>
+        console.log(
+          `New address posted to addresses table in db: `,
+          response.data,
+        ),
+      );
+
+    updateDeliveryAddress(formData.addressLine1);
     setLoaderSpinner(true);
     setTimeout(() => {
       setShippingInfoState(false);
