@@ -14,13 +14,18 @@ const PaymentSuccessPage = () => {
   const [userId, setUserId] = useState(null);
   const { user, isAuthenticated } = useAuth0();
   const [productIdArray, setProductIdArray] = useState([]);
-  const { getDeliveryAddress, getTotalCartPrice, cartItems } =
-    useContext(CartContext);
+  const [orderStatus, setOrderStatus] = useState(false);
+  const {
+    getDeliveryAddress,
+    getTotalCartPrice,
+    cartItems,
+    getTotalCartItemsQty,
+  } = useContext(CartContext);
 
   const navigate = useNavigate();
 
   // console.log(isAuthenticated, user);
-  console.log(cartItems);
+  // console.log(cartItems);
 
   const getUserIdAndSetUserAddress = async () => {
     if (user) {
@@ -52,6 +57,30 @@ const PaymentSuccessPage = () => {
     }
   };
 
+  const subTotalPrice = getTotalCartPrice();
+  const quantity = getTotalCartItemsQty();
+
+  // Post order
+  const postOrder = async () => {
+    try {
+      console.log('postOrder is called!');
+      await axios
+        .post(`${BACKEND_URL}/orders`, {
+          address_id: addressId,
+          user_id: userId,
+          total_price: subTotalPrice,
+          productId: productIdArray,
+          quantity: quantity,
+        })
+        .then((response) => {
+          console.log(response);
+        });
+      setOrderStatus(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getUserIdAndSetUserAddress();
   }, [user]);
@@ -60,9 +89,16 @@ const PaymentSuccessPage = () => {
     setProductIdArrays();
   }, [cartItems]);
 
-  const subTotalPrice = getTotalCartPrice();
+  useEffect(() => {
+    // console.log('Empty Dependency Array runs twice');
 
-  console.log(userAddress, addressId, userId, subTotalPrice, productIdArray);
+    if (orderStatus === false && userId && addressId) {
+      postOrder();
+    }
+  }, [userId, addressId]);
+
+  // console.log(orderStatus);
+  // console.log(userAddress, addressId, userId, subTotalPrice, productIdArray);
 
   return (
     <div>
