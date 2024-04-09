@@ -26,6 +26,7 @@ const TabletsProductPage = () => {
 
   // useEffect(() => {
   //   axios.get(`${BACKEND_URL}/products?${categoryName}`).then((response) => {
+  //   axios.get(`${BACKEND_URL}/products?${categoryName}`).then((response) => {
   //     setTablets(response.data);
   //     setModelState("tablet");
   //   });

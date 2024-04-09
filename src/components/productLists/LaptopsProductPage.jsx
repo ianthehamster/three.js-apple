@@ -27,6 +27,7 @@ const LaptopsProductPage = () => {
 
   // useEffect(() => {
   //   axios.get(`${BACKEND_URL}/products?${categoryName}`).then((response) => {
+  //   axios.get(`${BACKEND_URL}/products?${categoryName}`).then((response) => {
   //     setLaptops(response.data);
   //     setModelState("laptop");
   //   });

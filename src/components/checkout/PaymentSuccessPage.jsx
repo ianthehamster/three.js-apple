@@ -68,13 +68,13 @@ const PaymentSuccessPage = () => {
     <div>
       <Navbar />
       <div className="page-content">
-        <div className="success-img">
+        <div className="payment-res-img">
           <img
             src="https://us.123rf.com/450wm/dstarky/dstarky1709/dstarky170900073/85568018-green-tick-flat-icon-in-circle-vector-illustration-isolated-on-a-white-background-acceptance-of.jpg?ver=6"
             alt="success"
           />
         </div>
-        <p className="success-header">Success!</p>
+        <p className="payment-result">Success!</p>
         <p className="text">Your payment has been processed successfully!</p>
         <p className="text">Thank you for shopping with us!</p>
         <Button

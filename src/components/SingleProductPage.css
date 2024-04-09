@@ -8,7 +8,7 @@
   padding-left: 8px;
 }
 
-.text {
+.product-info {
   font-size: 110%;
   padding: 15px 8px;
 }
@@ -24,11 +24,29 @@
   display: flex;
   align-items: center;
 }
+
+.increment-btn {
+  display: flex;
+  align-items: center;
+  padding-left: 6px;
+}
+.spinner {
+  /* display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 500px) {
   .image {
-    width: 350px;
-    height: 500px;
+    width: 300px;
+    height: 400px;
   }
 }
 
