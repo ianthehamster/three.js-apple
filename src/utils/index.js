@@ -30,6 +30,9 @@ import explore2 from '/assets/images/explore2.jpg';
 import chip from '/assets/images/chip.jpeg';
 import frame from '/assets/images/frame.png';
 import hightechpicture1 from '/assets/images/hightechpicture1.jpg';
+import techieEStoreLogoV1 from '/assets/images/updated-logo.png';
+import microsoftBackground from '/assets/images/about-us-section-3.jpg';
+import technologyBackground from '/assets/images/about-us-section-4.jpg';
 
 export const highTechVideo = hightech;
 export const heroVideo = hmv;
@@ -59,3 +62,6 @@ export const explore2Img = explore2;
 export const chipImg = chip;
 export const frameImg = frame;
 export const hightechpictureV1 = hightechpicture1;
+export const mainLogo = techieEStoreLogoV1;
+export const aboutUsSection2 = microsoftBackground;
+export const aboutUsSection3 = technologyBackground;

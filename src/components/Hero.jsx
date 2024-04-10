@@ -39,9 +39,15 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="w-full nav-height relative">
+    <section
+      className="w-full nav-height relative"
+      style={{ backgroundColor: 'black' }}
+    >
       {/* <section className="w-full nav-height bg-black relative"> */}
-      <div className="h-5/6 w-full flex-center flex-col">
+      <div
+        className="h-5/6 w-full flex-center flex-col"
+        style={{ backgroundColor: 'black' }}
+      >
         {/* <div className="h-3/6 w-full"> */}
         {/* <p id="hero" className="hero-title" style={{ size: '30px' }}>
           Techie E-Store 📱
@@ -65,7 +71,9 @@ const Hero = () => {
         <a href="#highlights" className="btn">
           Buy
         </a>
-        <p className="font-normal text-xl">From $199/month or $999</p>
+        <p className="font-normal text-xl" style={{ color: 'white' }}>
+          From $199/month or $999
+        </p>
       </div>
     </section>
   );

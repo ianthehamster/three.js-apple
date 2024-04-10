@@ -12,6 +12,7 @@ import { CartContext } from '../context/CartContext';
 import { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { BACKEND_URL } from '../constantVariables';
+import { mainLogo } from '../utils';
 
 const Navbar = ({ isUserInDb }) => {
   const navigate = useNavigate();
@@ -49,11 +50,15 @@ const Navbar = ({ isUserInDb }) => {
       style={{ width: '100%' }}
     >
       <nav className="flex w-full screen-max-width">
-        <DevicesIcon style={{ color: 'white', marginRight: '15px' }} />
-
-        <Typography variant="p" style={{ color: 'white' }}>
+        {/* <DevicesIcon style={{ color: 'white', marginRight: '15px' }} /> */}
+        <img
+          src={mainLogo}
+          alt="App Logo"
+          style={{ width: '120px', height: 'auto' }}
+        />
+        {/* <Typography variant="p" style={{ color: 'white' }}>
           Techie E-Store
-        </Typography>
+        </Typography> */}
 
         <div className="flex flex-1 justify-center max-sm:hidden">
           <div>
@@ -70,6 +75,7 @@ const Navbar = ({ isUserInDb }) => {
               Home
             </Button>
           </div>
+
           <div>
             <BasicMenu />
           </div>
