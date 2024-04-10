@@ -10,6 +10,7 @@ import highlightThirdmv from '/assets/videos/hightlight-sec.mp4';
 import highlightFourthmv from '/assets/videos/hightlight-fourth.mp4';
 import exploremv from '/assets/videos/explore.mp4';
 import framemv from '/assets/videos/frame.mp4';
+import hightech from '/assets/videos/hightech.mp4';
 
 import apple from '/assets/images/apple.svg';
 import search from '/assets/images/search.svg';
@@ -28,7 +29,9 @@ import explore1 from '/assets/images/explore1.jpg';
 import explore2 from '/assets/images/explore2.jpg';
 import chip from '/assets/images/chip.jpeg';
 import frame from '/assets/images/frame.png';
+import hightechpicture1 from '/assets/images/hightechpicture1.jpg';
 
+export const highTechVideo = hightech;
 export const heroVideo = hmv;
 export const smallHeroVideo = smallmv;
 export const highlightFirstVideo = highlightFirstmv;
@@ -55,3 +58,4 @@ export const explore1Img = explore1;
 export const explore2Img = explore2;
 export const chipImg = chip;
 export const frameImg = frame;
+export const hightechpictureV1 = hightechpicture1;
