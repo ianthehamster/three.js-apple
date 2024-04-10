@@ -17,10 +17,10 @@ import { momentum } from 'ldrs';
 import axios from 'axios';
 import { BACKEND_URL } from '../../constantVariables';
 import { loadStripe } from '@stripe/stripe-js';
-import {
-  EmbeddedCheckoutProvider,
-  EmbeddedCheckout,
-} from '@stripe/react-stripe-js';
+// import {
+//   EmbeddedCheckoutProvider,
+//   EmbeddedCheckout,
+// } from '@stripe/react-stripe-js';
 import { useAuth0 } from '@auth0/auth0-react';
 
 // const stripePromise = loadStripe('pk_test_123');
@@ -394,6 +394,7 @@ const CheckoutPage = () => {
                       setShippingInfoState(true);
                       setShippingMethodState(true);
                       setLoaderSpinner(false);
+                      setLoaderSpinnerMethod(false);
                     }}
                   >
                     Edit
@@ -604,9 +605,11 @@ const CheckoutPage = () => {
           }}
         >
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Button variant="outlined" onClick={handleCheckout}>
-              Checkout!
-            </Button>
+            {!shippingInfoState && !shippingMethodState ? (
+              <Button variant="outlined" onClick={handleCheckout}>
+                Checkout!
+              </Button>
+            ) : null}
           </Box>
         </Box>
       </Box>

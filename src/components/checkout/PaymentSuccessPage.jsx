@@ -40,8 +40,10 @@ const PaymentSuccessPage = () => {
     if (userAddress) {
       try {
         await axios
-          .post(`http://localhost:3000/addresses/get-address-id`, {
-            delivery_address: userAddress,
+          .get(`http://localhost:3000/addresses/get-address-id`, {
+            params: {
+              delivery_address: userAddress,
+            },
           })
           .then((response) => setAddressId(response.data))
           .catch((err) => console.log(err));
