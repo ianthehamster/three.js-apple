@@ -17,6 +17,7 @@ import CartPage from "./components/cart/CartPage.jsx";
 import CheckoutPage from "./components/checkout/CheckoutPage.jsx";
 import PaymentCancelledPage from "./components/checkout/PaymentCancelledPage.jsx";
 import OrdersHistoryPage from "./components/orders/OrdersHistoryPage.jsx";
+import SingleOrderPage from "./components/orders/SingleOrderPage.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -52,6 +53,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="/order/success" element={<PaymentSuccessPage />} />
             <Route path="/?canceled=true" element={<PaymentCancelledPage />} />
             <Route path="/my-orders" element={<OrdersHistoryPage />} />
+            <Route path="/?canceled=true" element={<PaymentCancelledPage />} />
+            <Route path="/my-orders/:orderId" element={<SingleOrderPage />} />
             <Route path="*" element={"Nothing here!"} />
           </Routes>
         </BrowserRouter>

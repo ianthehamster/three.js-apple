@@ -38,7 +38,7 @@ const OrdersHistoryPage = () => {
       <OrderCard order={order} />
     </div>
   ));
-  // fetch all orders that belong to this user
+
   return (
     <div className="orders-page">
       <Navbar />
