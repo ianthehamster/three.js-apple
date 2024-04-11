@@ -18,7 +18,7 @@ const OrderCard = (props) => {
   const navigate = useNavigate();
   const orderPrice = formatCurrency(props.order.total_price);
   const formattedDate = new Date(props.order.createdAt).toLocaleString();
-  // const address = props.order.address.address;
+  const address = props.order.address.address;
 
   const products = props.order.products;
 
@@ -51,9 +51,9 @@ const OrderCard = (props) => {
               Created: {formattedDate}
             </Typography>
 
-            {/* <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary">
               Shipped to: {address && address}
-            </Typography>  */}
+            </Typography>
           </div>
           <Divider />
           {orderedProducts}
