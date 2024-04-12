@@ -34,7 +34,7 @@ const CheckoutPage = () => {
     firstName: '',
     lastName: '',
     addressLine1: '',
-    addressLine2: '',
+    // addressLine2: '',
     country: '',
     postcode: '',
     phoneNumber: '',
@@ -51,43 +51,6 @@ const CheckoutPage = () => {
   const { user, isAuthenticated } = useAuth0();
 
   const options = useMemo(() => countryList().getData(), []);
-
-  // Stripe Embedded Form
-  // const fetchClientSecret = useCallback(() => {
-  //   // Create a Checkout Session
-  //   return fetch('http://localhost:3000/products/create-checkout-session', {
-  //     method: 'POST',
-  //   })
-  //     .then((res) => {
-  //       console.log(res);
-  //       res.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //       data.clientSecret;
-  //     });
-  // }, []);
-
-  // const fetchClientSecret = useCallback(async () => {
-  //   try {
-  //     // Create a Checkout Session
-
-  //     const response = await axios.post(
-  //       'http://localhost:3000/products/create-checkout-session',
-  //     );
-
-  //     console.log(response);
-  //     console.log(response.data); // Log the response data
-
-  //     return response.data.clientSecret;
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //     // Handle error here if needed
-  //     throw error; // Rethrow error to handle it outside of this function
-  //   }
-  // }, []);
-
-  // const options1 = { fetchClientSecret };
 
   const changeHandler = (e) => {
     console.log(e.label);
@@ -276,7 +239,7 @@ const CheckoutPage = () => {
                 onChange={handleInputChange}
                 sx={{ marginBottom: '25px' }}
               />
-              <InputLabel htmlFor="addressLine2">Address Line 2</InputLabel>
+              {/* <InputLabel htmlFor="addressLine2">Address Line 2</InputLabel>
               <TextField
                 fullWidth
                 id="addressLine2"
@@ -285,7 +248,7 @@ const CheckoutPage = () => {
                 required
                 onChange={handleInputChange}
                 sx={{ marginBottom: '25px' }}
-              />
+              /> */}
 
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Box sx={{ width: '50%', marginRight: '10px' }}>
@@ -551,23 +514,25 @@ const CheckoutPage = () => {
                   </Typography>
                 </Box>
               </Box>
-              <Box sx={{ marginTop: '20px' }}>
-                <Button
-                  variant="contained"
-                  sx={{
-                    color: 'white',
-                    backgroundColor: 'grey',
-                  }}
-                  onClick={handleYourShippingMethod}
-                >
-                  Next
-                </Button>
-              </Box>
-              {loaderSpinnerMethod ? (
-                <Box sx={{ marginLeft: '20px' }}>
-                  <l-momentum size="27" speed="1.1" color="grey"></l-momentum>
+              <Box sx={{ display: 'flex' }}>
+                <Box sx={{ marginTop: '20px' }}>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      color: 'white',
+                      backgroundColor: 'grey',
+                    }}
+                    onClick={handleYourShippingMethod}
+                  >
+                    Next
+                  </Button>
                 </Box>
-              ) : null}
+                {loaderSpinnerMethod ? (
+                  <Box sx={{ marginLeft: '20px', marginTop: '20px' }}>
+                    <l-momentum size="27" speed="1.1" color="grey"></l-momentum>
+                  </Box>
+                ) : null}
+              </Box>
             </>
           ) : !shippingMethodState ? (
             <>

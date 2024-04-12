@@ -33,6 +33,7 @@ import hightechpicture1 from '/assets/images/hightechpicture1.jpg';
 import techieEStoreLogoV1 from '/assets/images/updated-logo.png';
 import microsoftBackground from '/assets/images/about-us-section-3.jpg';
 import technologyBackground from '/assets/images/about-us-section-4.jpg';
+import highTechBackground from '/assets/images/about-us-section-5.png';
 
 export const highTechVideo = hightech;
 export const heroVideo = hmv;
@@ -65,3 +66,4 @@ export const hightechpictureV1 = hightechpicture1;
 export const mainLogo = techieEStoreLogoV1;
 export const aboutUsSection2 = microsoftBackground;
 export const aboutUsSection3 = technologyBackground;
+export const aboutUsSection5 = highTechBackground;

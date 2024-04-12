@@ -1,6 +1,11 @@
 import React, { useRef } from 'react';
 import gsap from 'gsap';
-import { aboutUsSection2, aboutUsSection3, highTechVideo } from '../utils';
+import {
+  aboutUsSection2,
+  aboutUsSection3,
+  aboutUsSection5,
+  highTechVideo,
+} from '../utils';
 import { hightechpictureV1 } from '../utils';
 const AboutUsHero = () => {
   const videoRef = useRef(null);
@@ -109,12 +114,50 @@ const AboutUsHero = () => {
         >
           <p
             style={{
+              fontSize: '25px',
               color: '#fff',
               textShadow:
                 '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff00de, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de, 0 0 55px #ff00de, 0 0 75px #ff00de',
             }}
           >
-            Never miss our store update! Subscribe to our mailing list here!
+            At Techie, we are committed to sustainability in every aspect of our
+            business. That's why we take pride in sourcing only sustainable
+            batteries for our products. With every purchase, you can trust that
+            you're not only getting quality products but also supporting
+            eco-friendly practices. Together, we can make a positive difference
+            for our planet.{' '}
+          </p>
+        </div>
+      </div>
+      <div style={{ position: 'relative', width: '100%' }}>
+        <img src={aboutUsSection5} alt="section-2" style={{ width: '100%' }} />
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 1,
+            textAlign: 'center',
+            color: 'white',
+            fontSize: '2rem',
+            fontWeight: 'bold',
+          }}
+        >
+          <p
+            style={{
+              fontSize: '25px',
+              color: '#fff',
+              textShadow:
+                '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff00de, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de, 0 0 55px #ff00de, 0 0 75px #ff00de',
+            }}
+          >
+            We're committed to a mission that goes beyond mere business, only
+            sourcing sustainable materials for our products and ensuring that
+            each purchase contributes positively to the environment. Our
+            ultimate goal is to provide unparalleled satisfaction to all our
+            customers, delivering not just cutting-edge technology, but also a
+            sense of pride in making responsible choices for the planet.{' '}
           </p>
         </div>
       </div>
