@@ -22,7 +22,7 @@ const Navbar = ({ isUserInDb }) => {
   const { getTotalCartItemsQty } = useContext(CartContext);
   const cartQuantity = getTotalCartItemsQty();
 
-  // console.log(isUserInDb, user);
+  const isSmallScreen = window.innerWidth <= 640;
 
   const postNewUser = async () => {
     if (isUserInDb === false) {
@@ -105,16 +105,20 @@ const Navbar = ({ isUserInDb }) => {
               }}
             />
           </Badge>
-          <div style={{ color: 'white' }}>
+          <div
+            style={{
+              color: 'white',
+              ...(isSmallScreen && { marginRight: '30px' }),
+            }}
+          >
             Hello {isAuthenticated ? `${user.first_name}` : `Guest`}
           </div>
 
-          <div style={{ color: 'white' }}>
+          <div className="hidden md:block" style={{ color: 'white' }}>
             {isAuthenticated ? <LogoutButton /> : <LoginButton />}
           </div>
         </div>
         <div className="md:hidden">
-          {/* <Hamburger color="#fff" /> */}
           <NavMobile />
         </div>
       </nav>

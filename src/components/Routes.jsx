@@ -1,37 +1,41 @@
-import { BiHomeAlt2 } from 'react-icons/bi';
-import { FiSearch } from 'react-icons/fi';
 import { PiChatCircleBold } from 'react-icons/pi';
 import { IoPricetagsOutline } from 'react-icons/io5';
+import HomeIcon from '@mui/icons-material/Home';
+import ComputerIcon from '@mui/icons-material/Computer';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
+import TabletIcon from '@mui/icons-material/Tablet';
+import InfoIcon from '@mui/icons-material/Info';
 
 export const routes = [
   {
     title: 'Home',
     href: '/',
-    Icon: BiHomeAlt2,
+    Icon: HomeIcon,
   },
   {
     title: 'Laptops',
     href: '/laptopsPage',
-    Icon: FiSearch,
+    Icon: ComputerIcon,
   },
   {
     title: 'Phones',
     href: '/phonesPage',
-    Icon: IoPricetagsOutline,
+    Icon: PhoneIphoneIcon,
   },
   {
     title: 'Accessories',
     href: '/accessoriesPage',
-    Icon: IoPricetagsOutline,
+    Icon: HeadsetMicIcon,
   },
   {
     title: 'Tablets',
     href: '/tabletsPage',
-    Icon: IoPricetagsOutline,
+    Icon: TabletIcon,
   },
   {
     title: 'About Us',
     href: '/aboutUs',
-    Icon: PiChatCircleBold,
+    Icon: InfoIcon,
   },
 ];

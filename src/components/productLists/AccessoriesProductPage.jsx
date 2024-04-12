@@ -22,14 +22,6 @@ const AccessoriesProductPage = () => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   axios.get(`${BACKEND_URL}/products?${categoryName}`).then((response) => {
-  //   axios.get(`${BACKEND_URL}/products?${categoryName}`).then((response) => {
-  //     setAccessories(response.data);
-  //     setModelState("accessories");
-  //   });
-  // }, []);
-
   return (
     <div>
       <div>

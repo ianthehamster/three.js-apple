@@ -49,6 +49,7 @@ const CheckoutPage = () => {
   const [shippingMethodState, setShippingMethodState] = useState(true);
   const [loaderSpinnerMethod, setLoaderSpinnerMethod] = useState(false);
   const { user, isAuthenticated } = useAuth0();
+  const isSmallScreen = window.innerWidth <= 640;
 
   const options = useMemo(() => countryList().getData(), []);
 
@@ -159,12 +160,12 @@ const CheckoutPage = () => {
 
   return (
     <div>
-      {/* <EmbeddedCheckoutProvider stripe={stripePromise} options={options1}> */}
       <Navbar />
       <Typography variant="h5" sx={{ margin: '20px', marginTop: '50px' }}>
         Secure Checkout
       </Typography>
-      <Box sx={{ display: 'flex' }}>
+      {/* <Box sx={{ displa}y: isSmallScreen ? 'block' : 'flex' }> */}
+      <Box className="block md:flex">
         <form
           onSubmit={handleSubmit}
           style={{
@@ -176,16 +177,7 @@ const CheckoutPage = () => {
           }}
         >
           {shippingInfoState ? (
-            <Box
-              // sx={{
-              //   margin: '20px',
-              //   width: '60%',
-              //   padding: 3,
-              //   border: '1px solid grey',
-              //   borderRadius: 1,
-              // }}
-              sx={{ margin: '20px' }}
-            >
+            <Box sx={{ margin: '20px' }}>
               {/* <form> */}
               <Typography variant="h6" sx={{ marginBottom: '12px' }}>
                 Your Details
@@ -414,10 +406,13 @@ const CheckoutPage = () => {
                   />
                 </Box>
                 <Box style={{ display: 'flex', flexDirection: 'column' }}>
-                  <Box sx={{ marginBottom: '5px', width: '110px' }}>
+                  <Box
+                    sx={{ marginBottom: '5px', width: '110px' }}
+                    className="md:ml-0 ml-5"
+                  >
                     {cartItem.title}
                   </Box>
-                  <Box>Qty: {cartItem.quantity}</Box>
+                  <Box className="md:ml-0 ml-5">Qty: {cartItem.quantity}</Box>
                 </Box>
                 <Box sx={{ marginLeft: '50px', marginRight: '20px' }}>
                   SGD${cartItem.price * cartItem.quantity}
@@ -578,8 +573,6 @@ const CheckoutPage = () => {
           </Box>
         </Box>
       </Box>
-      {/* <EmbeddedCheckout /> */}
-      {/* </EmbeddedCheckoutProvider> */}
     </div>
   );
 };
