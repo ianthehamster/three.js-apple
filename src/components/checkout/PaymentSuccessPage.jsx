@@ -1,31 +1,30 @@
-import React, { useEffect, useContext, useState } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import Navbar from '../Navbar';
-import { BACKEND_URL } from '../../constantVariables';
-import axios from 'axios';
-import './PaymentSuccessPage.css';
-import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { CartContext } from '../../context/CartContext';
+import React, { useEffect, useContext, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import Navbar from "../Navbar";
+import { BACKEND_URL } from "../../constantVariables";
+import axios from "axios";
+import "./PaymentSuccessPage.css";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { CartContext } from "../../context/CartContext";
 
 const PaymentSuccessPage = () => {
   const [userAddress, setUserAddress] = useState(null);
   const [addressId, setAddressId] = useState(null);
   const [userId, setUserId] = useState(null);
-  const { user, isAuthenticated } = useAuth0();
-  const [productIdArray, setProductIdArray] = useState([]);
+  const { user } = useAuth0();
+  // const [productIdArray, setProductIdArray] = useState([]);
   const [orderStatus, setOrderStatus] = useState(false);
+  const [productsArray, setProductsArray] = useState([]);
   const {
     getDeliveryAddress,
     getTotalCartPrice,
     cartItems,
     getTotalCartItemsQty,
+    checkout,
   } = useContext(CartContext);
 
   const navigate = useNavigate();
-
-  // console.log(isAuthenticated, user);
-  // console.log(cartItems);
 
   const getUserIdAndSetUserAddress = async () => {
     if (user) {
@@ -40,7 +39,7 @@ const PaymentSuccessPage = () => {
     if (userAddress) {
       try {
         await axios
-          .get(`http://localhost:3000/addresses/get-address-id`, {
+          .get(`${BACKEND_URL}/addresses/get-address-id`, {
             params: {
               delivery_address: userAddress,
             },
@@ -53,31 +52,42 @@ const PaymentSuccessPage = () => {
     }
   };
 
-  const setProductIdArrays = () => {
-    if (cartItems) {
-      setProductIdArray(cartItems.map((cartItem) => cartItem.id));
-    }
-  };
+  // const setProductIdArrays = () => {
+  //   if (cartItems) {
+  //     setProductIdArray(cartItems.map((cartItem) => cartItem.id));
+  //   }
+  // };
+
+  // const quantity = getTotalCartItemsQty();
 
   const subTotalPrice = getTotalCartPrice();
-  const quantity = getTotalCartItemsQty();
+
+  const updateProductsArray = () => {
+    if (cartItems) {
+      setProductsArray(
+        cartItems.map((cartItem) => ({
+          [cartItem.id]: cartItem.quantity,
+        }))
+      );
+    }
+  };
 
   // Post order
   const postOrder = async () => {
     try {
-      console.log('postOrder is called!');
+      console.log("postOrder is called!");
       await axios
         .post(`${BACKEND_URL}/orders`, {
           address_id: addressId,
           user_id: userId,
           total_price: subTotalPrice,
-          productId: productIdArray,
-          quantity: quantity,
+          products: productsArray,
         })
         .then((response) => {
           console.log(response);
         });
       setOrderStatus(true);
+      checkout();
     } catch (err) {
       console.log(err);
     }
@@ -88,19 +98,15 @@ const PaymentSuccessPage = () => {
   }, [user]);
 
   useEffect(() => {
-    setProductIdArrays();
+    // setProductIdArrays();
+    updateProductsArray();
   }, [cartItems]);
 
   useEffect(() => {
-    // console.log('Empty Dependency Array runs twice');
-
     if (orderStatus === false && userId && addressId) {
       postOrder();
     }
   }, [userId, addressId]);
-
-  // console.log(orderStatus);
-  // console.log(userAddress, addressId, userId, subTotalPrice, productIdArray);
 
   return (
     <div>
@@ -118,14 +124,14 @@ const PaymentSuccessPage = () => {
         <Button
           variant="contained"
           sx={{
-            marginTop: '20px',
-            bgcolor: '#42b883',
-            '&:hover': {
-              bgcolor: '#61b390',
+            marginTop: "20px",
+            bgcolor: "#42b883",
+            "&:hover": {
+              bgcolor: "#61b390",
             },
           }}
           onClick={() => {
-            navigate('/');
+            navigate("/");
           }}
         >
           Continue shopping
