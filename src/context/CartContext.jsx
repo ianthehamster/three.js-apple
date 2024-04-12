@@ -1,26 +1,23 @@
-import React from 'react';
+import React from "react";
 
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext(null);
 
 export const CartContextProvider = (props) => {
-  // const [cartItems, setCartItems] = useState(getDefaultCart());
-  const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+  const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const storedDeliveryAddress =
-    JSON.parse(localStorage.getItem('deliveryAddress')) || [];
+    JSON.parse(localStorage.getItem("deliveryAddress")) || [];
 
   const [cartItems, setCartItems] = useState(storedCartItems);
   const [deliveryAddress, setDeliveryAddress] = useState(storedDeliveryAddress);
-  console.log(storedCartItems);
-  console.log(storedDeliveryAddress);
 
   useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
   useEffect(() => {
-    localStorage.setItem('deliveryAddress', JSON.stringify(deliveryAddress));
+    localStorage.setItem("deliveryAddress", JSON.stringify(deliveryAddress));
   }, [deliveryAddress]);
 
   const getCartItemQuantity = (id) => {
@@ -30,13 +27,13 @@ export const CartContextProvider = (props) => {
 
   const updateDeliveryAddress = (address) => {
     console.log(
-      'updateDeliveryAddress from CartContext is running with: ',
-      address,
+      "updateDeliveryAddress from CartContext is running with: ",
+      address
     );
 
     setDeliveryAddress(address);
     console.log(deliveryAddress);
-    localStorage.setItem('deliveryAddress', JSON.stringify(deliveryAddress));
+    localStorage.setItem("deliveryAddress", JSON.stringify(deliveryAddress));
 
     return;
   };
@@ -56,8 +53,8 @@ export const CartContextProvider = (props) => {
         prev.map((cartItem) =>
           cartItem.id === item.id
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem,
-        ),
+            : cartItem
+        )
       );
     }
   };
@@ -72,8 +69,8 @@ export const CartContextProvider = (props) => {
         prev.map((cartItem) =>
           cartItem.id === id
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
-            : cartItem,
-        ),
+            : cartItem
+        )
       );
     }
   };
