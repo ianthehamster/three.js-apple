@@ -3,19 +3,19 @@ import {
   OrbitControls,
   PerspectiveCamera,
   View,
-} from '@react-three/drei';
+} from "@react-three/drei";
 
-import * as THREE from 'three';
-import Lights from './Lights';
-import { Suspense } from 'react';
-import IPhone from './IPhone';
-import AlienwareLaptop from './AlienwareLaptop';
-import Loader from './Loader';
-import { hourglass } from 'ldrs';
-import CyberpunkTablet from './CyberpunkTablet';
-import AppleVisionPro from './AppleVisionPro';
-import { Apple } from '@mui/icons-material';
-import IPhone13 from './IPhone13';
+import * as THREE from "three";
+import Lights from "./Lights";
+import { Suspense } from "react";
+import IPhone from "./IPhone";
+import AlienwareLaptop from "./AlienwareLaptop";
+import Loader from "./Loader";
+import { hourglass } from "ldrs";
+import CyberpunkTablet from "./CyberpunkTablet";
+import AppleVisionPro from "./AppleVisionPro";
+import { Apple } from "@mui/icons-material";
+import IPhone13 from "./IPhone13";
 
 hourglass.register();
 
@@ -30,24 +30,24 @@ const ModelView = ({
   modelState,
 }) => {
   console.log(modelState);
-  console.log(`PROBLEM ERROR: ${item}`);
+  // console.log(`PROBLEM ERROR: ${item}`);
   return (
     <View
       index={index}
       id={gsapType}
-      className={`w-full h-full absolute ${index === 2 ? 'right-[-100%]' : ''}`}
-      style={modelState === 'laptop' ? { height: '130%' } : null}
+      className={`w-full h-full absolute ${index === 2 ? "right-[-100%]" : ""}`}
+      style={modelState === "laptop" ? { height: "130%" } : null}
     >
       {/* Ambient Light */}
       <ambientLight intensity={0.3} />
 
-      {modelState === 'laptop' ? (
+      {modelState === "laptop" ? (
         <PerspectiveCamera makeDefault position={[4, 2, 7]} />
-      ) : modelState === 'tablet' ? (
+      ) : modelState === "tablet" ? (
         <PerspectiveCamera makeDefault position={[-300, 50, 230]} />
-      ) : modelState === 'accessories' ? (
+      ) : modelState === "accessories" ? (
         <PerspectiveCamera makeDefault position={[0.2, 0.2, 0.3]} />
-      ) : modelState === 'phones' ? (
+      ) : modelState === "phones" ? (
         <PerspectiveCamera makeDefault position={[0.7, 0.4, -1.4]} />
       ) : (
         <PerspectiveCamera makeDefault position={[0, 0, 4]} />
@@ -70,13 +70,13 @@ const ModelView = ({
         position={[0, 0, 0]}
       >
         <Suspense fallback={<Loader />}>
-          {modelState === 'laptop' ? (
+          {modelState === "laptop" ? (
             <AlienwareLaptop />
-          ) : modelState === 'tablet' ? (
+          ) : modelState === "tablet" ? (
             <CyberpunkTablet />
-          ) : modelState === 'accessories' ? (
+          ) : modelState === "accessories" ? (
             <AppleVisionPro />
-          ) : modelState === 'phones' ? (
+          ) : modelState === "phones" ? (
             <IPhone13 />
           ) : item ? (
             <IPhone

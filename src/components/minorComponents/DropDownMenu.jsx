@@ -60,7 +60,7 @@ export default function BasicMenu() {
   // };
   const handleClose = (e) => {
     const targetPage = e.target.innerText.toLowerCase();
-    const path = `/${targetPage}Page`;
+    const path = `/${targetPage}`;
     navigate(path);
     setAnchorEl(null);
   };

@@ -18,6 +18,7 @@ import CheckoutPage from "./components/checkout/CheckoutPage.jsx";
 import PaymentCancelledPage from "./components/checkout/PaymentCancelledPage.jsx";
 import OrdersHistoryPage from "./components/orders/OrdersHistoryPage.jsx";
 import SingleOrderPage from "./components/orders/SingleOrderPage.jsx";
+import ProductsPage from "./components/productLists/ProductsPage.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -36,13 +37,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/categories" element={<Categories />} />
-            <Route path="/laptopsPage" element={<LaptopsProductPage />} />
-            <Route path="/phonesPage" element={<PhonesProductPage />} />
-            <Route
-              path="/accessoriesPage"
-              element={<AccessoriesProductPage />}
-            />
-            <Route path="/tabletsPage" element={<TabletsProductPage />} />
+            <Route path="/:categoryName" element={<ProductsPage />} />
+            {/* <Route path="/:categoryName" element={<LaptopsProductPage />} />
+            <Route path="/phones" element={<PhonesProductPage />} />
+            <Route path="/accessories" element={<AccessoriesProductPage />} />
+            <Route path="/tablets" element={<TabletsProductPage />} /> */}
             <Route
               path="/products/:productId"
               element={<SingleProductPage />}
