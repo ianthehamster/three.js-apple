@@ -71,13 +71,13 @@ const ModelView = ({
         position={[0, 0, 0]}
       >
         <Suspense fallback={<Loader />}>
-          {modelState === "laptops" ? (
+          {modelState === `${LAPTOPS}` ? (
             <AlienwareLaptop />
-          ) : modelState === "tablets" ? (
+          ) : modelState === `${TABLETS}` ? (
             <CyberpunkTablet />
-          ) : modelState === "accessories" ? (
+          ) : modelState === `${ACCESSORIES}` ? (
             <AppleVisionPro />
-          ) : modelState === "phones" ? (
+          ) : modelState === `${PHONES}` ? (
             <IPhone13 />
           ) : item ? (
             <IPhone
