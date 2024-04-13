@@ -5,10 +5,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { BACKEND_URL } from "../../constantVariables";
 import axios from "axios";
 import OrderCard from "./OrderCard";
+import "ldrs/hourglass";
 
 const OrdersHistoryPage = () => {
   const { user } = useAuth0();
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchOrdersInfo = async () => {
     if (user && user.email) {
@@ -20,6 +22,7 @@ const OrdersHistoryPage = () => {
         });
 
         setOrders(response.data);
+        setLoading(false);
       } catch (err) {
         console.log(err.message);
       }
@@ -27,6 +30,7 @@ const OrdersHistoryPage = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetchOrdersInfo();
   }, [user]);
 
@@ -42,9 +46,18 @@ const OrdersHistoryPage = () => {
     <div className="orders-page">
       <Navbar />
       <div className="header">Your orders:</div>
-      <div className="orders-list">{ordersList}</div>
+      <div className="orders-list">
+        {loading ? (
+          <div className="spinner">
+            <l-hourglass size="40" color="black"></l-hourglass>
+          </div>
+        ) : (
+          ordersList
+        )}
+      </div>
+
       <div className="no-data-img-container">
-        {!orders.length && (
+        {!orders.length && !loading && (
           <img
             src="public/images/no-data.jpg"
             alt="Nothing here"
