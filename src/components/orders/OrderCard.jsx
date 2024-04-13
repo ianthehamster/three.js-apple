@@ -1,21 +1,9 @@
 import React from "react";
-import {
-  Grid,
-  Stack,
-  Button,
-  Typography,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Divider,
-} from "@mui/material";
+import { Typography, Card, CardContent, Divider } from "@mui/material";
 import { formatCurrency } from "../../utils/formatCurrency";
 import "./Orders.css";
-import { useNavigate } from "react-router-dom";
 
 const OrderCard = (props) => {
-  const navigate = useNavigate();
   const orderPrice = formatCurrency(props.order.total_price);
   const formattedDate = new Date(props.order.createdAt).toLocaleString();
   const address = props.order.address.address;
@@ -24,7 +12,6 @@ const OrderCard = (props) => {
 
   const orderedProducts = products.map((product) => (
     <div key={product.id} className="order-products">
-      {/* <Stack spacing={2}> */}
       <div className="product-info">
         <div className="product-title">{product.title}</div>
         <div className="product-in-order-img">
@@ -35,7 +22,6 @@ const OrderCard = (props) => {
           {product.price && formatCurrency(product.price)}
         </div>
       </div>
-      {/* </Stack> */}
     </div>
   ));
   const orderCard = (
@@ -43,7 +29,12 @@ const OrderCard = (props) => {
       <Card>
         <CardContent>
           <div className="order-info">
-            <Typography gutterBottom variant="h6" component="div">
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="div"
+              sx={{ fontWeight: "bold" }}
+            >
               Order id: {props.order.id}
             </Typography>
 
@@ -63,19 +54,6 @@ const OrderCard = (props) => {
             </Typography>
           </div>
         </CardContent>
-
-        {/* <CardActions className="order-card-actions">
-          <div className="order-card-btn">
-            <Button
-              variant="outlined"
-              size="small"
-              sx={{ color: "black" }}
-              onClick={() => navigate(`/my-orders/${props.order.id}`)}
-            >
-              View details
-            </Button>
-          </div>
-        </CardActions> */}
       </Card>
     </div>
   );
