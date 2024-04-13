@@ -43,7 +43,12 @@ const OrderCard = (props) => {
       <Card>
         <CardContent>
           <div className="order-info">
-            <Typography gutterBottom variant="h6" component="div">
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="div"
+              sx={{ fontWeight: "bold" }}
+            >
               Order id: {props.order.id}
             </Typography>
 

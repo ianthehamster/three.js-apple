@@ -19,10 +19,9 @@ const OrdersHistoryPage = () => {
           },
         });
 
-        console.log(response.data);
         setOrders(response.data);
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
       }
     }
   };
@@ -30,8 +29,6 @@ const OrdersHistoryPage = () => {
   useEffect(() => {
     fetchOrdersInfo();
   }, [user]);
-
-  console.log(orders);
 
   const ordersList = orders.map((order) => (
     <div key={order.id}>
@@ -42,7 +39,7 @@ const OrdersHistoryPage = () => {
   return (
     <div className="orders-page">
       <Navbar />
-      <div className="header">Your orders</div>
+      <div className="header">Your orders:</div>
       <div className="orders-list">{ordersList}</div>
     </div>
   );
