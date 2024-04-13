@@ -36,14 +36,14 @@ const ModelView = ({
       index={index}
       id={gsapType}
       className={`w-full h-full absolute ${index === 2 ? "right-[-100%]" : ""}`}
-      style={modelState === "laptop" ? { height: "130%" } : null}
+      style={modelState === "laptops" ? { height: "130%" } : null}
     >
       {/* Ambient Light */}
       <ambientLight intensity={0.3} />
 
-      {modelState === "laptop" ? (
+      {modelState === "laptops" ? (
         <PerspectiveCamera makeDefault position={[4, 2, 7]} />
-      ) : modelState === "tablet" ? (
+      ) : modelState === "tablets" ? (
         <PerspectiveCamera makeDefault position={[-300, 50, 230]} />
       ) : modelState === "accessories" ? (
         <PerspectiveCamera makeDefault position={[0.2, 0.2, 0.3]} />
@@ -70,9 +70,9 @@ const ModelView = ({
         position={[0, 0, 0]}
       >
         <Suspense fallback={<Loader />}>
-          {modelState === "laptop" ? (
+          {modelState === "laptops" ? (
             <AlienwareLaptop />
-          ) : modelState === "tablet" ? (
+          ) : modelState === "tablets" ? (
             <CyberpunkTablet />
           ) : modelState === "accessories" ? (
             <AppleVisionPro />

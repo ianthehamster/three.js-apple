@@ -1,25 +1,50 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import PhonesProductPage from "./PhonesProductPage";
-import LaptopsProductPage from "./LaptopsProductPage";
-import TabletsProductPage from "./TabletsProductPage";
-import AccessoriesProductPage from "./AccessoriesProductPage";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import ProductCard from "../ProductCard";
+import { Grid } from "@mui/material";
+import Navbar from "../Navbar";
+import { BACKEND_URL } from "../../constantVariables";
+import ModelFlagshipLaptop from "../ModelFlagshipProduct";
 
 const ProductsPage = () => {
   const { categoryName } = useParams();
-  // const displayProducts = ()=>{
+  const [accessories, setAccessories] = useState([]);
+  const [modelState, setModelState] = useState("");
+  const params = { categoryName: categoryName };
 
-  //   if (categoryName = "phones") {
-  //     return <PhonesProductPage/>
-  //   }
+  useEffect(() => {
+    axios.get(`${BACKEND_URL}/products`, { params }).then((response) => {
+      setAccessories(response.data);
+      setModelState(categoryName);
+    });
+  }, [categoryName]);
 
-  // }
   return (
     <div>
-      {categoryName === "phones" && <PhonesProductPage />}
-      {categoryName === "laptops" && <LaptopsProductPage />}
-      {categoryName === "tablets" && <TabletsProductPage />}
-      {categoryName === "accessories" && <AccessoriesProductPage />}
+      <div>
+        <Navbar />
+        <ModelFlagshipLaptop modelState={modelState} />
+        <Grid container spacing={5}>
+          {accessories.map((product) => (
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={4}
+              key={product.id}
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <div key={product.id}>
+                <ProductCard product={product} />
+              </div>
+            </Grid>
+          ))}
+        </Grid>
+      </div>
     </div>
   );
 };
