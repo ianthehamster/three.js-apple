@@ -85,16 +85,23 @@
   font-size: medium;
 }
 .total-price {
-  /* margin: 10px auto; */
   flex: 1;
-  /* display: flex;
-  justify-content: flex-end; */
   position: absolute;
   right: 0;
   margin-right: 30px;
   padding-right: 30px;
   bottom: 0;
   margin-bottom: 20px;
+}
+
+.no-data-img {
+  width: 50vw;
+  object-fit: cover;
+}
+.no-data-img-container {
+  display: flex;
+  justify-content: center;
+  justify-self: center;
 }
 
 @media only screen and (max-width: 700px) {
@@ -154,6 +161,10 @@
     margin-top: 40px;
     margin-bottom: 10px;
   }
+
+  .no-data-img {
+    width: 70vw;
+  }
 }
 
 @media only screen and (min-width: 701px) and (max-width: 1000px) {
@@ -168,29 +179,7 @@
     padding: 10px auto;
     width: 85vw;
   }
-}
-
-/* ORDER PAGE */
-
-.order-page {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-.order-box {
-  margin-top: 50px;
-  width: 50vw;
-  height: 70vh;
-  border-radius: 1%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  text-align: center;
-}
-
-.order-header {
-  text-align: center;
-  font-size: 200%;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  padding: 10px auto;
-  margin: 30px auto;
+  .no-data-img {
+    width: 70vw;
+  }
 }

@@ -30,17 +30,28 @@ const OrdersHistoryPage = () => {
     fetchOrdersInfo();
   }, [user]);
 
-  const ordersList = orders.map((order) => (
-    <div key={order.id}>
-      <OrderCard order={order} />
-    </div>
-  ));
+  const ordersList =
+    orders.length > 0 &&
+    orders.map((order) => (
+      <div key={order.id}>
+        <OrderCard order={order} />
+      </div>
+    ));
 
   return (
     <div className="orders-page">
       <Navbar />
       <div className="header">Your orders:</div>
       <div className="orders-list">{ordersList}</div>
+      <div className="no-data-img-container">
+        {!orders.length && (
+          <img
+            src="public/images/no-data.jpg"
+            alt="Nothing here"
+            className="no-data-img"
+          />
+        )}
+      </div>
     </div>
   );
 };
