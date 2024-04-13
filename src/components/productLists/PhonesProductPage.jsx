@@ -4,24 +4,28 @@ import axios from "axios";
 import ProductCard from "../ProductCard";
 import { Grid } from "@mui/material";
 import Navbar from "../Navbar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 import { BACKEND_URL } from "../../constantVariables";
 import ModelFlagshipLaptop from "../ModelFlagshipProduct";
 const PhonesProductPage = () => {
   const [phones, setPhones] = useState([]);
   const [modelState, setModelState] = useState("");
-  const location = useLocation();
-  const currentUrl = location.pathname; // returns /phonesPage - current path
-  const categoryName = currentUrl.replace(/Page$/, "").substring(1); //returns phones as category name
+  // const location = useLocation();
+  // const currentUrl = location.pathname; // returns /phonesPage - current path
+  // const categoryName = currentUrl.replace(/Page$/, "").substring(1); //returns phones as category name
+  const { categoryName } = useParams();
   const params = { categoryName: categoryName };
 
   useEffect(() => {
     axios.get(`${BACKEND_URL}/products`, { params }).then((response) => {
       setPhones(response.data);
       setModelState("phones");
+      // setModelState(categoryName);
     });
   }, []);
+
+  console.log(modelState);
 
   // useEffect(() => {
   //   axios.get(`${BACKEND_URL}/products?${categoryName}`).then((response) => {

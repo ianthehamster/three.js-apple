@@ -1,31 +1,26 @@
-import React, { useEffect, useState } from "react";
-import ProductCard from "../ProductCard";
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import ProductCard from "../ProductCard";
 import { Grid } from "@mui/material";
-import { BACKEND_URL } from "../../constantVariables";
 import Navbar from "../Navbar";
+import { BACKEND_URL } from "../../constantVariables";
 import ModelFlagshipLaptop from "../ModelFlagshipProduct";
-import { useLocation, useParams } from "react-router-dom";
 
-const AccessoriesProductPage = () => {
+const ProductsPage = () => {
+  const { categoryName } = useParams();
   const [accessories, setAccessories] = useState([]);
   const [modelState, setModelState] = useState("");
-  // const location = useLocation();
-  // const currentUrl = location.pathname; // returns /accessoriesPage - current path
-  // const categoryName = currentUrl.replace(/Page$/, '').substring(1); //returns accessories as category name
-  const { categoryName } = useParams();
-  console.log(categoryName);
   const params = { categoryName: categoryName };
 
   useEffect(() => {
     axios.get(`${BACKEND_URL}/products`, { params }).then((response) => {
       setAccessories(response.data);
-      setModelState("accessories");
-      // setModelState(categoryName);
+      setModelState(categoryName);
     });
   }, [categoryName]);
 
-  console.log(modelState);
   return (
     <div>
       <div>
@@ -54,4 +49,4 @@ const AccessoriesProductPage = () => {
   );
 };
 
-export default AccessoriesProductPage;
+export default ProductsPage;
