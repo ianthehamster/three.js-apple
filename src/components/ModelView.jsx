@@ -16,6 +16,7 @@ import CyberpunkTablet from "./CyberpunkTablet";
 import AppleVisionPro from "./AppleVisionPro";
 import { Apple } from "@mui/icons-material";
 import IPhone13 from "./IPhone13";
+import { TABLETS, PHONES, ACCESSORIES, LAPTOPS } from "../constantVariables";
 
 hourglass.register();
 
@@ -36,18 +37,18 @@ const ModelView = ({
       index={index}
       id={gsapType}
       className={`w-full h-full absolute ${index === 2 ? "right-[-100%]" : ""}`}
-      style={modelState === "laptops" ? { height: "130%" } : null}
+      style={modelState === `${LAPTOPS}` ? { height: "130%" } : null}
     >
       {/* Ambient Light */}
       <ambientLight intensity={0.3} />
 
-      {modelState === "laptops" ? (
+      {modelState === `${LAPTOPS}` ? (
         <PerspectiveCamera makeDefault position={[4, 2, 7]} />
-      ) : modelState === "tablets" ? (
+      ) : modelState === `${TABLETS}` ? (
         <PerspectiveCamera makeDefault position={[-300, 50, 230]} />
-      ) : modelState === "accessories" ? (
+      ) : modelState === `${ACCESSORIES}` ? (
         <PerspectiveCamera makeDefault position={[0.2, 0.2, 0.3]} />
-      ) : modelState === "phones" ? (
+      ) : modelState === `${PHONES}` ? (
         <PerspectiveCamera makeDefault position={[0.7, 0.4, -1.4]} />
       ) : (
         <PerspectiveCamera makeDefault position={[0, 0, 4]} />

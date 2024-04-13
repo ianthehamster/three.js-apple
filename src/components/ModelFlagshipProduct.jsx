@@ -8,6 +8,7 @@ import { Canvas } from "@react-three/fiber";
 import { View } from "@react-three/drei";
 import { models, sizes } from "../constants";
 import { animateWithGsapTimeline } from "../utils/animations";
+import { TABLETS, PHONES, ACCESSORIES, LAPTOPS } from "../constantVariables";
 
 const ModelFlagshipLaptop = ({ modelState }) => {
   // const [model, setModel] = useState({
@@ -75,22 +76,22 @@ const ModelFlagshipLaptop = ({ modelState }) => {
             Our Flagship Product: Cyberpunk Tablet
           </h1>
         ) : null} */}
-        {modelState === "laptops" ? (
+        {modelState === `${LAPTOPS}` ? (
           <h1 id="heading" className="section-heading" style={{ opacity: "0" }}>
             Our Flagship Product: Alienware Laptop
           </h1>
         ) : null}
-        {modelState === "tablets" ? (
+        {modelState === `${TABLETS}` ? (
           <h1 id="heading" className="section-heading" style={{ opacity: "0" }}>
             Our Flagship Product: Cyberpunk Tablet
           </h1>
         ) : null}
-        {modelState === "accessories" ? (
+        {modelState === `${ACCESSORIES}` ? (
           <h1 id="heading" className="section-heading" style={{ opacity: "0" }}>
             Our Flagship Product: Pear Vision Pro
           </h1>
         ) : null}
-        {modelState === "phones" ? (
+        {modelState === `${PHONES}` ? (
           <h1 id="heading" className="section-heading" style={{ opacity: "0" }}>
             Our Flagship Product: Pear IPhone X
           </h1>

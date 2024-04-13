@@ -6,6 +6,7 @@ import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import HeadsetMicIcon from "@mui/icons-material/HeadsetMic";
 import TabletIcon from "@mui/icons-material/Tablet";
 import InfoIcon from "@mui/icons-material/Info";
+import { TABLETS, LAPTOPS, ACCESSORIES, PHONES } from "../constantVariables";
 
 export const routes = [
   {
@@ -15,22 +16,22 @@ export const routes = [
   },
   {
     title: "Laptops",
-    href: "/laptops",
+    href: `/${LAPTOPS}`,
     Icon: ComputerIcon,
   },
   {
     title: "Phones",
-    href: "/phones",
+    href: `/${PHONES}`,
     Icon: PhoneIphoneIcon,
   },
   {
     title: "Accessories",
-    href: "/accessories",
+    href: `/${ACCESSORIES}`,
     Icon: HeadsetMicIcon,
   },
   {
     title: "Tablets",
-    href: "/tablets",
+    href: `/${TABLETS}`,
     Icon: TabletIcon,
   },
   {
