@@ -5,10 +5,6 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import App from "./App.jsx";
 import "./index.css";
 import Categories from "./components/Categories.jsx";
-import LaptopsProductPage from "./components/productLists/LaptopsProductPage.jsx";
-import PhonesProductPage from "./components/productLists/PhonesProductPage.jsx";
-import AccessoriesProductPage from "./components/productLists/AccessoriesProductPage.jsx";
-import TabletsProductPage from "./components/productLists/TabletsProductPage.jsx";
 import AboutUs from "./components/AboutUs.jsx";
 import SingleProductPage from "./components/SingleProductPage.jsx";
 import { CartContextProvider } from "./context/CartContext.jsx";
@@ -38,10 +34,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="/" element={<App />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/:categoryName" element={<ProductsPage />} />
-            {/* <Route path="/laptops" element={<LaptopsProductPage />} />
-            <Route path="/phones" element={<PhonesProductPage />} />
-            <Route path="/accessories" element={<AccessoriesProductPage />} />
-            <Route path="/tablets" element={<TabletsProductPage />} /> */}
             <Route
               path="/products/:productId"
               element={<SingleProductPage />}
