@@ -22,7 +22,7 @@ const SingleProductPage = () => {
   const [productId, setProductId] = useState("");
   const [priceId, setPriceId] = useState("");
   const { getCartItemQuantity, removeFromCart } = useContext(CartContext);
-  const { user, isAuthenticated, getAccessTokenSilently, loginWithRedirect } =
+  const { isAuthenticated, getAccessTokenSilently, loginWithRedirect } =
     useAuth0();
   const [accessToken, setAccessToken] = useState("");
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ const SingleProductPage = () => {
         scope:
           "read:current_user update:current_user_metadata openid profile email read:user_metadata",
       });
-      console.log("Token from Auth0", token);
+
       setAccessToken(token);
     }
   };
@@ -85,7 +85,6 @@ const SingleProductPage = () => {
     showProductInfo();
   }, [accessToken, productId]);
 
-  // Update product ID in state if needed to trigger data retrieval
   const params = useParams();
   if (productId !== params.productId) {
     setProductId(params.productId);
@@ -96,68 +95,43 @@ const SingleProductPage = () => {
 
   const productDetails = (
     <div>
-      <Grid container sx={{ p: 2, display: "flex" }}>
-        <Grid item xs={12} md={6} lg={6} display="flex" justifyContent="center">
-          <div className="image">
-            <img
-              id="product-image"
-              src={product.img && product.img}
-              alt="product_img"
-            />
-          </div>
+      <Grid container sx={{ p: 2 }} display="flex">
+        <Grid item xs={12} md={6} lg={6} className="product-image-container">
+          <img
+            id="product-image"
+            src={product.img && product.img}
+            alt="product_img"
+            className="product-image"
+          />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          md={6}
-          lg={6}
-          display="flex"
-          // flexDirection="column" // Add this line
-          alignItems="center"
-        >
-          <Stack spacing={2} sx={{ p: 2, width: "100%" }}>
-            <div className="header">{product.title && product.title}</div>
-            <div
-              className="product-info"
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
-              }}
-            >
+        <Grid item xs={12} md={6} lg={6} display="flex" alignItems="center">
+          <Stack
+            spacing={4}
+            sx={{ p: 2, width: "100%" }}
+            className="product-info-container"
+          >
+            <div className="product-title">
+              {product.title && product.title}
+            </div>
+            <div className="product-description">
               {product.description && product.description}
             </div>
 
             <div
               style={{
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
+                fontSize: "120%",
               }}
             >
-              <p>{product.price && price}</p>
-              <p> In stock: {product.stock_left && product.stock_left}</p>
+              {product.price && price}
             </div>
+            <div>In stock: {product.stock_left && product.stock_left}</div>
 
             {quantityInCart === 0 ? (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+              <div>
                 <AddToCartButton product={product} />
               </div>
             ) : (
-              <div
-                className="increment-btn"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+              <div className="increment-btn">
                 <IncrementDecrementBtn product={product} />
                 <div>
                   <DeleteIcon
@@ -179,7 +153,7 @@ const SingleProductPage = () => {
         <Navbar />
         {loading ? (
           <div className="spinner">
-            <l-hourglass size="60" color="coral"></l-hourglass>
+            <l-hourglass size="40" color="black"></l-hourglass>
           </div>
         ) : (
           productDetails
