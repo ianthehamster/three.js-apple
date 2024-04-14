@@ -7,12 +7,14 @@ import { Grid } from "@mui/material";
 import Navbar from "../Navbar";
 import { BACKEND_URL } from "../../constantVariables";
 import ModelFlagshipLaptop from "../ModelFlagshipProduct";
+import { useTheme } from "@mui/material/styles";
 
 const ProductsPage = () => {
   const { categoryName } = useParams();
   const [accessories, setAccessories] = useState([]);
   const [modelState, setModelState] = useState("");
   const params = { categoryName: categoryName };
+  const theme = useTheme();
 
   useEffect(() => {
     axios.get(`${BACKEND_URL}/products`, { params }).then((response) => {
@@ -26,7 +28,16 @@ const ProductsPage = () => {
       <div>
         <Navbar />
         <ModelFlagshipLaptop modelState={modelState} />
-        <Grid container spacing={5}>
+        <Grid
+          container
+          spacing={4}
+          sx={{
+            [theme.breakpoints.up("lg")]: {
+              paddingLeft: 5,
+              paddingRight: 5,
+            },
+          }}
+        >
           {accessories.map((product) => (
             <Grid
               item
