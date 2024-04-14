@@ -18,23 +18,33 @@ const CartPage = () => {
     <div>
       <Navbar />
       <div className="cart-wrapper">
+        <div className="cart-header">Your cart:</div>
+
         <Stack spacing={2} className="cart-content">
-          {cartItemsQuantity ? (
-            <div className="cart-header">Your cart</div>
-          ) : (
-            <div>Your cart is empty!</div>
-          )}
           <div>
             <CartItems />
           </div>
-          {cartItemsQuantity > 0 && (
-            <div className="subtotal">
-              <span className="subtotal-text">Subtotal:</span> {total}
+          {!cartItemsQuantity && (
+            <div>
+              <img
+                src="public/images/no-data.jpg"
+                alt="Nothing here!"
+                className="no-data-img"
+              />
             </div>
           )}
-          {cartItemsQuantity ? (
+        </Stack>
+        <div className="cart-page-bottom">
+          {cartItemsQuantity > 0 && (
+            <div className="subtotal">
+              <span className="subtotal-text">Subtotal: </span>{" "}
+              <span className="total-value">{total}</span>
+            </div>
+          )}
+          {cartItemsQuantity > 0 && (
             <div className="continue-btn">
               <Button
+                variant="contained"
                 onClick={() => {
                   navigate("/checkout");
                 }}
@@ -42,15 +52,8 @@ const CartPage = () => {
                 Continue
               </Button>
             </div>
-          ) : (
-            <div>
-              <img
-                src="public/cart-img/Animation - 1712157952636.gif"
-                alt="nothing"
-              />
-            </div>
           )}
-        </Stack>
+        </div>
       </div>
     </div>
   );

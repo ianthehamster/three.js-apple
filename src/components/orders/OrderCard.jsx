@@ -13,7 +13,7 @@ const OrderCard = (props) => {
   const orderedProducts = products.map((product) => (
     <div key={product.id} className="order-products">
       <div className="product-info">
-        <div className="product-title">{product.title}</div>
+        <div className="product-name">{product.title}</div>
         <div className="product-in-order-img">
           <img src={product.img && product.img} alt="product_img" />
         </div>
