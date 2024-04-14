@@ -13,13 +13,17 @@ const OrderCard = (props) => {
   const orderedProducts = products.map((product) => (
     <div key={product.id} className="order-products">
       <div className="product-info">
-        <div className="product-name">{product.title}</div>
+        <div className="product-name">{product.title && product.title}</div>
         <div className="product-in-order-img">
           <img src={product.img && product.img} alt="product_img" />
         </div>
-        <div className="quantity">x{product.order_products.quantity}</div>
+        <div className="quantity">
+          x{product.order_products.quantity && product.order_products.quantity}
+        </div>
         <div className="price">
-          {product.price && formatCurrency(product.price)}
+          {product.price &&
+            product.order_products.quantity &&
+            formatCurrency(product.price * product.order_products.quantity)}
         </div>
       </div>
     </div>
