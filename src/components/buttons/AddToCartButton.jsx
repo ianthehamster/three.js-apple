@@ -9,6 +9,7 @@ const AddToCartButton = (props) => {
   return (
     <div>
       <Button
+        variant="contained"
         size="small"
         disabled={!props.product.stock_left}
         onClick={() => addToCart(props.product)}
