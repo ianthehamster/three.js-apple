@@ -1,5 +1,5 @@
-import React, { useState, useMemo, useContext, useCallback } from 'react';
-import Navbar from '../Navbar';
+import React, { useState, useMemo, useContext, useCallback } from "react";
+import Navbar from "../Navbar";
 import {
   Box,
   InputLabel,
@@ -8,39 +8,38 @@ import {
   MenuItem,
   Button,
   Checkbox,
-} from '@mui/material';
+} from "@mui/material";
 // import { CartContext } from '../context/CartContext';
-import { CartContext } from '../../context/CartContext';
-import Select from 'react-select';
-import countryList from 'react-select-country-list';
-import { momentum } from 'ldrs';
-import axios from 'axios';
-import { BACKEND_URL } from '../../constantVariables';
-import { loadStripe } from '@stripe/stripe-js';
+import { CartContext } from "../../context/CartContext";
+import Select from "react-select";
+import countryList from "react-select-country-list";
+import { momentum } from "ldrs";
+import axios from "axios";
+import { BACKEND_URL } from "../../constantVariables";
+import { loadStripe } from "@stripe/stripe-js";
 // import {
 //   EmbeddedCheckoutProvider,
 //   EmbeddedCheckout,
 // } from '@stripe/react-stripe-js';
-import { useAuth0 } from '@auth0/auth0-react';
-
+import { useAuth0 } from "@auth0/auth0-react";
+import ErrorPage from "../ErrorPage";
 // const stripePromise = loadStripe('pk_test_123');
 
 momentum.register();
 
 const CheckoutPage = () => {
-  const [countryValue, setCountryValue] = useState('');
+  const [countryValue, setCountryValue] = useState("");
   const [formData, setFormData] = useState({
-    email: '',
-    firstName: '',
-    lastName: '',
-    addressLine1: '',
-    // addressLine2: '',
-    country: '',
-    postcode: '',
-    phoneNumber: '',
+    email: "",
+    firstName: "",
+    lastName: "",
+    addressLine1: "",
+    country: "",
+    postcode: "",
+    phoneNumber: "",
   });
 
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   const { cartItems, updateDeliveryAddress } = useContext(CartContext);
 
@@ -48,6 +47,7 @@ const CheckoutPage = () => {
   const [loaderSpinner, setLoaderSpinner] = useState(false);
   const [shippingMethodState, setShippingMethodState] = useState(true);
   const [loaderSpinnerMethod, setLoaderSpinnerMethod] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const { user, isAuthenticated } = useAuth0();
   const isSmallScreen = window.innerWidth <= 640;
 
@@ -64,28 +64,38 @@ const CheckoutPage = () => {
     console.log(
       `User purchased these items: `,
       itemNames,
-      'Delivery address is: ',
-      formData.addressLine1,
+      "Delivery address is: ",
+      formData.addressLine1
     );
 
-    // POST request to add address to addresses table
-    const newAddress = await axios
-      .post(`${BACKEND_URL}/addresses`, {
-        email: user.name,
-        address: formData.addressLine1,
-      })
-      .then((response) =>
-        console.log(
-          `New address posted to addresses table in db: `,
-          response.data,
-        ),
-      );
+    const isFormFilledOut = Object.values(formData).every(
+      (value) => value !== ""
+    );
+    if (!isFormFilledOut) {
+      setErrorMessage("Please fill out your shipping details 😉 ");
+      return;
+    }
 
-    updateDeliveryAddress(formData.addressLine1);
-    setLoaderSpinner(true);
-    setTimeout(() => {
-      setShippingInfoState(false);
-    }, 2000);
+    // POST request to add address to addresses table
+    if (isFormFilledOut && !errorMessage) {
+      const newAddress = await axios
+        .post(`${BACKEND_URL}/addresses`, {
+          email: user.name,
+          address: formData.addressLine1,
+        })
+        .then((response) =>
+          console.log(
+            `New address posted to addresses table in db: `,
+            response.data
+          )
+        );
+
+      updateDeliveryAddress(formData.addressLine1);
+      setLoaderSpinner(true);
+      setTimeout(() => {
+        setShippingInfoState(false);
+      }, 2000);
+    }
   };
 
   const handleYourShippingMethod = (e) => {
@@ -99,7 +109,7 @@ const CheckoutPage = () => {
     const { id } = e.target;
     let { value } = e.target;
 
-    if (id === 'phoneNumber' || id === 'postcode') {
+    if (id === "phoneNumber" || id === "postcode") {
       value = Number(value);
     }
 
@@ -136,7 +146,7 @@ const CheckoutPage = () => {
           userLastName: user.last_name,
           userEmail: user.name,
           itemNames: itemNames,
-        },
+        }
       );
       window.location.href = response.data.url;
     } catch (err) {
@@ -152,39 +162,47 @@ const CheckoutPage = () => {
   const subTotal = cartItems.reduce(
     (accumulator, currentValue) =>
       accumulator + Number(currentValue.price) * currentValue.quantity,
-    initialValue,
+    initialValue
   );
-
+  const handleErrorMessage = () => {
+    setErrorMessage("");
+  };
   console.log(cartItems);
   console.log(user);
 
   return (
     <div>
       <Navbar />
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Typography variant="h5" sx={{ margin: '20px', marginTop: '50px' }}>
+
+      <ErrorPage
+        errorMessage={errorMessage}
+        handleErrorMessage={handleErrorMessage}
+      />
+
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Typography variant="h5" sx={{ margin: "20px", marginTop: "50px" }}>
           Secure Checkout
         </Typography>
       </Box>
       {/* <Box sx={{ displa}y: isSmallScreen ? 'block' : 'flex' }> */}
       <Box
         className="block md:flex"
-        sx={{ display: 'flex', flexDirection: 'column' }}
+        sx={{ display: "flex", flexDirection: "column" }}
       >
         <form
           onSubmit={handleSubmit}
           style={{
-            margin: '20px',
-            width: '60%',
+            margin: "20px",
+            width: "60%",
             padding: 3,
-            border: '1px solid grey',
+            border: "1px solid grey",
             borderRadius: 1,
           }}
         >
           {shippingInfoState ? (
-            <Box sx={{ margin: '20px' }}>
+            <Box sx={{ margin: "20px" }}>
               {/* <form> */}
-              <Typography variant="h6" sx={{ marginBottom: '12px' }}>
+              <Typography variant="h6" sx={{ marginBottom: "12px" }}>
                 Your Details
               </Typography>
               <InputLabel htmlFor="email">Email Address</InputLabel>
@@ -195,13 +213,13 @@ const CheckoutPage = () => {
                 // margin="normal"
                 required
                 onChange={handleInputChange}
-                sx={{ marginBottom: '25px' }}
+                sx={{ marginBottom: "25px" }}
               />
-              <Typography variant="h6" sx={{ marginBottom: '12px' }}>
+              <Typography variant="h6" sx={{ marginBottom: "12px" }}>
                 Shipping Information
               </Typography>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Box sx={{ width: '50%', marginRight: '10px' }}>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Box sx={{ width: "50%", marginRight: "10px" }}>
                   <InputLabel htmlFor="firstName">First Name</InputLabel>
                   <TextField
                     fullWidth
@@ -210,10 +228,10 @@ const CheckoutPage = () => {
                     // margin="normal"
                     required
                     onChange={handleInputChange}
-                    sx={{ marginBottom: '25px' }}
+                    sx={{ marginBottom: "25px" }}
                   />
                 </Box>
-                <Box sx={{ width: '50%', marginLeft: '10px' }}>
+                <Box sx={{ width: "50%", marginLeft: "10px" }}>
                   <InputLabel htmlFor="lastName">Last Name</InputLabel>
                   <TextField
                     fullWidth
@@ -222,7 +240,7 @@ const CheckoutPage = () => {
                     // margin="normal"
                     required
                     onChange={handleInputChange}
-                    sx={{ marginBottom: '25px' }}
+                    sx={{ marginBottom: "25px" }}
                   />
                 </Box>
               </Box>
@@ -234,7 +252,7 @@ const CheckoutPage = () => {
                 // margin="normal"
                 required
                 onChange={handleInputChange}
-                sx={{ marginBottom: '25px' }}
+                sx={{ marginBottom: "25px" }}
               />
               {/* <InputLabel htmlFor="addressLine2">Address Line 2</InputLabel>
               <TextField
@@ -247,8 +265,8 @@ const CheckoutPage = () => {
                 sx={{ marginBottom: '25px' }}
               /> */}
 
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Box sx={{ width: '50%', marginRight: '10px' }}>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Box sx={{ width: "50%", marginRight: "10px" }}>
                   <InputLabel htmlFor="country">Country</InputLabel>
                   <TextField
                     fullWidth
@@ -257,10 +275,10 @@ const CheckoutPage = () => {
                     // margin="normal"
                     required
                     onChange={handleInputChange}
-                    sx={{ marginBottom: '25px' }}
+                    sx={{ marginBottom: "25px" }}
                   />
                 </Box>
-                <Box sx={{ width: '50%', marginRight: '10px' }}>
+                <Box sx={{ width: "50%", marginRight: "10px" }}>
                   <InputLabel htmlFor="postcode">Postcode</InputLabel>
                   <TextField
                     fullWidth
@@ -269,12 +287,12 @@ const CheckoutPage = () => {
                     // margin="normal"
                     required
                     onChange={handleInputChange}
-                    sx={{ marginBottom: '25px' }}
+                    sx={{ marginBottom: "25px" }}
                   />
                 </Box>
               </Box>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Box sx={{ width: '35%', marginRight: '10px' }}>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Box sx={{ width: "35%", marginRight: "10px" }}>
                   <InputLabel htmlFor="country-code">Phone Number</InputLabel>
                   {/* <TextField
                 fullWidth
@@ -291,12 +309,12 @@ const CheckoutPage = () => {
                     styles={{
                       control: (provided, state) => ({
                         ...provided,
-                        height: '56px', // Adjust the height as needed
+                        height: "56px", // Adjust the height as needed
                       }),
                     }}
                   />
                 </Box>
-                <Box sx={{ width: '65%', marginRight: '10px' }}>
+                <Box sx={{ width: "65%", marginRight: "10px" }}>
                   <InputLabel htmlFor="phoneNumber">‎</InputLabel>
                   <TextField
                     fullWidth
@@ -304,24 +322,24 @@ const CheckoutPage = () => {
                     variant="outlined"
                     required
                     onChange={handleInputChange}
-                    sx={{ marginBottom: '25px' }}
+                    sx={{ marginBottom: "25px" }}
                   />
                 </Box>
               </Box>
-              <Box sx={{ marginTop: '25px' }}>
-                <Typography variant="p" sx={{ fontSize: '15px' }}>
+              <Box sx={{ marginTop: "25px" }}>
+                <Typography variant="p" sx={{ fontSize: "15px" }}>
                   By providing your email, you agree to receive emails relating
                   to your order. Reply STOP to opt out of receiving any future
                   emails related to your order
                 </Typography>
               </Box>
-              <Box sx={{ marginTop: '20px', display: 'flex' }}>
+              <Box sx={{ marginTop: "20px", display: "flex" }}>
                 <Box>
                   <Button
                     variant="contained"
                     sx={{
-                      color: 'white',
-                      backgroundColor: 'grey',
+                      color: "white",
+                      backgroundColor: "grey",
                     }}
                     onClick={handleYourDetails}
                   >
@@ -329,7 +347,7 @@ const CheckoutPage = () => {
                   </Button>
                 </Box>
                 {loaderSpinner ? (
-                  <Box sx={{ marginLeft: '20px' }}>
+                  <Box sx={{ marginLeft: "20px" }}>
                     <l-momentum size="27" speed="1.1" color="grey"></l-momentum>
                   </Box>
                 ) : null}
@@ -337,9 +355,9 @@ const CheckoutPage = () => {
               {/* </form> */}
             </Box>
           ) : (
-            <Box sx={{ margin: '20px' }}>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="h6" sx={{ marginBottom: '30px' }}>
+            <Box sx={{ margin: "20px" }}>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Typography variant="h6" sx={{ marginBottom: "30px" }}>
                   Shipping Details
                 </Typography>
                 <Box>
@@ -347,8 +365,8 @@ const CheckoutPage = () => {
                     variant="contained"
                     size="small"
                     sx={{
-                      color: 'white',
-                      backgroundColor: 'grey',
+                      color: "white",
+                      backgroundColor: "grey",
                     }}
                     onClick={() => {
                       setShippingInfoState(true);
@@ -361,8 +379,8 @@ const CheckoutPage = () => {
                   </Button>
                 </Box>
               </Box>
-              <Box sx={{ display: 'flex', marginTop: '30px' }}>
-                <Typography sx={{ marginRight: '5px' }}>
+              <Box sx={{ display: "flex", marginTop: "30px" }}>
+                <Typography sx={{ marginRight: "5px" }}>
                   {formData.firstName}
                 </Typography>
                 <Typography>{formData.lastName}</Typography>
@@ -370,19 +388,19 @@ const CheckoutPage = () => {
               <Box>
                 <Typography>{formData.addressLine1}</Typography>
               </Box>
-              <Box sx={{ display: 'flex' }}>
-                <Typography sx={{ marginRight: '5px' }}>
+              <Box sx={{ display: "flex" }}>
+                <Typography sx={{ marginRight: "5px" }}>
                   {formData.country}
                 </Typography>
                 <Typography>{formData.postcode}</Typography>
               </Box>
-              <Box sx={{ marginTop: '30px' }}>
+              <Box sx={{ marginTop: "30px" }}>
                 <Typography>{formData.email}</Typography>
               </Box>
               <Box>
                 <Typography>{formData.phoneNumber}</Typography>
               </Box>
-              <Box sx={{ marginTop: '20px' }}>
+              <Box sx={{ marginTop: "20px" }}>
                 Order updates will be sent by email 📨
               </Box>
             </Box>
@@ -390,36 +408,36 @@ const CheckoutPage = () => {
         </form>
         <Box
           sx={{
-            margin: '20px',
-            width: '60%',
+            margin: "20px",
+            width: "60%",
             padding: 3,
-            border: '1px solid grey',
+            border: "1px solid grey",
             borderRadius: 1,
           }}
         >
-          <Typography variant="h6" sx={{ marginBottom: '30px' }}>
+          <Typography variant="h6" sx={{ marginBottom: "30px" }}>
             Order Summary
           </Typography>
           {cartItems.map((cartItem) => (
-            <Box key={cartItem.title} sx={{ marginBottom: '45px' }}>
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Box sx={{ width: '40%' }}>
+            <Box key={cartItem.title} sx={{ marginBottom: "45px" }}>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <Box sx={{ width: "40%" }}>
                   <img
                     src={cartItem.img}
                     alt="Image"
-                    style={{ width: '50%', height: 'auto' }}
+                    style={{ width: "50%", height: "auto" }}
                   />
                 </Box>
-                <Box style={{ display: 'flex', flexDirection: 'column' }}>
+                <Box style={{ display: "flex", flexDirection: "column" }}>
                   <Box
-                    sx={{ marginBottom: '5px', width: '110px' }}
+                    sx={{ marginBottom: "5px", width: "110px" }}
                     className="md:ml-0 ml-5"
                   >
                     {cartItem.title}
                   </Box>
                   <Box className="md:ml-0 ml-5">Qty: {cartItem.quantity}</Box>
                 </Box>
-                <Box sx={{ marginLeft: '50px', marginRight: '20px' }}>
+                <Box sx={{ marginLeft: "50px", marginRight: "20px" }}>
                   SGD${cartItem.price * cartItem.quantity}
                 </Box>
               </Box>
@@ -427,100 +445,100 @@ const CheckoutPage = () => {
           ))}
           <Box
             sx={{
-              width: '100%',
+              width: "100%",
 
-              border: '1px solid lightgrey',
+              border: "1px solid lightgrey",
               borderRadius: 1,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           ></Box>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Typography sx={{ marginLeft: '20px', marginTop: '20px' }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography sx={{ marginLeft: "20px", marginTop: "20px" }}>
               Subtotal
             </Typography>
-            <Box sx={{ marginRight: '20px', marginTop: '20px' }}>
+            <Box sx={{ marginRight: "20px", marginTop: "20px" }}>
               SGD${subTotal}
             </Box>
           </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Typography sx={{ marginLeft: '20px', marginTop: '20px' }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography sx={{ marginLeft: "20px", marginTop: "20px" }}>
               Shipping
             </Typography>
-            <Box sx={{ marginRight: '20px', marginTop: '20px' }}>SGD$0</Box>
+            <Box sx={{ marginRight: "20px", marginTop: "20px" }}>SGD$0</Box>
           </Box>
 
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Typography sx={{ marginLeft: '20px', marginTop: '20px' }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography sx={{ marginLeft: "20px", marginTop: "20px" }}>
               Taxes
             </Typography>
-            <Box sx={{ marginRight: '20px', marginTop: '20px' }}>SGD$0</Box>
+            <Box sx={{ marginRight: "20px", marginTop: "20px" }}>SGD$0</Box>
           </Box>
           <Box
             sx={{
-              width: '100%',
-              marginTop: '45px',
-              border: '1px solid lightgrey',
+              width: "100%",
+              marginTop: "45px",
+              border: "1px solid lightgrey",
               borderRadius: 1,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           ></Box>
           <Box>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography sx={{ marginLeft: '20px', marginTop: '20px' }}>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography sx={{ marginLeft: "20px", marginTop: "20px" }}>
                 Order Total
               </Typography>
-              <Box sx={{ marginRight: '20px', marginTop: '20px' }}>
+              <Box sx={{ marginRight: "20px", marginTop: "20px" }}>
                 SGD${subTotal}
               </Box>
             </Box>
           </Box>
         </Box>
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box
           sx={{
-            margin: '20px',
-            width: '50%',
+            margin: "20px",
+            width: "50%",
             padding: 3,
-            border: '1px solid grey',
+            border: "1px solid grey",
             borderRadius: 1,
           }}
         >
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box>Shipping Method</Box>
           </Box>
           {!shippingInfoState && shippingMethodState ? (
             <>
               <Box
                 sx={{
-                  marginTop: '20px',
-                  width: '80%',
+                  marginTop: "20px",
+                  width: "80%",
                   padding: 3,
-                  border: '1px solid grey',
+                  border: "1px solid grey",
                   borderRadius: 1,
                 }}
               >
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Checkbox {...label} disabled checked />
-                  <Typography sx={{ marginTop: '10px', marginLeft: '5px' }}>
+                  <Typography sx={{ marginTop: "10px", marginLeft: "5px" }}>
                     Couriers & Singapore Post
                   </Typography>
-                  <Typography sx={{ marginTop: '10px', marginLeft: '5px' }}>
+                  <Typography sx={{ marginTop: "10px", marginLeft: "5px" }}>
                     SGD$0.00
                   </Typography>
                 </Box>
               </Box>
-              <Box sx={{ display: 'flex' }}>
-                <Box sx={{ marginTop: '20px' }}>
+              <Box sx={{ display: "flex" }}>
+                <Box sx={{ marginTop: "20px" }}>
                   <Button
                     variant="contained"
                     sx={{
-                      color: 'white',
-                      backgroundColor: 'grey',
+                      color: "white",
+                      backgroundColor: "grey",
                     }}
                     onClick={handleYourShippingMethod}
                   >
@@ -528,7 +546,7 @@ const CheckoutPage = () => {
                   </Button>
                 </Box>
                 {loaderSpinnerMethod ? (
-                  <Box sx={{ marginLeft: '20px', marginTop: '20px' }}>
+                  <Box sx={{ marginLeft: "20px", marginTop: "20px" }}>
                     <l-momentum size="27" speed="1.1" color="grey"></l-momentum>
                   </Box>
                 ) : null}
@@ -538,19 +556,19 @@ const CheckoutPage = () => {
             <>
               <Box
                 sx={{
-                  marginTop: '20px',
-                  width: '80%',
+                  marginTop: "20px",
+                  width: "80%",
                   padding: 3,
-                  border: '1px solid grey',
+                  border: "1px solid grey",
                   borderRadius: 1,
                 }}
               >
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   {/* <Checkbox {...label} disabled checked /> */}
-                  <Typography sx={{ marginTop: '10px', marginLeft: '5px' }}>
+                  <Typography sx={{ marginTop: "10px", marginLeft: "5px" }}>
                     Couriers & Singapore Post
                   </Typography>
-                  <Typography sx={{ marginTop: '10px', marginLeft: '5px' }}>
+                  <Typography sx={{ marginTop: "10px", marginLeft: "5px" }}>
                     SGD$0.00
                   </Typography>
                 </Box>
@@ -559,17 +577,17 @@ const CheckoutPage = () => {
           ) : null}
         </Box>
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box
           sx={{
-            margin: '20px',
-            width: '50%',
+            margin: "20px",
+            width: "50%",
             padding: 3,
             // border: '1px solid grey',
             // borderRadius: 1,
           }}
         >
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
             {!shippingInfoState && !shippingMethodState ? (
               <Button variant="outlined" onClick={handleCheckout}>
                 Checkout!
