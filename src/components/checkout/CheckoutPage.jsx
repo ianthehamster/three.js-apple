@@ -161,11 +161,16 @@ const CheckoutPage = () => {
   return (
     <div>
       <Navbar />
-      <Typography variant="h5" sx={{ margin: '20px', marginTop: '50px' }}>
-        Secure Checkout
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Typography variant="h5" sx={{ margin: '20px', marginTop: '50px' }}>
+          Secure Checkout
+        </Typography>
+      </Box>
       {/* <Box sx={{ displa}y: isSmallScreen ? 'block' : 'flex' }> */}
-      <Box className="block md:flex">
+      <Box
+        className="block md:flex"
+        sx={{ display: 'flex', flexDirection: 'column' }}
+      >
         <form
           onSubmit={handleSubmit}
           style={{
