@@ -55,7 +55,7 @@
   padding-top: 40px;
   margin-bottom: 50px;
 }
-.product-title {
+.product-name {
   flex: 1;
   display: flex;
   justify-content: flex-start;
@@ -95,8 +95,8 @@
 }
 
 .no-data-img {
-  width: 50vw;
-  object-fit: cover;
+  width: 45vw;
+  object-fit: contain;
 }
 .no-data-img-container {
   display: flex;

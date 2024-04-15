@@ -37,10 +37,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/:categoryName" element={<ProductsPage />} />
-            {/* <Route path="/laptops" element={<LaptopsProductPage />} />
-            <Route path="/phones" element={<PhonesProductPage />} />
-            <Route path="/accessories" element={<AccessoriesProductPage />} />
-            <Route path="/tablets" element={<TabletsProductPage />} /> */}
             <Route
               path="/products/:productId"
               element={<SingleProductPage />}
