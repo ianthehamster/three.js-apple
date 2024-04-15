@@ -13,6 +13,7 @@ import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
 import TabletIcon from '@mui/icons-material/Tablet';
 import InfoIcon from '@mui/icons-material/Info';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 export const NavMobile = () => {
   const [isOpen, setOpen] = useState(false);
@@ -68,6 +69,30 @@ export const NavMobile = () => {
                   </motion.li>
                 );
               })}
+              {isAuthenticated ? (
+                <motion.li
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 260,
+                    damping: 20,
+                    delay: 0.1 + 5 / 10,
+                  }}
+                  className="w-full p-[0.08rem] rounded-xl bg-gradient-to-tr from-neutral-800 via-neutral-950 to-neutral-700"
+                >
+                  <a
+                    onClick={() => setOpen((prev) => !prev)}
+                    className={
+                      'flex items-center justify-between w-full p-5 rounded-xl bg-neutral-950'
+                    }
+                    href="/my-orders"
+                  >
+                    <span className="flex gap-1 text-lg">My Orders</span>
+                    <MenuBookIcon className="text-xl" />
+                  </a>
+                </motion.li>
+              ) : null}
             </ul>
             <div style={{ color: 'white', margin: '20px', marginTop: '30px' }}>
               {isAuthenticated ? <LogoutButton /> : <LoginButton />}
