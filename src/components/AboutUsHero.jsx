@@ -63,7 +63,7 @@ const AboutUsHero = () => {
                 color: '#3366cc',
                 textShadow:
                   '0 0 5px #66ccff, 0 0 10px #66ccff, 0 0 15px #66ccff, 0 0 20px #66ccff, 0 0 30px #66ccff, 0 0 40px #66ccff, 0 0 55px #66ccff, 0 0 75px #66ccff',
-                '@media (max-width: 768px)': {
+                '@media (maxWidth: 768px)': {
                   fontSize: '1.5rem',
                 },
               }}
@@ -84,7 +84,6 @@ const AboutUsHero = () => {
             zIndex: 1,
             textAlign: 'center',
             color: 'white',
-
             fontWeight: 'bold',
           }}
         >
@@ -93,7 +92,7 @@ const AboutUsHero = () => {
               color: '#3366cc',
               textShadow:
                 '0 0 5px #66ccff, 0 0 10px #66ccff, 0 0 15px #66ccff, 0 0 20px #66ccff, 0 0 30px #66ccff, 0 0 40px #66ccff, 0 0 55px #66ccff, 0 0 75px #66ccff',
-              '@media (max-width: 400px)': {
+              '@media (maxWidth: 400px)': {
                 fontSize: '1rem',
               },
             }}
@@ -123,7 +122,7 @@ const AboutUsHero = () => {
               color: '#3366cc',
               textShadow:
                 '0 0 5px #66ccff, 0 0 10px #66ccff, 0 0 15px #66ccff, 0 0 20px #66ccff, 0 0 30px #66ccff, 0 0 40px #66ccff, 0 0 55px #66ccff, 0 0 75px #66ccff',
-              '@media (max-width: 400px)': {
+              '@media (maxWidth: 400px)': {
                 fontSize: '1rem',
               },
             }}

@@ -1,12 +1,12 @@
-import React, { useEffect, useContext, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
-import Navbar from "../Navbar";
-import { BACKEND_URL } from "../../constantVariables";
-import axios from "axios";
-import "./PaymentSuccessPage.css";
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { CartContext } from "../../context/CartContext";
+import React, { useEffect, useContext, useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import Navbar from '../Navbar';
+import { BACKEND_URL } from '../../constantVariables';
+import axios from 'axios';
+import './PaymentSuccessPage.css';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { CartContext } from '../../context/CartContext';
 
 const PaymentSuccessPage = () => {
   const [userAddress, setUserAddress] = useState(null);
@@ -67,7 +67,7 @@ const PaymentSuccessPage = () => {
       setProductsArray(
         cartItems.map((cartItem) => ({
           [cartItem.id]: cartItem.quantity,
-        }))
+        })),
       );
     }
   };
@@ -75,7 +75,7 @@ const PaymentSuccessPage = () => {
   // Post order
   const postOrder = async () => {
     try {
-      console.log("postOrder is called!");
+      console.log('postOrder is called!');
       await axios
         .post(`${BACKEND_URL}/orders`, {
           address_id: addressId,
@@ -103,10 +103,17 @@ const PaymentSuccessPage = () => {
   }, [cartItems]);
 
   useEffect(() => {
-    if (orderStatus === false && userId && addressId) {
+    if (
+      orderStatus === false &&
+      userId &&
+      addressId &&
+      cartItems.length !== 0
+    ) {
       postOrder();
     }
   }, [userId, addressId]);
+
+  console.log(cartItems.length);
 
   return (
     <div>
@@ -124,14 +131,14 @@ const PaymentSuccessPage = () => {
         <Button
           variant="contained"
           sx={{
-            marginTop: "20px",
-            bgcolor: "#42b883",
-            "&:hover": {
-              bgcolor: "#61b390",
+            marginTop: '20px',
+            bgcolor: '#42b883',
+            '&:hover': {
+              bgcolor: '#61b390',
             },
           }}
           onClick={() => {
-            navigate("/");
+            navigate('/');
           }}
         >
           Continue shopping

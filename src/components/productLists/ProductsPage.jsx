@@ -3,11 +3,13 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProductCard from '../ProductCard';
-import { Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import Navbar from '../Navbar';
 import { BACKEND_URL } from '../../constantVariables';
 import ModelFlagshipLaptop from '../ModelFlagshipProduct';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const ProductsPage = () => {
   const { categoryName } = useParams();
@@ -15,6 +17,7 @@ const ProductsPage = () => {
   const [modelState, setModelState] = useState('');
   const params = { categoryName: categoryName };
   const theme = useTheme();
+  const { isAuthenticated } = useAuth0();
 
   useEffect(() => {
     axios.get(`${BACKEND_URL}/products`, { params }).then((response) => {
@@ -22,6 +25,11 @@ const ProductsPage = () => {
       setModelState(categoryName);
     });
   }, [categoryName]);
+
+  const navigate = useNavigate();
+  const handleLearnClick = (productId) => {
+    navigate(`/products/${productId}`);
+  };
 
   console.log(`Model State is: ${modelState}`);
 
@@ -39,22 +47,22 @@ const ProductsPage = () => {
           }}
         >
           {' '}
-          {modelState === 'laptops' ? (
-            <a href="/products/273" className="btn">
+          {modelState === 'laptops' && isAuthenticated ? (
+            <Button variant="contained" onClick={() => handleLearnClick(273)}>
               Buy
-            </a>
-          ) : modelState === 'phones' ? (
-            <a href="/products/274" className="btn">
+            </Button>
+          ) : modelState === 'phones' && isAuthenticated ? (
+            <Button variant="contained" onClick={() => handleLearnClick(274)}>
               Buy
-            </a>
-          ) : modelState === 'accessories' ? (
-            <a href="/products/275" className="btn">
+            </Button>
+          ) : modelState === 'accessories' && isAuthenticated ? (
+            <Button variant="contained" onClick={() => handleLearnClick(275)}>
               Buy
-            </a>
-          ) : modelState === 'tablets' ? (
-            <a href="/products/275" className="btn">
+            </Button>
+          ) : modelState === 'tablets' && isAuthenticated ? (
+            <Button variant="contained" onClick={() => handleLearnClick(276)}>
               Buy
-            </a>
+            </Button>
           ) : null}
         </div>
         <Grid

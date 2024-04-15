@@ -3,8 +3,12 @@ import { useGSAP } from '@gsap/react';
 import { heroVideo, smallHeroVideo } from '../utils';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
+import { BACKEND_URL } from '../constantVariables';
 
 const Hero = () => {
+  const { user, isAuthenticated } = useAuth0();
   const [videoSrc, setVideoSrc] = useState(
     window.innerWidth < 760 ? smallHeroVideo : heroVideo,
   );
@@ -38,6 +42,8 @@ const Hero = () => {
     });
   }, []);
 
+  console.log(user, isAuthenticated);
+
   return (
     <section
       className="w-full nav-height relative"
@@ -63,17 +69,6 @@ const Hero = () => {
             <source src={videoSrc} type="video/mp4" />
           </video>
         </div>
-      </div>
-      <div
-        id="cta"
-        className="flex flex-col items-center opacity-0 translate-y-20"
-      >
-        <a href="/products/274" className="btn">
-          Buy
-        </a>
-        <p className="font-normal text-xl" style={{ color: 'white' }}>
-          From $199/month or $1200 upfront
-        </p>
       </div>
     </section>
   );
