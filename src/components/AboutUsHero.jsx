@@ -60,9 +60,12 @@ const AboutUsHero = () => {
           >
             <p
               style={{
-                color: '#fff',
+                color: '#3366cc',
                 textShadow:
-                  '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff00de, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de, 0 0 55px #ff00de, 0 0 75px #ff00de',
+                  '0 0 5px #66ccff, 0 0 10px #66ccff, 0 0 15px #66ccff, 0 0 20px #66ccff, 0 0 30px #66ccff, 0 0 40px #66ccff, 0 0 55px #66ccff, 0 0 75px #66ccff',
+                '@media (max-width: 768px)': {
+                  fontSize: '1.5rem',
+                },
               }}
             >
               One Stop Hub <br /> <br /> For the Products of Tomorrow
@@ -81,15 +84,18 @@ const AboutUsHero = () => {
             zIndex: 1,
             textAlign: 'center',
             color: 'white',
-            fontSize: '2rem',
+
             fontWeight: 'bold',
           }}
         >
           <p
             style={{
-              color: '#fff',
+              color: '#3366cc',
               textShadow:
-                '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff00de, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de, 0 0 55px #ff00de, 0 0 75px #ff00de',
+                '0 0 5px #66ccff, 0 0 10px #66ccff, 0 0 15px #66ccff, 0 0 20px #66ccff, 0 0 30px #66ccff, 0 0 40px #66ccff, 0 0 55px #66ccff, 0 0 75px #66ccff',
+              '@media (max-width: 400px)': {
+                fontSize: '1rem',
+              },
             }}
           >
             With our amazing collection, you can find your tech product that
@@ -108,56 +114,22 @@ const AboutUsHero = () => {
             zIndex: 1,
             textAlign: 'center',
             color: 'white',
-            fontSize: '2rem',
+
             fontWeight: 'bold',
           }}
         >
           <p
             style={{
-              fontSize: '25px',
-              color: '#fff',
+              color: '#3366cc',
               textShadow:
-                '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff00de, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de, 0 0 55px #ff00de, 0 0 75px #ff00de',
+                '0 0 5px #66ccff, 0 0 10px #66ccff, 0 0 15px #66ccff, 0 0 20px #66ccff, 0 0 30px #66ccff, 0 0 40px #66ccff, 0 0 55px #66ccff, 0 0 75px #66ccff',
+              '@media (max-width: 400px)': {
+                fontSize: '1rem',
+              },
             }}
           >
             At Techie, we are committed to sustainability in every aspect of our
-            business. That's why we take pride in sourcing only sustainable
-            batteries for our products. With every purchase, you can trust that
-            you're not only getting quality products but also supporting
-            eco-friendly practices. Together, we can make a positive difference
-            for our planet.{' '}
-          </p>
-        </div>
-      </div>
-      <div style={{ position: 'relative', width: '100%' }}>
-        <img src={aboutUsSection5} alt="section-2" style={{ width: '100%' }} />
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            zIndex: 1,
-            textAlign: 'center',
-            color: 'white',
-            fontSize: '2rem',
-            fontWeight: 'bold',
-          }}
-        >
-          <p
-            style={{
-              fontSize: '25px',
-              color: '#fff',
-              textShadow:
-                '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff00de, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de, 0 0 55px #ff00de, 0 0 75px #ff00de',
-            }}
-          >
-            We're committed to a mission that goes beyond mere business, only
-            sourcing sustainable materials for our products and ensuring that
-            each purchase contributes positively to the environment. Our
-            ultimate goal is to provide unparalleled satisfaction to all our
-            customers, delivering not just cutting-edge technology, but also a
-            sense of pride in making responsible choices for the planet.{' '}
+            business{' '}
           </p>
         </div>
       </div>

@@ -8,11 +8,6 @@ const AboutUs = () => {
     <div>
       <Navbar />
       <Box>
-        {/* <Typography variant="h2">
-          Our mission is to enable everyone easy access to our high quality
-          technology products
-        </Typography> */}
-
         <Box>
           <AboutUsHero />
         </Box>
