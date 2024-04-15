@@ -76,6 +76,14 @@ const CheckoutPage = () => {
       return;
     }
 
+    if (!Number(formData.phoneNumber)) {
+      setErrorMessage("Your phone must be a number!");
+      return;
+    }
+    if (!Number(formData.postcode)) {
+      setErrorMessage("Post code must be a number!");
+      return;
+    }
     // POST request to add address to addresses table
     if (isFormFilledOut && !errorMessage) {
       const newAddress = await axios
@@ -91,6 +99,7 @@ const CheckoutPage = () => {
         );
 
       updateDeliveryAddress(formData.addressLine1);
+
       setLoaderSpinner(true);
       setTimeout(() => {
         setShippingInfoState(false);
