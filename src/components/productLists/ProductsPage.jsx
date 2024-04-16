@@ -1,20 +1,20 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import ProductCard from '../ProductCard';
-import { Button, Grid } from '@mui/material';
-import Navbar from '../Navbar';
-import { BACKEND_URL } from '../../constantVariables';
-import ModelFlagshipLaptop from '../ModelFlagshipProduct';
-import { useTheme } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import ProductCard from "../ProductCard";
+import { Button, Grid } from "@mui/material";
+import Navbar from "../Navbar";
+import { BACKEND_URL } from "../../constantVariables";
+import ModelFlagshipLaptop from "../ModelFlagshipProduct";
+import { useTheme } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ProductsPage = () => {
   const { categoryName } = useParams();
   const [accessories, setAccessories] = useState([]);
-  const [modelState, setModelState] = useState('');
+  const [modelState, setModelState] = useState("");
   const params = { categoryName: categoryName };
   const theme = useTheme();
   const { isAuthenticated } = useAuth0();
@@ -40,27 +40,42 @@ const ProductsPage = () => {
         <ModelFlagshipLaptop modelState={modelState} />
         <div
           style={{
-            margin: '20px auto',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            margin: "20px auto",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          {' '}
-          {modelState === 'laptops' && isAuthenticated ? (
-            <Button variant="contained" onClick={() => handleLearnClick(273)}>
+          {modelState === "laptops" && isAuthenticated ? (
+            <Button
+              variant="contained"
+              sx={{ marginBottom: "50px", marginTop: 0 }}
+              onClick={() => handleLearnClick(38)}
+            >
               Buy
             </Button>
-          ) : modelState === 'phones' && isAuthenticated ? (
-            <Button variant="contained" onClick={() => handleLearnClick(274)}>
+          ) : modelState === "phones" && isAuthenticated ? (
+            <Button
+              variant="contained"
+              sx={{ marginBottom: "50px", marginTop: 0 }}
+              onClick={() => handleLearnClick(39)}
+            >
               Buy
             </Button>
-          ) : modelState === 'accessories' && isAuthenticated ? (
-            <Button variant="contained" onClick={() => handleLearnClick(275)}>
+          ) : modelState === "accessories" && isAuthenticated ? (
+            <Button
+              variant="contained"
+              sx={{ marginBottom: "50px", marginTop: 0 }}
+              onClick={() => handleLearnClick(40)}
+            >
               Buy
             </Button>
-          ) : modelState === 'tablets' && isAuthenticated ? (
-            <Button variant="contained" onClick={() => handleLearnClick(276)}>
+          ) : modelState === "tablets" && isAuthenticated ? (
+            <Button
+              variant="contained"
+              sx={{ marginBottom: "50px", marginTop: 0 }}
+              onClick={() => handleLearnClick(41)}
+            >
               Buy
             </Button>
           ) : null}
@@ -69,7 +84,7 @@ const ProductsPage = () => {
           container
           spacing={4}
           sx={{
-            [theme.breakpoints.up('lg')]: {
+            [theme.breakpoints.up("lg")]: {
               paddingLeft: 5,
               paddingRight: 5,
             },
