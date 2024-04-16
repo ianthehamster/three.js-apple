@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import {
   aboutUsSection2,
@@ -7,6 +7,8 @@ import {
   highTechVideo,
 } from '../utils';
 import { hightechpictureV1 } from '../utils';
+import '../index.css';
+
 const AboutUsHero = () => {
   const videoRef = useRef(null);
 
@@ -17,6 +19,22 @@ const AboutUsHero = () => {
       videoRef.current.play();
     }
   };
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  console.log(windowWidth);
 
   return (
     <section style={{ width: '100%', position: 'relative' }}>
@@ -86,15 +104,13 @@ const AboutUsHero = () => {
             color: 'white',
             fontWeight: 'bold',
           }}
+          className={window.innerWidth > 768 ? 'large-text' : 'medium-text'}
         >
           <p
             style={{
               color: '#3366cc',
               textShadow:
                 '0 0 5px #66ccff, 0 0 10px #66ccff, 0 0 15px #66ccff, 0 0 20px #66ccff, 0 0 30px #66ccff, 0 0 40px #66ccff, 0 0 55px #66ccff, 0 0 75px #66ccff',
-              '@media (maxWidth: 400px)': {
-                fontSize: '1rem',
-              },
             }}
           >
             With our amazing collection, you can find your tech product that
@@ -116,15 +132,13 @@ const AboutUsHero = () => {
 
             fontWeight: 'bold',
           }}
+          className={window.innerWidth > 768 ? 'large-text' : 'medium-text'}
         >
           <p
             style={{
               color: '#3366cc',
               textShadow:
                 '0 0 5px #66ccff, 0 0 10px #66ccff, 0 0 15px #66ccff, 0 0 20px #66ccff, 0 0 30px #66ccff, 0 0 40px #66ccff, 0 0 55px #66ccff, 0 0 75px #66ccff',
-              '@media (maxWidth: 400px)': {
-                fontSize: '1rem',
-              },
             }}
           >
             At Techie, we are committed to sustainability in every aspect of our
