@@ -1,23 +1,23 @@
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import ModelView from './ModelView';
-import { useRef, useState, useEffect } from 'react';
-import { yellowImg } from '../utils';
-import * as THREE from 'three';
-import { Canvas } from '@react-three/fiber';
-import { View } from '@react-three/drei';
-import { models, sizes } from '../constants';
-import { animateWithGsapTimeline } from '../utils/animations';
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import ModelView from "./ModelView";
+import { useRef, useState, useEffect } from "react";
+import { yellowImg } from "../utils";
+import * as THREE from "three";
+import { Canvas } from "@react-three/fiber";
+import { View } from "@react-three/drei";
+import { models, sizes } from "../constants";
+import { animateWithGsapTimeline } from "../utils/animations";
 
 const Model = ({ modelState }) => {
-  const [size, setSize] = useState('small');
+  const [size, setSize] = useState("small");
   const [model, setModel] = useState({
-    title: 'iPhone 15 Pro in Natural Titanium',
-    color: ['#8F8A81', '#FFE7N9', '#6F6C64'],
+    title: "iPhone 15 Pro in Natural Titanium",
+    color: ["#8F8A81", "#FFE7N9", "#6F6C64"],
     img: yellowImg,
   });
 
-  // Camera control for model view
+  // Camera control for model viewf
   const cameraControlSmall = useRef();
   const cameraControlLarge = useRef();
 
@@ -32,32 +32,30 @@ const Model = ({ modelState }) => {
   const tl = gsap.timeline();
 
   useEffect(() => {
-    if (size === 'large') {
-      animateWithGsapTimeline(tl, small, smallRotation, '#view1', '#view2', {
-        transform: 'translateX(-100%)',
+    if (size === "large") {
+      animateWithGsapTimeline(tl, small, smallRotation, "#view1", "#view2", {
+        transform: "translateX(-100%)",
         duration: 2,
       });
     }
 
-    if (size === 'small') {
-      animateWithGsapTimeline(tl, large, largeRotation, '#view2', '#view1', {
-        transform: 'translateX(0)',
+    if (size === "small") {
+      animateWithGsapTimeline(tl, large, largeRotation, "#view2", "#view1", {
+        transform: "translateX(0)",
         duration: 2,
       });
     }
   }, [size]);
 
   useGSAP(() => {
-    gsap.to('#heading', {
+    gsap.to("#heading", {
       y: 0,
       opacity: 1,
     });
   }, []);
 
-  console.log(`The current model state is ${modelState}`);
-
   return (
-    <section className="common-padding" style={{ backgroundColor: 'beige' }}>
+    <section className="common-padding" style={{ backgroundColor: "beige" }}>
       <div className="screen-max-width">
         <h1 id="heading" className="section-heading">
           Take a closer look.
@@ -86,30 +84,17 @@ const Model = ({ modelState }) => {
               size={size}
               modelState={modelState}
             />
-
-            {/* {modelState === 'laptop' ? null : (
-              <ModelView
-                index={2}
-                groupRef={large}
-                gsapType="view2"
-                controlRef={cameraControlLarge}
-                setRotationState={setLargeRotation}
-                item={model}
-                size={size}
-                modelState={modelState}
-              />
-            )} */}
             <Canvas
               className="w-full h-full"
               style={{
-                position: 'fixed',
+                position: "fixed",
                 top: 0,
                 bottom: 0,
                 left: 0,
                 right: 0,
-                overflow: 'hidden',
+                overflow: "hidden",
               }}
-              eventSource={document.getElementById('root')}
+              eventSource={document.getElementById("root")}
             >
               <View.Port />
             </Canvas>
@@ -136,8 +121,8 @@ const Model = ({ modelState }) => {
                     key={label}
                     className="size-btn"
                     style={{
-                      backgroundColor: size === value ? 'white' : 'transparent',
-                      color: size === value ? 'black' : 'white',
+                      backgroundColor: size === value ? "white" : "transparent",
+                      color: size === value ? "black" : "white",
                     }}
                     onClick={() => setSize(value)}
                   >

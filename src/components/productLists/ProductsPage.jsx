@@ -31,8 +31,6 @@ const ProductsPage = () => {
     navigate(`/products/${productId}`);
   };
 
-  console.log(`Model State is: ${modelState}`);
-
   return (
     <div>
       <div>

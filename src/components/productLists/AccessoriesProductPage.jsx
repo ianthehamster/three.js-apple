@@ -14,7 +14,7 @@ const AccessoriesProductPage = () => {
   // const currentUrl = location.pathname; // returns /accessoriesPage - current path
   // const categoryName = currentUrl.replace(/Page$/, '').substring(1); //returns accessories as category name
   const { categoryName } = useParams();
-  console.log(categoryName);
+
   const params = { categoryName: categoryName };
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const AccessoriesProductPage = () => {
       setModelState("accessories");
       // setModelState(categoryName);
     });
-  }, [categoryName]);
+  }, []);
 
   console.log(modelState);
   return (

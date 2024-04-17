@@ -1,14 +1,14 @@
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Highlights from './components/Highlights';
-import Model from './components/Model';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { BACKEND_URL } from './constantVariables';
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Highlights from "./components/Highlights";
+import Model from "./components/Model";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { BACKEND_URL } from "./constantVariables";
 
 const App = () => {
-  const { user, isAuthenticated } = useAuth0();
+  const { user } = useAuth0();
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [allUsers, setAllUsers] = useState(null);
   const [isUserInDb, setIsUserInDb] = useState(null);
@@ -20,20 +20,16 @@ const App = () => {
   };
 
   const checkIfUserInDb = async () => {
-    console.log(`loggedInUser.name is ${loggedInUser.name}`);
     await axios
       .put(`${BACKEND_URL}/users`, {
-        name: loggedInUser.name,
+        email: loggedInUser.name,
       })
       .then((response) => {
-        console.log(response.data);
         if (response.data === null) {
           setIsUserInDb(false);
         } else {
           setIsUserInDb(true);
         }
-
-        // postNewUser();
       });
   };
 
@@ -56,12 +52,8 @@ const App = () => {
     }
   }, [loggedInUser]);
 
-  console.log(isUserInDb);
-  console.log(loggedInUser);
-
   return (
     <main>
-      {/* <main className="bg-black"> */}
       <Navbar isUserInDb={isUserInDb} />
       <Hero />
       <Highlights />
