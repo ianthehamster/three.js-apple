@@ -26,12 +26,11 @@ const Navbar = ({ isUserInDb }) => {
 
   const postNewUser = async () => {
     if (isUserInDb === false) {
-      // console.log(`postNewUser is called`);
       await axios
         .post(`${BACKEND_URL}/users`, {
           first_name: user.first_name,
           last_name: user.last_name,
-          email: user.name,
+          email: user.email,
         })
         .then((response) => console.log(response))
         .catch((err) => console.error(err));
@@ -39,9 +38,7 @@ const Navbar = ({ isUserInDb }) => {
   };
 
   useEffect(() => {
-    console.log("useEffect is called but postNewUser is not called");
     if (user && isUserInDb === false) {
-      console.log("useEffect is called correctly");
       postNewUser();
     }
   }, [user, isUserInDb]);

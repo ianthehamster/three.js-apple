@@ -16,7 +16,6 @@ const LaptopsProductPage = () => {
   // const currentUrl = location.pathname; // returns /laptopsPage - current path
   // const categoryName = currentUrl.replace(/Page$/, '').substring(1); //returns laptops as category name
   const { categoryName } = useParams();
-  console.log(categoryName);
   const params = { categoryName: categoryName };
 
   // Seed Laptops and also alter products table to add columns and categories so that only products of category laptop is fetched here

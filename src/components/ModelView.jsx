@@ -14,7 +14,6 @@ import Loader from "./Loader";
 import { hourglass } from "ldrs";
 import CyberpunkTablet from "./CyberpunkTablet";
 import AppleVisionPro from "./AppleVisionPro";
-import { Apple } from "@mui/icons-material";
 import IPhone13 from "./IPhone13";
 import { TABLETS, PHONES, ACCESSORIES, LAPTOPS } from "../constantVariables";
 
@@ -30,8 +29,6 @@ const ModelView = ({
   item,
   modelState,
 }) => {
-  console.log(modelState);
-  // console.log(`PROBLEM ERROR: ${item}`);
   return (
     <View
       index={index}

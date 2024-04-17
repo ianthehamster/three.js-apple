@@ -10,7 +10,6 @@ const SingleOrderPage = () => {
   const [order, setOrder] = useState({});
   const [orderId, setOrderId] = useState();
   const params = useParams();
-  console.log(params);
   if (orderId !== params.orderId) {
     setOrderId(params.orderId);
   }
@@ -19,7 +18,6 @@ const SingleOrderPage = () => {
     if (orderId) {
       try {
         const response = await axios.get(`${BACKEND_URL}/orders/${orderId}`);
-        console.log(response.data);
         setOrder(response.data);
       } catch (err) {
         console.log(err);
@@ -31,7 +29,6 @@ const SingleOrderPage = () => {
     fetchSingleOrderInfo();
   }, [orderId]);
 
-  console.log(order);
   return (
     <div>
       <Navbar />

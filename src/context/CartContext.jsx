@@ -26,13 +26,7 @@ export const CartContextProvider = (props) => {
   };
 
   const updateDeliveryAddress = (address) => {
-    console.log(
-      "updateDeliveryAddress from CartContext is running with: ",
-      address
-    );
-
     setDeliveryAddress(address);
-    console.log(deliveryAddress);
     localStorage.setItem("deliveryAddress", JSON.stringify(deliveryAddress));
 
     return;
