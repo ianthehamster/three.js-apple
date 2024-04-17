@@ -11,7 +11,6 @@ import PaymentSuccessPage from "./components/checkout/PaymentSuccessPage.jsx";
 import CartPage from "./components/cart/CartPage.jsx";
 import CheckoutPage from "./components/checkout/CheckoutPage.jsx";
 import OrdersHistoryPage from "./components/orders/OrdersHistoryPage.jsx";
-import SingleOrderPage from "./components/orders/SingleOrderPage.jsx";
 import ProductsPage from "./components/productLists/ProductsPage.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -40,7 +39,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/order/success" element={<PaymentSuccessPage />} />
             <Route path="/my-orders" element={<OrdersHistoryPage />} />
-            <Route path="/my-orders/:orderId" element={<SingleOrderPage />} />
             <Route path="*" element={"Nothing here!"} />
           </Routes>
         </BrowserRouter>
