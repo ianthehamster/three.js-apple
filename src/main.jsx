@@ -11,7 +11,7 @@ import PaymentSuccessPage from "./components/checkout/PaymentSuccessPage.jsx";
 import CartPage from "./components/cart/CartPage.jsx";
 import CheckoutPage from "./components/checkout/CheckoutPage.jsx";
 import OrdersHistoryPage from "./components/orders/OrdersHistoryPage.jsx";
-import ProductsPage from "./components/productLists/ProductsPage.jsx";
+import ProductsPage from "./components/products/ProductsPage.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
