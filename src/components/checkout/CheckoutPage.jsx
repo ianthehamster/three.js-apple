@@ -5,25 +5,17 @@ import {
   InputLabel,
   TextField,
   Typography,
-  MenuItem,
   Button,
   Checkbox,
 } from "@mui/material";
-// import { CartContext } from '../context/CartContext';
 import { CartContext } from "../../context/CartContext";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 import { momentum } from "ldrs";
 import axios from "axios";
 import { BACKEND_URL } from "../../constantVariables";
-import { loadStripe } from "@stripe/stripe-js";
-// import {
-//   EmbeddedCheckoutProvider,
-//   EmbeddedCheckout,
-// } from '@stripe/react-stripe-js';
 import { useAuth0 } from "@auth0/auth0-react";
 import ErrorPage from "../errorPopup/ErrorPage";
-// const stripePromise = loadStripe('pk_test_123');
 
 momentum.register();
 
@@ -79,14 +71,15 @@ const CheckoutPage = () => {
       return;
     }
 
-    // POST request to add address to addresses table
     if (isFormFilledOut && !errorMessage) {
-      const newAddress = await axios
-        .post(`${BACKEND_URL}/addresses`, {
-          email: user.name,
+      try {
+        const response = await axios.post(`${BACKEND_URL}/addresses`, {
+          email: user.email,
           address: formData.addressLine1,
-        })
-        .then((response) => console.log(response.data));
+        });
+      } catch (error) {
+        console.error(error.message);
+      }
 
       updateDeliveryAddress(formData.addressLine1);
 
@@ -138,11 +131,10 @@ const CheckoutPage = () => {
       const response = await axios.post(
         `${BACKEND_URL}/products/create-checkout-session-external`,
         {
-          // priceIds is array of priceIds
           priceIds: priceIdsOfItems,
           userFirstName: user.first_name,
           userLastName: user.last_name,
-          userEmail: user.name,
+          userEmail: user.email,
           itemNames: itemNames,
         }
       );
@@ -150,8 +142,6 @@ const CheckoutPage = () => {
     } catch (err) {
       console.error(`Error creating checkout session: ${err}`);
     }
-
-    // Send a POST request to backend to create an order
     try {
     } catch (err) {}
   };

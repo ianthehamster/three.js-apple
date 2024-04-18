@@ -10,14 +10,7 @@ import { BACKEND_URL } from "./constantVariables";
 const App = () => {
   const { user } = useAuth0();
   const [loggedInUser, setLoggedInUser] = useState(null);
-  const [allUsers, setAllUsers] = useState(null);
   const [isUserInDb, setIsUserInDb] = useState(null);
-
-  const getAllUsers = async () => {
-    await axios.get(`${BACKEND_URL}/users`).then((response) => {
-      setAllUsers(response.data);
-    });
-  };
 
   const checkIfUserInDb = async () => {
     await axios

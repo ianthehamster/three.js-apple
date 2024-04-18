@@ -7,18 +7,12 @@ import { routes } from "../Routes";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../buttons/LoginButton";
 import LogoutButton from "../buttons/LogoutButton";
-import HomeIcon from "@mui/icons-material/Home";
-import ComputerIcon from "@mui/icons-material/Computer";
-import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
-import HeadsetMicIcon from "@mui/icons-material/HeadsetMic";
-import TabletIcon from "@mui/icons-material/Tablet";
-import InfoIcon from "@mui/icons-material/Info";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 export const NavMobile = () => {
   const [isOpen, setOpen] = useState(false);
   const ref = useRef(null);
-  const { user, isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0();
 
   useClickAway(ref, () => setOpen(false));
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import { Paper, MenuItem, Menu } from "@mui/material";
+import { MenuItem, Menu } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -59,11 +59,6 @@ export default function BasicMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        {/* <MenuItem onClick={handleClose}>Laptops</MenuItem>
-        <MenuItem onClick={handleClose}>Phones</MenuItem>
-        <MenuItem onClick={handleClose}>Accessories</MenuItem>
-        <MenuItem onClick={handleClose}>Tablets</MenuItem> */}
-
         {categories.map((category) => (
           <MenuItem key={category} onClick={handleClose}>
             {category.charAt(0).toUpperCase() + category.slice(1)}
