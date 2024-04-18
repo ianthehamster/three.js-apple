@@ -1,9 +1,6 @@
-import { appleImg, bagImg, searchImg } from "../../utils";
-// import { navLists } from "../constants";
-import { Link } from "react-router-dom";
-import DevicesIcon from "@mui/icons-material/Devices";
+import { bagImg } from "../../utils";
 import BasicMenu from "../categories/DropDownMenu";
-import { Button, Typography, Badge } from "@mui/material";
+import { Button, Badge } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../buttons/LoginButton";
@@ -31,7 +28,6 @@ const Navbar = ({ isUserInDb }) => {
           last_name: user.last_name,
           email: user.email,
         })
-        .then((response) => console.log(response))
         .catch((err) => console.error(err));
     }
   };
