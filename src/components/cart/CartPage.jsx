@@ -2,7 +2,7 @@ import React from "react";
 import CartItems from "./CartItems";
 import Navbar from "../navbar/Navbar";
 import "./Cart.css";
-import { Stack, Button, Box } from "@mui/material";
+import { Stack, Button } from "@mui/material";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { formatCurrency } from "../../utils/formatCurrency";
@@ -37,7 +37,7 @@ const CartPage = () => {
         <div className="cart-page-bottom">
           {cartItemsQuantity > 0 && (
             <div className="subtotal">
-              <span className="subtotal-text">Subtotal: </span>{" "}
+              <span className="subtotal-text">Subtotal: </span>
               <span className="total-value">{total}</span>
             </div>
           )}
