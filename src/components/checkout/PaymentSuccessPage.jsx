@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import Navbar from "../Navbar";
+import Navbar from "../navbar/Navbar";
 import { BACKEND_URL } from "../../constantVariables";
 import axios from "axios";
 import "./PaymentSuccessPage.css";

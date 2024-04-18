@@ -1,19 +1,18 @@
-import { appleImg, bagImg, searchImg } from "../utils";
+import { appleImg, bagImg, searchImg } from "../../utils";
 // import { navLists } from "../constants";
 import { Link } from "react-router-dom";
 import DevicesIcon from "@mui/icons-material/Devices";
-import BasicMenu from "./minorComponents/DropDownMenu";
+import BasicMenu from "../categories/DropDownMenu";
 import { Button, Typography, Badge } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from "./buttons/LoginButton";
-import LogoutButton from "./buttons/LogoutButton";
-import { CartContext } from "../context/CartContext";
+import LoginButton from "../buttons/LoginButton";
+import LogoutButton from "../buttons/LogoutButton";
+import { CartContext } from "../../context/CartContext";
 import { useContext, useEffect } from "react";
 import axios from "axios";
-import { BACKEND_URL } from "../constantVariables";
-import { mainLogo } from "../utils";
-
+import { BACKEND_URL } from "../../constantVariables";
+import { mainLogo } from "../../utils";
 import { NavMobile } from "./NavMobile";
 
 const Navbar = ({ isUserInDb }) => {

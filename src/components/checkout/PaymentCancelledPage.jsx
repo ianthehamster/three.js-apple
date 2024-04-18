@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../Navbar";
+import Navbar from "../navbar/Navbar";
 import { Button } from "@mui/material";
 import "./PaymentSuccessPage.css";
 import { useNavigate } from "react-router-dom";

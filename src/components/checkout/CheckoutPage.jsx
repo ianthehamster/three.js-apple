@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useContext, useCallback } from "react";
-import Navbar from "../Navbar";
+import Navbar from "../navbar/Navbar";
 import {
   Box,
   InputLabel,
@@ -22,7 +22,7 @@ import { loadStripe } from "@stripe/stripe-js";
 //   EmbeddedCheckout,
 // } from '@stripe/react-stripe-js';
 import { useAuth0 } from "@auth0/auth0-react";
-import ErrorPage from "../ErrorPage";
+import ErrorPage from "../errorPopup/ErrorPage";
 // const stripePromise = loadStripe('pk_test_123');
 
 momentum.register();
