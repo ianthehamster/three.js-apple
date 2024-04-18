@@ -247,18 +247,3 @@ const SingleProductPage = () => {
 };
 
 export default SingleProductPage;
-
-// return (
-//   <div>
-//     <section>
-//       <Navbar />
-//       {loading ? (
-//         <div className="spinner">
-//           <l-hourglass size="40" color="black"></l-hourglass>
-//         </div>
-//       ) : (
-//         productDetails
-//       )}
-//     </section>
-//   </div>
-// );
