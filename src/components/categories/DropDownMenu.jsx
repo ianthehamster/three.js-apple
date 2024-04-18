@@ -30,34 +30,6 @@ export default function BasicMenu() {
     setAnchorEl(event.currentTarget);
   };
 
-  //HARDCODED CATEGORIES
-  // const handleClose = (e) => {
-  //   // console.log(e.target.innerText);
-
-  //   const targetPage = e.target.innerText;
-  //   switch (targetPage) {
-  //     case "Laptops":
-  //       navigate("/laptopPage");
-  //       break;
-  //     case "Phones":
-  //       navigate("/phonesPage");
-  //       break;
-  //     case "Accessories":
-  //       navigate("/accessoriesPage");
-  //       break;
-  //     case "Tablets":
-  //       navigate("/tabletsPage");
-  //       break;
-  //     default:
-  //       console.log("Please click a valid option");
-  //   }
-
-  //   if (e.target.innerText === "Laptops") {
-  //     // Test link
-  //     navigate("/laptopPage");
-  //   }
-  //   setAnchorEl(null);
-  // };
   const handleClose = (e) => {
     const targetPage = e.target.innerText.toLowerCase();
     const path = `/${targetPage}`;

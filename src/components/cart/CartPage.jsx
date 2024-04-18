@@ -1,6 +1,6 @@
 import React from "react";
 import CartItems from "./CartItems";
-import Navbar from "../Navbar";
+import Navbar from "../navbar/Navbar";
 import "./Cart.css";
 import { Stack, Button, Box } from "@mui/material";
 import { useContext } from "react";

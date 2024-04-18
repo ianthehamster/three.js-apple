@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
-import { CartContext } from "../context/CartContext";
-import Navbar from "./Navbar";
-import { BACKEND_URL } from "../constantVariables";
+import { CartContext } from "../../context/CartContext";
+import Navbar from "../navbar/Navbar";
+import { BACKEND_URL } from "../../constantVariables";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Grid, Stack, Box } from "@mui/material";
 import "./SingleProductPage.css";
-import { formatCurrency } from "../utils/formatCurrency";
-import AddToCartButton from "./buttons/AddToCartButton";
-import IncrementDecrementBtn from "./buttons/IncrementDecrementBtn";
+import { formatCurrency } from "../../utils/formatCurrency";
+import AddToCartButton from "../buttons/AddToCartButton";
+import IncrementDecrementBtn from "../buttons/IncrementDecrementBtn";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useAuth0 } from "@auth0/auth0-react";
 // Animations
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import "ldrs/hourglass";
-import ModelFlagshipLaptop from "./ModelFlagshipProduct";
+import ModelFlagshipLaptop from "../ModelFlagshipProduct";
 
 const SingleProductPage = () => {
   const [product, setProduct] = useState({});

@@ -5,9 +5,9 @@ import {
   aboutUsSection3,
   aboutUsSection5,
   highTechVideo,
-} from "../utils";
-import { hightechpictureV1 } from "../utils";
-import "../index.css";
+} from "../../utils";
+import { hightechpictureV1 } from "../../utils";
+import "../../index.css";
 
 const AboutUsHero = () => {
   const videoRef = useRef(null);
