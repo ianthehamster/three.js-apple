@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../navbar/Navbar";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import AboutUsHero from "./AboutUsHero";
 
 const AboutUs = () => {
