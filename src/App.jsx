@@ -26,10 +26,6 @@ const App = () => {
       });
   };
 
-  useEffect(() => {
-    getAllUsers();
-  }, []);
-
   const setUser = () => {
     setLoggedInUser(user);
   };
