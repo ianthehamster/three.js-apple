@@ -41,10 +41,7 @@ const ProductCard = ({ product }) => {
             {price}
           </Typography>
         </CardContent>
-        <CardActions sx={{ display: "flex", justifyContent: "space-evenly" }}>
-          <div>
-            <Button size="small">Share</Button>
-          </div>
+        <CardActions sx={{ display: "flex", justifyContent: "center" }}>
           <div>
             <Button size="small" onClick={handleLearnClick}>
               Learn More
