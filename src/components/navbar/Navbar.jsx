@@ -6,37 +6,17 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../buttons/LoginButton";
 import LogoutButton from "../buttons/LogoutButton";
 import { CartContext } from "../../context/CartContext";
-import { useContext, useEffect } from "react";
-import axios from "axios";
-import { BACKEND_URL } from "../../constantVariables";
+import { useContext } from "react";
 import { mainLogo } from "../../utils";
 import { NavMobile } from "./NavMobile";
 
-const Navbar = ({ isUserInDb }) => {
+const Navbar = () => {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
   const { getTotalCartItemsQty } = useContext(CartContext);
   const cartQuantity = getTotalCartItemsQty();
 
   const isSmallScreen = window.innerWidth <= 640;
-
-  const postNewUser = async () => {
-    if (isUserInDb === false) {
-      await axios
-        .post(`${BACKEND_URL}/users`, {
-          first_name: user.first_name,
-          last_name: user.last_name,
-          email: user.email,
-        })
-        .catch((err) => console.error(err));
-    }
-  };
-
-  useEffect(() => {
-    if (user && isUserInDb === false) {
-      postNewUser();
-    }
-  }, [user, isUserInDb]);
 
   return (
     <header
