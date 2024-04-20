@@ -4,6 +4,7 @@ import { Grid, Stack, Box } from '@mui/material';
 import IncrementDecrementBtn from '../buttons/IncrementDecrementBtn';
 import ModelFlagshipLaptop from '../ModelFlagshipProduct';
 import AddToCartButton from '../buttons/AddToCartButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const SingleFlagshipProductPage = ({
   modelState,
