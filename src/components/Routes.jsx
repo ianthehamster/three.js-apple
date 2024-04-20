@@ -1,12 +1,9 @@
-import { PiChatCircleBold } from 'react-icons/pi';
-import { IoPricetagsOutline } from 'react-icons/io5';
 import HomeIcon from '@mui/icons-material/Home';
 import ComputerIcon from '@mui/icons-material/Computer';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
 import TabletIcon from '@mui/icons-material/Tablet';
 import InfoIcon from '@mui/icons-material/Info';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { TABLETS, LAPTOPS, ACCESSORIES, PHONES } from '../constantVariables';
 
 export const routes = [

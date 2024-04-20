@@ -1,44 +1,40 @@
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import ModelView from "./ModelView";
-import { Canvas } from "@react-three/fiber";
-import { View } from "@react-three/drei";
-import { TABLETS, PHONES, ACCESSORIES, LAPTOPS } from "../constantVariables";
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import ModelView from './ModelView';
+import { Canvas } from '@react-three/fiber';
+import { View } from '@react-three/drei';
+import { TABLETS, PHONES, ACCESSORIES, LAPTOPS } from '../constantVariables';
 
 const ModelFlagshipLaptop = ({ modelState }) => {
   const tl = gsap.timeline();
 
   useGSAP(() => {
-    gsap.to("#heading", {
+    gsap.to('#heading', {
       y: 0,
       opacity: 1,
-    });
-    gsap.to("#flagship", {
-      opacity: 1,
-      y: -50,
     });
   }, [modelState]);
 
   return (
-    <section className="common-padding" style={{ paddingBottom: "1px" }}>
+    <section className="common-padding" style={{ paddingBottom: '1px' }}>
       <div className="screen-max-width">
         {modelState === `${LAPTOPS}` ? (
-          <h1 id="heading" className="section-heading" style={{ opacity: "0" }}>
+          <h1 id="heading" className="section-heading" style={{ opacity: '0' }}>
             Our Flagship Product: Alienware Laptop
           </h1>
         ) : null}
         {modelState === `${TABLETS}` ? (
-          <h1 id="heading" className="section-heading" style={{ opacity: "0" }}>
+          <h1 id="heading" className="section-heading" style={{ opacity: '0' }}>
             Our Flagship Product: Cyberpunk Tablet
           </h1>
         ) : null}
         {modelState === `${ACCESSORIES}` ? (
-          <h1 id="heading" className="section-heading" style={{ opacity: "0" }}>
+          <h1 id="heading" className="section-heading" style={{ opacity: '0' }}>
             Our Flagship Product: Pear Vision Pro
           </h1>
         ) : null}
         {modelState === `${PHONES}` ? (
-          <h1 id="heading" className="section-heading" style={{ opacity: "0" }}>
+          <h1 id="heading" className="section-heading" style={{ opacity: '0' }}>
             Our Flagship Product: Pear IPhone X
           </h1>
         ) : null}
@@ -50,14 +46,14 @@ const ModelFlagshipLaptop = ({ modelState }) => {
             <Canvas
               className="w-full h-full"
               style={{
-                position: "fixed",
+                position: 'fixed',
                 top: 0,
                 bottom: 0,
                 left: 0,
                 right: 0,
-                overflow: "hidden",
+                overflow: 'hidden',
               }}
-              eventSource={document.getElementById("root")}
+              eventSource={document.getElementById('root')}
             >
               <View.Port />
             </Canvas>

@@ -1,21 +1,21 @@
-import Navbar from "./components/navbar/Navbar";
-import Hero from "./components/Hero";
-import Highlights from "./components/Highlights";
-import Model from "./components/Model";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { BACKEND_URL } from "./constantVariables";
+import Navbar from './components/navbar/Navbar';
+import Hero from './components/Hero';
+import Highlights from './components/Highlights';
+import Model from './components/Model';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { BACKEND_URL } from './constantVariables';
 
 const App = () => {
   const { user } = useAuth0();
   const [isUserInDb, setIsUserInDb] = useState(null);
 
   const checkIfUserInDb = async () => {
-    if (user && user.email) {
+    if (user && user.name) {
       await axios
         .put(`${BACKEND_URL}/users`, {
-          email: user.email,
+          email: user.name,
         })
         .then((response) => {
           if (response.data === null) {
@@ -23,7 +23,8 @@ const App = () => {
           } else {
             setIsUserInDb(true);
           }
-        });
+        })
+        .catch((err) => console.log(err));
     }
   };
   const postNewUser = async () => {

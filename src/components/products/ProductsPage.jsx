@@ -1,26 +1,26 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import ProductCard from "./ProductCard";
-import { Button, Grid } from "@mui/material";
-import Navbar from "../navbar/Navbar";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import ProductCard from './ProductCard';
+import { Button, Grid } from '@mui/material';
+import Navbar from '../navbar/Navbar';
 import {
   BACKEND_URL,
   TABLETS,
   LAPTOPS,
   PHONES,
   ACCESSORIES,
-} from "../../constantVariables";
-import ModelFlagshipLaptop from "../ModelFlagshipProduct";
-import { useTheme } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+} from '../../constantVariables';
+import ModelFlagshipLaptop from '../ModelFlagshipProduct';
+import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const ProductsPage = () => {
   const { categoryName } = useParams();
   const [accessories, setAccessories] = useState([]);
-  const [modelState, setModelState] = useState("");
+  const [modelState, setModelState] = useState('');
   const params = { categoryName: categoryName };
   const theme = useTheme();
   const { isAuthenticated } = useAuth0();
@@ -37,16 +37,16 @@ const ProductsPage = () => {
   const handleClick = () => {
     let productId;
     if (modelState === LAPTOPS) {
-      productId = 38;
+      productId = 273;
     }
     if (modelState === PHONES) {
-      productId = 39;
+      productId = 274;
     }
     if (modelState === ACCESSORIES) {
-      productId = 40;
+      productId = 275;
     }
     if (modelState === TABLETS) {
-      productId = 41;
+      productId = 276;
     }
     navigate(`/products/${productId}`);
   };
@@ -58,16 +58,16 @@ const ProductsPage = () => {
         <ModelFlagshipLaptop modelState={modelState} />
         <div
           style={{
-            margin: "20px auto",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            margin: '20px auto',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
-          {isAuthenticated && modelState !== "" && (
+          {isAuthenticated && modelState !== '' && (
             <Button
               variant="contained"
-              sx={{ marginBottom: "50px", marginTop: 0 }}
+              sx={{ marginBottom: '50px', marginTop: 0 }}
               onClick={handleClick}
             >
               Buy
@@ -78,7 +78,7 @@ const ProductsPage = () => {
           container
           spacing={4}
           sx={{
-            [theme.breakpoints.up("lg")]: {
+            [theme.breakpoints.up('lg')]: {
               paddingLeft: 5,
               paddingRight: 5,
             },

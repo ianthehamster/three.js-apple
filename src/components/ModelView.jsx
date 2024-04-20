@@ -1,21 +1,16 @@
-import {
-  Html,
-  OrbitControls,
-  PerspectiveCamera,
-  View,
-} from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera, View } from '@react-three/drei';
 
-import * as THREE from "three";
-import Lights from "./Lights";
-import { Suspense } from "react";
-import IPhone from "./IPhone";
-import AlienwareLaptop from "./AlienwareLaptop";
-import Loader from "./Loader";
-import { hourglass } from "ldrs";
-import CyberpunkTablet from "./CyberpunkTablet";
-import AppleVisionPro from "./AppleVisionPro";
-import IPhone13 from "./IPhone13";
-import { TABLETS, PHONES, ACCESSORIES, LAPTOPS } from "../constantVariables";
+import * as THREE from 'three';
+import Lights from './Lights';
+import { Suspense } from 'react';
+import IPhone from './IPhone';
+import AlienwareLaptop from './AlienwareLaptop';
+import Loader from './Loader';
+import { hourglass } from 'ldrs';
+import CyberpunkTablet from './CyberpunkTablet';
+import AppleVisionPro from './AppleVisionPro';
+import IPhone13 from './IPhone13';
+import { TABLETS, PHONES, ACCESSORIES, LAPTOPS } from '../constantVariables';
 
 hourglass.register();
 
@@ -33,8 +28,8 @@ const ModelView = ({
     <View
       index={index}
       id={gsapType}
-      className={`w-full h-full absolute ${index === 2 ? "right-[-100%]" : ""}`}
-      style={modelState === `${LAPTOPS}` ? { height: "130%" } : null}
+      className={`w-full h-full absolute ${index === 2 ? 'right-[-100%]' : ''}`}
+      style={modelState === `${LAPTOPS}` ? { height: '130%' } : null}
     >
       {/* Ambient Light */}
       <ambientLight intensity={0.3} />

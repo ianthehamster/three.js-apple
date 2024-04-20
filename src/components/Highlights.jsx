@@ -9,13 +9,6 @@ const Highlights = () => {
       opacity: 1,
       y: 0,
     });
-
-    gsap.to('.link', {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      stagger: 0.25,
-    });
   }, []);
 
   return (
@@ -29,16 +22,6 @@ const Highlights = () => {
             {' '}
             Get the highlights
           </h1>
-          {/* <div className="flex flex-wrap items-end gap-5">
-            <p className="link">
-              Watch the film
-              <img src={watchImg} alt="watch" className="ml-2" />
-            </p>
-            <p className="link">
-              Watch the event
-              <img src={rightImg} alt="right" className="ml-2" />
-            </p>
-          </div> */}
         </div>
 
         <VideoCarousel />
