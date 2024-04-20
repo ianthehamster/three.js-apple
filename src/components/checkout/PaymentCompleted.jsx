@@ -49,7 +49,6 @@ const PaymentCompleted = () => {
           }
         );
         setAddressId(response.data);
-        console.log(response.data);
       } catch (err) {
         setErrorMessage("Please contact the developer at developer@gmail.com");
         console.log(err);
@@ -78,7 +77,6 @@ const PaymentCompleted = () => {
           total_price: subTotalPrice,
           products: productsArray,
         });
-        console.log(response.data);
         setOrderStatus(true);
         checkout();
       } catch (err) {
