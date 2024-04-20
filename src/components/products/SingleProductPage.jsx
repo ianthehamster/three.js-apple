@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import Navbar from "../navbar/Navbar";
-import { BACKEND_URL } from "../../constantVariables";
+import {
+  BACKEND_URL,
+  TABLETS,
+  LAPTOPS,
+  PHONES,
+  ACCESSORIES,
+} from "../../constantVariables";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Grid, Stack, Box } from "@mui/material";
@@ -152,16 +158,16 @@ const SingleProductPage = () => {
   useEffect(() => {
     switch (product.title) {
       case "Alienware Laptop":
-        setModelState("laptops");
+        setModelState(LAPTOPS);
         break;
       case "Pear IPhone X":
-        setModelState("phones");
+        setModelState(PHONES);
         break;
       case "Pear Vision Pro":
-        setModelState("accessories");
+        setModelState(ACCESSORIES);
         break;
       case "Cyberpunk Tablet":
-        setModelState("tablets");
+        setModelState(TABLETS);
         break;
       default:
         setModelState("");
