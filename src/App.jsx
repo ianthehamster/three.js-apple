@@ -9,41 +9,46 @@ import { BACKEND_URL } from "./constantVariables";
 
 const App = () => {
   const { user } = useAuth0();
-  const [loggedInUser, setLoggedInUser] = useState(null);
   const [isUserInDb, setIsUserInDb] = useState(null);
 
   const checkIfUserInDb = async () => {
-    await axios
-      .put(`${BACKEND_URL}/users`, {
-        email: loggedInUser.name,
-      })
-      .then((response) => {
-        if (response.data === null) {
-          setIsUserInDb(false);
-        } else {
-          setIsUserInDb(true);
-        }
-      });
+    if (user && user.email) {
+      await axios
+        .put(`${BACKEND_URL}/users`, {
+          email: user.email,
+        })
+        .then((response) => {
+          if (response.data === null) {
+            setIsUserInDb(false);
+          } else {
+            setIsUserInDb(true);
+          }
+        });
+    }
+  };
+  const postNewUser = async () => {
+    if (isUserInDb === false && user.email) {
+      await axios
+        .post(`${BACKEND_URL}/users`, {
+          first_name: user.first_name ? user.first_name : null,
+          last_name: user.last_name ? user.last_name : null,
+          email: user.email,
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   useEffect(() => {
-    getAllUsers();
-  }, []);
-
-  const setUser = () => {
-    setLoggedInUser(user);
-  };
-
-  // Set loggedInUser when user object changes via Auth0
-  useEffect(() => {
-    setUser();
+    if (user) {
+      checkIfUserInDb();
+    }
   }, [user]);
 
   useEffect(() => {
-    if (loggedInUser) {
-      checkIfUserInDb();
+    if (user && isUserInDb === false) {
+      postNewUser();
     }
-  }, [loggedInUser]);
+  }, [user, isUserInDb]);
 
   return (
     <main>

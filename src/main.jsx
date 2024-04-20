@@ -12,6 +12,7 @@ import CartPage from "./components/cart/CartPage.jsx";
 import CheckoutPage from "./components/checkout/CheckoutPage.jsx";
 import OrdersHistoryPage from "./components/orders/OrdersHistoryPage.jsx";
 import ProductsPage from "./components/products/ProductsPage.jsx";
+import PaymentCompleted from "./components/checkout/PaymentCompleted.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -37,7 +38,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />}></Route>
             <Route path="/aboutUs" element={<AboutUs />} />
-            <Route path="/order/success" element={<PaymentSuccessPage />} />
+            <Route path="/order/success" element={<PaymentCompleted />} />
             <Route path="/my-orders" element={<OrdersHistoryPage />} />
             <Route path="*" element={"Nothing here!"} />
           </Routes>

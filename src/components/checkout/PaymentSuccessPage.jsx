@@ -1,99 +1,11 @@
-import React, { useEffect, useContext, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import React from "react";
 import Navbar from "../navbar/Navbar";
-import { BACKEND_URL } from "../../constantVariables";
-import axios from "axios";
 import "./PaymentSuccessPage.css";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { CartContext } from "../../context/CartContext";
 
 const PaymentSuccessPage = () => {
-  const [userAddress, setUserAddress] = useState(null);
-  const [addressId, setAddressId] = useState(null);
-  const [userId, setUserId] = useState(null);
-  const { user } = useAuth0();
-  const [orderStatus, setOrderStatus] = useState(false);
-  const [productsArray, setProductsArray] = useState([]);
-  const { getDeliveryAddress, getTotalCartPrice, cartItems, checkout } =
-    useContext(CartContext);
   const navigate = useNavigate();
-
-  const getUserIdAndSetUserAddress = async () => {
-    if (user) {
-      await axios
-        .put(`${BACKEND_URL}/users`, {
-          email: user.name,
-        })
-        .then((response) => setUserId(response.data.id));
-    }
-    setUserAddress(getDeliveryAddress());
-
-    if (userAddress) {
-      try {
-        await axios
-          .get(`${BACKEND_URL}/addresses/get-address-id`, {
-            params: {
-              delivery_address: userAddress,
-            },
-          })
-          .then((response) => setAddressId(response.data))
-          .catch((err) => console.log(err));
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
-
-  const subTotalPrice = getTotalCartPrice();
-
-  const updateProductsArray = () => {
-    if (cartItems) {
-      setProductsArray(
-        cartItems.map((cartItem) => ({
-          [cartItem.id]: cartItem.quantity,
-        }))
-      );
-    }
-  };
-
-  const postOrder = async () => {
-    try {
-      await axios
-        .post(`${BACKEND_URL}/orders`, {
-          address_id: addressId,
-          user_id: userId,
-          total_price: subTotalPrice,
-          products: productsArray,
-        })
-        .then((response) => {
-          console.log(response);
-        });
-      setOrderStatus(true);
-      checkout();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getUserIdAndSetUserAddress();
-  }, [user]);
-
-  useEffect(() => {
-    updateProductsArray();
-  }, [cartItems]);
-
-  useEffect(() => {
-    if (
-      orderStatus === false &&
-      userId &&
-      addressId &&
-      cartItems.length !== 0
-    ) {
-      postOrder();
-    }
-  }, [userId, addressId]);
 
   return (
     <div>
@@ -106,7 +18,7 @@ const PaymentSuccessPage = () => {
           />
         </div>
         <p className="payment-result">Success!</p>
-        <p className="text">Your payment has been processed successfully!</p>
+        <p className="text">Your order has been posted successfully!</p>
         <p className="text">Thank you for shopping with us!</p>
         <Button
           variant="contained"

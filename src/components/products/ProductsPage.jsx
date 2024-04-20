@@ -5,7 +5,13 @@ import axios from "axios";
 import ProductCard from "./ProductCard";
 import { Button, Grid } from "@mui/material";
 import Navbar from "../navbar/Navbar";
-import { BACKEND_URL } from "../../constantVariables";
+import {
+  BACKEND_URL,
+  TABLETS,
+  LAPTOPS,
+  PHONES,
+  ACCESSORIES,
+} from "../../constantVariables";
 import ModelFlagshipLaptop from "../ModelFlagshipProduct";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +33,21 @@ const ProductsPage = () => {
   }, [categoryName]);
 
   const navigate = useNavigate();
-  const handleLearnClick = (productId) => {
+
+  const handleClick = () => {
+    let productId;
+    if (modelState === LAPTOPS) {
+      productId = 38;
+    }
+    if (modelState === PHONES) {
+      productId = 39;
+    }
+    if (modelState === ACCESSORIES) {
+      productId = 40;
+    }
+    if (modelState === TABLETS) {
+      productId = 41;
+    }
     navigate(`/products/${productId}`);
   };
 
@@ -44,39 +64,15 @@ const ProductsPage = () => {
             alignItems: "center",
           }}
         >
-          {modelState === "laptops" && isAuthenticated ? (
+          {isAuthenticated && modelState !== "" && (
             <Button
               variant="contained"
               sx={{ marginBottom: "50px", marginTop: 0 }}
-              onClick={() => handleLearnClick(38)}
+              onClick={handleClick}
             >
               Buy
             </Button>
-          ) : modelState === "phones" && isAuthenticated ? (
-            <Button
-              variant="contained"
-              sx={{ marginBottom: "50px", marginTop: 0 }}
-              onClick={() => handleLearnClick(39)}
-            >
-              Buy
-            </Button>
-          ) : modelState === "accessories" && isAuthenticated ? (
-            <Button
-              variant="contained"
-              sx={{ marginBottom: "50px", marginTop: 0 }}
-              onClick={() => handleLearnClick(40)}
-            >
-              Buy
-            </Button>
-          ) : modelState === "tablets" && isAuthenticated ? (
-            <Button
-              variant="contained"
-              sx={{ marginBottom: "50px", marginTop: 0 }}
-              onClick={() => handleLearnClick(41)}
-            >
-              Buy
-            </Button>
-          ) : null}
+          )}
         </div>
         <Grid
           container
