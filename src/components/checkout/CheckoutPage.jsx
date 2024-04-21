@@ -16,6 +16,7 @@ import axios from "axios";
 import { BACKEND_URL } from "../../constantVariables";
 import { useAuth0 } from "@auth0/auth0-react";
 import ErrorPage from "../errorPopup/ErrorPage";
+import { formatCurrency } from "../../utils/formatCurrency";
 
 momentum.register();
 
@@ -33,7 +34,8 @@ const CheckoutPage = () => {
 
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-  const { cartItems, updateDeliveryAddress } = useContext(CartContext);
+  const { cartItems, getTotalCartPrice, updateDeliveryAddress } =
+    useContext(CartContext);
 
   const [shippingInfoState, setShippingInfoState] = useState(true);
   const [loaderSpinner, setLoaderSpinner] = useState(false);
@@ -146,12 +148,14 @@ const CheckoutPage = () => {
     } catch (err) {}
   };
 
-  const initialValue = 0;
-  const subTotal = cartItems.reduce(
-    (accumulator, currentValue) =>
-      accumulator + Number(currentValue.price) * currentValue.quantity,
-    initialValue
-  );
+  // const initialValue = 0;
+  // const subTotal = cartItems.reduce(
+  //   (accumulator, currentValue) =>
+  //     accumulator + Number(currentValue.price) * currentValue.quantity,
+  //   initialValue
+  // );
+  const subTotal = getTotalCartPrice();
+
   const handleErrorMessage = () => {
     setErrorMessage("");
   };
@@ -404,7 +408,7 @@ const CheckoutPage = () => {
                   <Box className="md:ml-0 ml-5">Qty: {cartItem.quantity}</Box>
                 </Box>
                 <Box sx={{ marginLeft: "50px", marginRight: "20px" }}>
-                  SGD${cartItem.price * cartItem.quantity}
+                  {formatCurrency(cartItem.price * cartItem.quantity)}
                 </Box>
               </Box>
             </Box>
@@ -425,21 +429,21 @@ const CheckoutPage = () => {
               Subtotal
             </Typography>
             <Box sx={{ marginRight: "20px", marginTop: "20px" }}>
-              SGD${subTotal}
+              {formatCurrency(subTotal)}
             </Box>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography sx={{ marginLeft: "20px", marginTop: "20px" }}>
               Shipping
             </Typography>
-            <Box sx={{ marginRight: "20px", marginTop: "20px" }}>SGD$0</Box>
+            <Box sx={{ marginRight: "20px", marginTop: "20px" }}>SGD 0</Box>
           </Box>
 
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography sx={{ marginLeft: "20px", marginTop: "20px" }}>
               Taxes
             </Typography>
-            <Box sx={{ marginRight: "20px", marginTop: "20px" }}>SGD$0</Box>
+            <Box sx={{ marginRight: "20px", marginTop: "20px" }}>SGD 0</Box>
           </Box>
           <Box
             sx={{
@@ -458,7 +462,7 @@ const CheckoutPage = () => {
                 Order Total
               </Typography>
               <Box sx={{ marginRight: "20px", marginTop: "20px" }}>
-                SGD${subTotal}
+                {formatCurrency(subTotal)}
               </Box>
             </Box>
           </Box>
@@ -494,7 +498,7 @@ const CheckoutPage = () => {
                     Couriers & Singapore Post
                   </Typography>
                   <Typography sx={{ marginTop: "10px", marginLeft: "5px" }}>
-                    SGD$0.00
+                    SGD 0.00
                   </Typography>
                 </Box>
               </Box>
@@ -534,7 +538,7 @@ const CheckoutPage = () => {
                     Couriers & Singapore Post
                   </Typography>
                   <Typography sx={{ marginTop: "10px", marginLeft: "5px" }}>
-                    SGD$0.00
+                    SGD0.00
                   </Typography>
                 </Box>
               </Box>
@@ -552,8 +556,8 @@ const CheckoutPage = () => {
         >
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             {!shippingInfoState && !shippingMethodState ? (
-              <Button variant="outlined" onClick={handleCheckout}>
-                Checkout!
+              <Button variant="contained" onClick={handleCheckout}>
+                Checkout
               </Button>
             ) : null}
           </Box>

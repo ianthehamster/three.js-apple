@@ -34,6 +34,12 @@ The app is designed for users based in Singapore.
 
 13. By selecting the "About us" section on the navigation bar, users can access detailed information about the store, including its concepts and principles.
 
+## ERD:
+
+https://drawsql.app/teams/kit-ian-chow/diagrams/carousell
+
+## Wireframes:
+
 ## Requirements
 
 To install and launch the app, you will need NodeJS v16+
