@@ -25,17 +25,6 @@ export const CartContextProvider = (props) => {
     return cartItem ? cartItem.quantity : 0;
   };
 
-  const updateDeliveryAddress = (address) => {
-    setDeliveryAddress(address);
-    localStorage.setItem("deliveryAddress", JSON.stringify(deliveryAddress));
-
-    return;
-  };
-
-  const getDeliveryAddress = () => {
-    return deliveryAddress;
-  };
-
   const addToCart = (item) => {
     const isItemNotInCart =
       cartItems.find((cartItem) => cartItem.id === item.id) === undefined;
@@ -75,29 +64,34 @@ export const CartContextProvider = (props) => {
   };
 
   const getTotalCartPrice = () => {
-    let cartTotal = 0;
-    let itemTotal = 0;
-    for (let i = 0; i < cartItems.length; i++) {
-      const item = cartItems[i];
-      itemTotal = item.price * item.quantity;
-      cartTotal = cartTotal + itemTotal;
-    }
-
-    return cartTotal;
+    const totalPrice = cartItems.reduce(
+      (accumulator, item) => accumulator + item.price * item.quantity,
+      0
+    );
+    return totalPrice;
   };
 
   const getTotalCartItemsQty = () => {
-    let total = 0;
-    for (let i = 0; i < cartItems.length; i++) {
-      const item = cartItems[i];
-      total = total + item.quantity;
-    }
-
-    return total;
+    const totalItemsQty = cartItems.reduce(
+      (accumulator, item) => accumulator + item.quantity,
+      0
+    );
+    return totalItemsQty;
   };
 
   const checkout = () => {
     setCartItems([]);
+  };
+
+  const updateDeliveryAddress = (address) => {
+    setDeliveryAddress(address);
+    localStorage.setItem("deliveryAddress", JSON.stringify(deliveryAddress));
+
+    return;
+  };
+
+  const getDeliveryAddress = () => {
+    return deliveryAddress;
   };
 
   const contextValue = {
