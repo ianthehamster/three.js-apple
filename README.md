@@ -36,9 +36,10 @@ The app is designed for users based in Singapore.
 
 ## ERD:
 
-https://drawsql.app/teams/kit-ian-chow/diagrams/carousell
+[https://drawsql.app/teams/kit-ian-chow/diagrams/carousell](https://drawsql.app/teams/dream-team-107/diagrams/techie-e-store)
 
-## Wireframes:
+## Wireframes: 
+
 
 ## Requirements
 
