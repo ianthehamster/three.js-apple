@@ -39,7 +39,7 @@ The app is designed for users based in Singapore.
 [https://drawsql.app/teams/kit-ian-chow/diagrams/carousell](https://drawsql.app/teams/kit-ian-chow/diagrams/carousell)
 
 ## Wireframes: 
-
+[https://app.moqups.com/cZBdpfivjIP7NqDsaNvPfpeUgKsT4bSY/edit/page/a2a00afc0](https://app.moqups.com/cZBdpfivjIP7NqDsaNvPfpeUgKsT4bSY/edit/page/a2a00afc0)
 
 ## Requirements
 
