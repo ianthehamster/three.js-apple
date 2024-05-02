@@ -5,7 +5,7 @@ import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
 import TabletIcon from '@mui/icons-material/Tablet';
 import InfoIcon from '@mui/icons-material/Info';
 import { TABLETS, LAPTOPS, ACCESSORIES, PHONES } from '../constantVariables';
-
+// i think this could be a .js file since there is no component here
 export const routes = [
   {
     title: 'Home',

@@ -32,7 +32,7 @@ const CheckoutPage = () => {
     phoneNumber: "",
   });
 
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
+  const label = { inputProps: { "aria-label": "Checkbox demo" } }; // please always define all hooks above any other variables
 
   const { cartItems, getTotalCartPrice, updateDeliveryAddress } =
     useContext(CartContext);
@@ -68,7 +68,7 @@ const CheckoutPage = () => {
       return;
     }
 
-    if (!Number(formData.phoneNumber)) {
+    if (!Number(formData.phoneNumber)) { // nice, I wish you would have validated like so in the BE as well. That's for people bypassing the form and making direct requests via POSTMAN etc.
       setErrorMessage("Your phone must be a number!");
       return;
     }
@@ -131,7 +131,7 @@ const CheckoutPage = () => {
     // Sending customer to Stripe-hosted checkout page
     try {
       const response = await axios.post(
-        `${BACKEND_URL}/products/create-checkout-session-external`,
+        `${BACKEND_URL}/products/create-checkout-session-external`, // what a url :D Please follow REST patterns
         {
           priceIds: priceIdsOfItems,
           userFirstName: user.first_name,
@@ -151,7 +151,7 @@ const CheckoutPage = () => {
   // const initialValue = 0;
   // const subTotal = cartItems.reduce(
   //   (accumulator, currentValue) =>
-  //     accumulator + Number(currentValue.price) * currentValue.quantity,
+  //     accumulator + Number(currentValue.price) * currentValue.quantity, // remove comments like so
   //   initialValue
   // );
   const subTotal = getTotalCartPrice();
@@ -179,7 +179,7 @@ const CheckoutPage = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center", // Center horizontally
+          justifyContent: "center", // Center horizontally // redundant comments
           alignItems: "center", // Center vertically
         }}
       >
@@ -224,7 +224,7 @@ const CheckoutPage = () => {
                 </Box>
                 <Box sx={{ width: "50%", marginLeft: "10px" }}>
                   <InputLabel htmlFor="lastName">Last Name</InputLabel>
-                  <TextField
+                  <TextField // these text fields all have the same props aside from the id and the label. Can we do that dynamically? See a lot of repeated code here.
                     fullWidth
                     id="lastName"
                     variant="outlined"
@@ -320,9 +320,10 @@ const CheckoutPage = () => {
                   <Box sx={{ marginLeft: "20px" }}>
                     <l-momentum size="27" speed="1.1" color="grey"></l-momentum>
                   </Box>
-                ) : null}
+                ) : null} 
+                {/* ternary operator that ends in null is useless. Just use { condition && ( ...code )} */}
               </Box>
-              {/* </form> */}
+              {/* </form>, form is sad being all alone and commented out here */}
             </Box>
           ) : (
             <Box sx={{ margin: "20px" }}>
@@ -358,6 +359,7 @@ const CheckoutPage = () => {
               <Box>
                 <Typography>{formData.addressLine1}</Typography>
               </Box>
+              {/* Across this component, and others, you could do really well with creating subcomponents that can be re-used instead of repeating yourself endlessly */}
               <Box sx={{ display: "flex" }}>
                 <Typography sx={{ marginRight: "5px" }}>
                   {formData.country}

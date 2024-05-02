@@ -13,6 +13,7 @@ function IPhone(props) {
     Object.entries(materials).map((material) => {
       // these are the material names that can't be changed color
       if (
+        // i think you could store these material names into variables for easier understanding.
         material[0] !== 'zFdeDaGNRwzccye' &&
         material[0] !== 'ujsvqBWRMnqdwPx' &&
         material[0] !== 'hUlRcbieVuIiOXG' &&

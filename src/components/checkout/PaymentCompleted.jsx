@@ -14,7 +14,7 @@ const PaymentCompleted = () => {
   const [userAddress, setUserAddress] = useState(null);
   const [addressId, setAddressId] = useState(null);
   const [userId, setUserId] = useState(null);
-  const { user } = useAuth0();
+  const { user } = useAuth0(); // i barely see any protection via auth0 on any of your pages. We should make sure to protect our pages appropriately and redirect users if necessary
   const [orderStatus, setOrderStatus] = useState(false);
   const [productsArray, setProductsArray] = useState([]);
   const { getDeliveryAddress, getTotalCartPrice, cartItems, checkout } =
@@ -86,6 +86,7 @@ const PaymentCompleted = () => {
     }
   };
 
+  // so many effects. Please give them named functions in order to have a better insight as to what they are for.
   useEffect(() => {
     getUserId();
     getAddressId();

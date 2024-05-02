@@ -38,7 +38,7 @@ const AboutUsHero = () => {
     <section style={{ width: "100%", position: "relative" }}>
       <div style={{ position: "relative", width: "100%", height: "100vh" }}>
         <div
-          style={{
+          style={{ // please use css files, not in-line styles. Unless you want to code like 20 years ago :D
             position: "absolute",
             inset: 0,
             display: "flex",

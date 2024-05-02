@@ -113,3 +113,5 @@ export const CartContextProvider = (props) => {
     </CartContext.Provider>
   );
 };
+
+// very impressed by this kind of function! Very well done - I think this is the best function I have seen in this round of projects so far

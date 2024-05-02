@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 
+// generally I see lots of different devices being coded here. Why not separate those into own folders for better organization?
+
 function AlienwareLaptop(props) {
   const { nodes, materials } = useGLTF('/models/gaming_laptop.glb');
   return (
