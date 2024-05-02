@@ -67,3 +67,5 @@ export const mainLogo = techieEStoreLogoV1;
 export const aboutUsSection2 = microsoftBackground;
 export const aboutUsSection3 = technologyBackground;
 export const aboutUsSection5 = highTechBackground;
+
+// thumbs up for this kind of file

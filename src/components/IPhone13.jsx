@@ -7,6 +7,7 @@ function IPhone13(props) {
     <group {...props} dispose={null}>
       <group scale={0.01}>
         <group scale={100}>
+          {/* Why not use a loop? This is a lot of manual work */}
           <mesh
             castShadow
             receiveShadow

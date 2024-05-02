@@ -9,11 +9,13 @@ import { View } from "@react-three/drei";
 import { models, sizes } from "../constants";
 import { animateWithGsapTimeline } from "../utils/animations";
 
+// I see three components for Models. Maybe you could create a folder for those?
+
 const Model = ({ modelState }) => {
   const [size, setSize] = useState("small");
   const [model, setModel] = useState({
     title: "iPhone 15 Pro in Natural Titanium",
-    color: ["#8F8A81", "#FFE7N9", "#6F6C64"],
+    color: ["#8F8A81", "#FFE7N9", "#6F6C64"], // ideally we store such color codes in your constants.js, to give those a name. Otherwise hard to tell what color those have.
     img: yellowImg,
   });
 
@@ -120,7 +122,7 @@ const Model = ({ modelState }) => {
                   <span
                     key={label}
                     className="size-btn"
-                    style={{
+                    style={{ // why use inline styles?
                       backgroundColor: size === value ? "white" : "transparent",
                       color: size === value ? "black" : "white",
                     }}

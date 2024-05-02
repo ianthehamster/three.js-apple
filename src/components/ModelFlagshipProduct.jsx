@@ -38,6 +38,7 @@ const ModelFlagshipLaptop = ({ modelState }) => {
             Our Flagship Product: Pear IPhone X
           </h1>
         ) : null}
+        {/* Same as in ModelView, this could be done better! */}
 
         <div className="flex flex-col items-center mt-5">
           <div className="w-full h-[75vh] md:h-[90vh] overflow-hidden relative">

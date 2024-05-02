@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
-const IncrementDecrementBtn = (props) => {
+const IncrementDecrementBtn = (props) => { // I don't see a single button, but two buttons. Also, why spell it Btn here, but spell it out in other components?
   const { addToCart, getCartItemQuantity, decreaseQuantity } =
     useContext(CartContext);
 

@@ -27,14 +27,14 @@ const Navbar = () => {
         <img
           src={mainLogo}
           alt="App Logo"
-          style={{ width: '120px', height: 'auto' }}
+          style={{ width: '120px', height: 'auto' }} // I am sure your CSS library will be able to facilitate most of such standard css
         />
 
         <div className="flex flex-1 justify-center max-sm:hidden">
           <div>
             <Button
               id="basic-button"
-              aria-controls={open ? 'basic-menu' : undefined}
+              aria-controls={open ? 'basic-menu' : undefined} // open && 'basic-menu'
               aria-haspopup="true"
               aria-expanded={open ? 'true' : undefined}
               onClick={() => {
@@ -100,6 +100,7 @@ const Navbar = () => {
                 My orders
               </Button>
             )}
+            {/* so much repetition, so little refactoring */}
           </div>
 
           <div className="hidden md:block" style={{ color: 'white' }}>

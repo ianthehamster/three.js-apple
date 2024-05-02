@@ -6,7 +6,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { BACKEND_URL } from "../../constantVariables";
 
-export default function BasicMenu() {
+export default function BasicMenu() { // I am confused. Folder is called categories, file is called DropDownMenu, component is called BasicMenu. Never let them know your next step? :D Please name everything consistently and appropriately
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [categories, setCategories] = useState([]);
 

@@ -51,6 +51,8 @@ In the project directory, you can run:
 
 ### `npm install`
 
+
+<!-- what about how to setup environment variables? -->
 ## How to launch the app
 
 In the project directory, you can run:

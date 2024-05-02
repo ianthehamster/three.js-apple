@@ -7,6 +7,7 @@ function CyberpunkTablet(props) {
   );
   return (
     <group {...props} dispose={null}>
+      {/* don't tell me you coded all of this by hand. This would have taken forever for all those components using those mesh tags I assume! */}
       <group
         position={[0, 50.454, -8.888]}
         rotation={[-1.943, 0, -Math.PI / 2]}

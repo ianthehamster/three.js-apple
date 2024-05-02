@@ -45,6 +45,8 @@ const ModelView = ({
       ) : (
         <PerspectiveCamera makeDefault position={[0, 0, 4]} />
       )}
+
+      {/* a lot of repetitive code with the PerspectiveCamera. Why not use a datastructure to determine the position, and then render dynamically? This above is not nice to code, and not nice to read either :) */}
       <Lights />
 
       <OrbitControls
@@ -78,6 +80,7 @@ const ModelView = ({
               size={size}
             />
           ) : null}
+          {/* This logic here could also be done dynamically. Not really nice to row so many ternary operators, when you could just do a: { DEVICES[modelState] // DEVICES is a variable containing your above logic } to render your desired component */}
         </Suspense>
       </group>
     </View>

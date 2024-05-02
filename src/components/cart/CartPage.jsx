@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const { getTotalCartPrice, getTotalCartItemsQty } = useContext(CartContext);
+  const { getTotalCartPrice, getTotalCartItemsQty } = useContext(CartContext); // your context is really mighty. I am sure you realized how useful that context is across your app
 
   const total = formatCurrency(getTotalCartPrice());
   const cartItemsQuantity = getTotalCartItemsQty();
@@ -35,13 +35,13 @@ const CartPage = () => {
           )}
         </Stack>
         <div className="cart-page-bottom">
-          {cartItemsQuantity > 0 && (
+          {cartItemsQuantity && (
             <div className="subtotal">
               <span className="subtotal-text">Subtotal: </span>
               <span className="total-value">{total}</span>
             </div>
           )}
-          {cartItemsQuantity > 0 && (
+          {cartItemsQuantity && (
             <div className="continue-btn">
               <Button
                 variant="contained"

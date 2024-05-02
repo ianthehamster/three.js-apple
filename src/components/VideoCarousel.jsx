@@ -48,7 +48,7 @@ const VideoCarousel = () => {
     });
   }, [isEnd, videoId]);
 
-  useEffect(() => {
+  useEffect(() => { // i think it would make sense to make this a named function instead of an anonymous one, to detail what the effect is responsible for
     let currentProgress = 0;
     let span = videoSpanRef.current;
 
@@ -104,7 +104,7 @@ const VideoCarousel = () => {
       //       hightlightsSlides[videoId].videoDuration,
       //   );
       // };
-
+        // u know I don't like commented-out code :D
       // if (isPlaying) {
       //   // ticker to update the progress bar
       //   gsap.ticker.add(animUpdate);
@@ -116,8 +116,9 @@ const VideoCarousel = () => {
   }, [videoId, startPlay]);
 
   useEffect(() => {
+    // why 3? maybe you could store the 3 in a constant, that lets us know why 3 is the threshold
     if (loadedData.length > 3) {
-      if (!isPlaying) {
+      if (!isPlaying) { // pause it if it is not playing? Play it if it is playing? Hmmmm
         videoRef.current[videoId].pause();
       } else {
         startPlay && videoRef.current[videoId].play();
@@ -224,6 +225,7 @@ const VideoCarousel = () => {
                 : !isPlaying
                 ? () => handleProcess('play')
                 : () => handleProcess('pause')
+                // nested ternary operators, the bane of my existance grrrrr
             }
           />
         </button>

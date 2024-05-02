@@ -1,4 +1,4 @@
-export const animateWithGsapTimeline = (
+export const animateWithGsapTimeline = ( // what is a Gsap timeline? Would be better to spell things out sometimes
   timeline,
   rotationRef,
   rotationState,

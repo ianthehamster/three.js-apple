@@ -19,7 +19,7 @@ const App = () => {
         })
         .then((response) => {
           if (response.data === null) {
-            setIsUserInDb(false);
+            setIsUserInDb(false); // why not just set the default state as false?
           } else {
             setIsUserInDb(true);
           }
@@ -29,7 +29,7 @@ const App = () => {
   };
   const postNewUser = async () => {
     if (isUserInDb === false && user.email) {
-      await axios
+      await axios // no need to await something if it is the last thing to run within a function
         .post(`${BACKEND_URL}/users`, {
           first_name: user.first_name ? user.first_name : null,
           last_name: user.last_name ? user.last_name : null,
@@ -46,7 +46,7 @@ const App = () => {
   }, [user]);
 
   useEffect(() => {
-    if (user && isUserInDb === false) {
+    if (user && !isUserInDb) {
       postNewUser();
     }
   }, [user, isUserInDb]);
