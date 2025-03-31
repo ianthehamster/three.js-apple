@@ -20,7 +20,7 @@
     "@react-three/fiber": "^8.15.19",
     "@stripe/react-stripe-js": "^2.6.2",
     "@stripe/stripe-js": "^3.2.0",
-    "axios": "^1.6.8",
+    "axios": "^1.8.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "framer-motion": "^11.0.28",
